@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Styles", href: "/styles" },
+  { label: "Monospace Text", href: "/styles/monospace-text-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Monospace Text Generator — Monospace Unicode Fonts | Ff Font Lab",
+  description: "Generate monospace text using Unicode characters. Create code-style, typewriter-like text perfect for Discord, coding forums, and terminal aesthetics.",
+  url: "https://fontchange.co.in/styles/monospace-text-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Type your text", description: "Enter the text you want to convert to monospace style in the input field." },
+  { step: 2, title: "Select monospace", description: "Choose the monospace or sans-serif monospace style from the available options." },
+  { step: 3, title: "Copy and use", description: "Click the copy button and paste the monospace text anywhere you need equal-width characters." },
+];
+
+const faqs = [
+  { question: "What is monospace text?", answer: "Monospace text uses Unicode Mathematical Monospace characters where every letter, number, and symbol occupies the same width. This creates a clean, code-like appearance similar to terminal or typewriter fonts." },
+  { question: "Do monospace fonts work on Discord?", answer: "Yes! Monospace text works great on Discord. You can use it in messages, nicknames, channel names, and server descriptions to create a coding or terminal aesthetic." },
+  { question: "Where can I use monospace text?", answer: "Monospace text is popular on Discord, GitHub, coding forums, Reddit, and social media bios. It is ideal for code snippets, aligned text blocks, and terminal-style aesthetics." },
+  { question: "Are monospace Unicode fonts free?", answer: "Yes, our monospace text generator is completely free. You can generate unlimited monospace text without any sign-up or payment required." },
+];
+
+const relatedTools = [
+  { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+  { title: "Gothic Font Generator", href: "/styles/gothic-font-generator", category: "style" },
+  { title: "Calligraphy Font Generator", href: "/styles/calligraphy-font-generator", category: "style" },
+  { title: "Aesthetic Text Generator", href: "/styles/aesthetic-text-generator", category: "style" },
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+];
+---
+
+<BaseLayout
+  title="Monospace Text Generator — Monospace Unicode Fonts | Ff Font Lab"
+  description="Generate monospace text using Unicode characters. Create code-style, typewriter-like text perfect for Discord, coding forums, and terminal aesthetics."
+  canonical="/styles/monospace-text-generator"
+  jsonLd={pageSchema}
+  activePage="styles"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Monospace Text Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Generate monospace text using Unicode characters. Create code-style, typewriter-like text perfect for Discord, coding forums, GitHub profiles, and terminal aesthetics.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={0}
+      styles={["monospace", "sansSerif"]}
+      placeholder="Type your monospace text..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        About Monospace Unicode Fonts
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Monospace fonts give each character equal width, creating a clean and structured appearance. They are widely popular in coding communities, Discord servers, and terminal-based aesthetics. Unlike proportional fonts where letters like "i" and "w" take different widths, monospace ensures perfect alignment.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Our generator uses Unicode Mathematical Monospace characters (U+1D670–U+1D68A) to create styled text that works across platforms. This is ideal for code snippets in social media posts, aligned text blocks, and anyone who loves the clean look of terminal-style typography.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

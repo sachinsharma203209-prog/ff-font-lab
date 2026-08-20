@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Social Media", href: "/social" },
+  { label: "Pinterest", href: "/social/pinterest-font-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Pinterest Font Generator — Stylish Pin & Profile Fonts | Ff Font Lab",
+  description: "Create stylish fonts for Pinterest pin descriptions, board names, and profile bio. Make your Pinterest presence visually unique.",
+  url: "https://fontchange.co.in/social/pinterest-font-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Enter your Pinterest text", description: "Type the pin description, board name, or profile bio text you want to style." },
+  { step: 2, title: "Select a font style", description: "Choose from bold, italic, cursive, small caps, double-struck, sans serif, and other decorative styles." },
+  { step: 3, title: "Apply to Pinterest", description: "Copy the generated font and paste it into your pin description, board title, or profile bio on Pinterest." },
+];
+
+const faqs = [
+  { question: "Do fonts work on Pinterest?", answer: "Yes, Pinterest supports Unicode characters in pin descriptions, board names, and profile bios. Our generated fonts will display correctly when you paste them into these fields on the Pinterest platform." },
+  { question: "How do I change the font on Pinterest?", answer: "Pinterest doesn't offer built-in font customization, but our Unicode font generator provides a simple workaround. Generate your preferred style, copy it, and paste it directly into your pin descriptions, board names, or bio section." },
+  { question: "Can I use styled text in Pinterest pins?", answer: "You can use styled fonts in your pin titles and descriptions. This helps your pins catch more eyes in search results and feeds. For text within pin images, you would need to use a separate image editor." },
+  { question: "What fonts are compatible with Pinterest?", answer: "Pinterest supports a wide range of Unicode characters. Bold, italic, cursive, small caps, and double-struck fonts all work well in pin descriptions, board names, and profile bios on Pinterest." },
+];
+
+const relatedTools = [
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+  { title: "Facebook Font Style", href: "/social/facebook-font-style", category: "social" },
+  { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", category: "social" },
+  { title: "Twitter / X Font Generator", href: "/social/twitter-font-generator", category: "social" },
+  { title: "LinkedIn Font Generator", href: "/social/linkedin-font-generator", category: "social" },
+  { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Pinterest Font Generator — Stylish Pin & Profile Fonts | Ff Font Lab"
+  description="Create stylish fonts for Pinterest pin descriptions, board names, and profile bio. Make your Pinterest presence visually unique."
+  canonical="/social/pinterest-font-generator"
+  jsonLd={pageSchema}
+  activePage="social"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Pinterest Font Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Transform your Pinterest profile and pins with custom typography. Generate stylish fonts for pin descriptions, board names, and your profile bio to create a cohesive and visually distinctive brand presence on Pinterest.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={500}
+      charLimitLabel="Description limit"
+      styles={["boldSans", "italic", "cursive", "smallCaps", "doubleStruck", "sansSerif"]}
+      placeholder="Type your Pinterest text..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Enhance Your Pinterest Boards with Custom Typography
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Pinterest is a visual platform where every detail of your profile contributes to your brand aesthetic. Styled fonts in board names and pin descriptions help create a polished, professional look that distinguishes your profile from others in search results and category feeds.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Cursive fonts add a handcrafted feel that suits DIY and lifestyle boards, while bold sans styles work well for fashion and tech collections. Small caps give your board titles a clean, editorial look that pairs beautifully with Pinterest's image-focused layout.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

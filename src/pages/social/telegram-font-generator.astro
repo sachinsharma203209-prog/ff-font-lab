@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Social Media", href: "/social" },
+  { label: "Telegram", href: "/social/telegram-font-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Telegram Font Generator — Stylish Chat & Bio Fonts | Ff Font Lab",
+  description: "Create stylish fonts for Telegram messages, channel names, and bio. Stand out with unique Unicode text styles on Telegram.",
+  url: "https://fontchange.co.in/social/telegram-font-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Enter your text", description: "Type the message, channel name, or bio text you want to style for Telegram." },
+  { step: 2, title: "Select a font style", description: "Choose from bold, italic, double-struck, fraktur, monospace, small caps, and other decorative options." },
+  { step: 3, title: "Use it on Telegram", description: "Copy the generated text and paste it into your Telegram message, channel description, or profile bio." },
+];
+
+const faqs = [
+  { question: "How do I change my font in Telegram?", answer: "Telegram has limited built-in formatting options like bold and italic using asterisks and underscores. Our generator provides additional Unicode font styles that you can paste directly into Telegram messages, bios, and channel names for more creative typography." },
+  { question: "Do Unicode fonts work in Telegram channels?", answer: "Yes, Telegram fully supports Unicode characters in channel names, descriptions, and posts. You can use any of our generated fonts to make your channel stand out with unique typography." },
+  { question: "Can I use styled text in Telegram groups?", answer: "Absolutely. Styled text works in Telegram group messages, group names, and group descriptions. Simply copy the generated text and paste it into any text field within your Telegram groups." },
+  { question: "How do I format Telegram messages with custom fonts?", answer: "While Telegram supports basic markdown like **bold** and _italic_, our generator goes further by creating Unicode-based styled text. Generate your desired font, copy it, and paste it into your Telegram chat. The recipient will see the styled text as you intended." },
+];
+
+const relatedTools = [
+  { title: "WhatsApp Font Generator", href: "/social/whatsapp-font-generator", category: "social" },
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+  { title: "Facebook Font Style", href: "/social/facebook-font-style", category: "social" },
+  { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", category: "social" },
+  { title: "Twitter / X Font Generator", href: "/social/twitter-font-generator", category: "social" },
+  { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Telegram Font Generator — Stylish Chat & Bio Fonts | Ff Font Lab"
+  description="Create stylish fonts for Telegram messages, channel names, and bio. Stand out with unique Unicode text styles on Telegram."
+  canonical="/social/telegram-font-generator"
+  jsonLd={pageSchema}
+  activePage="social"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Telegram Font Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Make your Telegram chats, channels, and profile shine with our stylish font generator. Create bold messages that grab attention, elegant channel names, and unique bio text using Unicode fonts that Telegram fully supports.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={0}
+      charLimitLabel=""
+      styles={["boldSans", "italic", "cursive", "doubleStruck", "fraktur", "monospace", "smallCaps"]}
+      placeholder="Type your Telegram text..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Telegram Formatting Tips — Bold, Italic and Custom Fonts
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Telegram offers some built-in text formatting like bold with asterisks and italic with underscores, but our Unicode font generator unlocks a much wider range of styles. Use double-struck text for a distinctive look in channel posts, or try fraktur fonts for a gothic-inspired aesthetic in your group conversations.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          For Telegram channel names and descriptions, styled fonts help your channel make a strong first impression. Bold sans and monospace fonts are particularly effective for tech-focused channels, while cursive and small caps work well for lifestyle and creative content channels.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

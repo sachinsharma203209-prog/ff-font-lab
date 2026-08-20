@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import BentoCard from '../../components/BentoCard.astro';
+import FAQ from '../../components/FAQ.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Social Media", href: "/social" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Social Media Font Generators | Ff Font Lab",
+  description: "Generate stylish fonts for all major social media platforms. Instagram, TikTok, Twitter, WhatsApp, Facebook, LinkedIn, Snapchat, Telegram, Threads, Pinterest, and multilingual font tools.",
+  url: "https://fontchange.co.in/social",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const socialTools = [
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", icon: "photo_camera", description: "Create eye-catching fonts for your Instagram bio, captions, reels, and stories. Stand out with bold, cursive, and aesthetic Unicode styles." },
+  { title: "Facebook Font Style", href: "/social/facebook-font-style", icon: "thumb_up", description: "Style your Facebook posts, comments, and profile with unique Unicode fonts. Make your text pop in every conversation." },
+  { title: "WhatsApp Font Generator", href: "/social/whatsapp-font-generator", icon: "chat", description: "Send stylish messages and update your WhatsApp status with cool Unicode fonts. Bold, italic, and decorative text for chats." },
+  { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", icon: "music_note", description: "Generate standout fonts for your TikTok bio and video captions. Attract more followers with unique typography." },
+  { title: "Twitter / X Font Generator", href: "/social/twitter-font-generator", icon: "tag", description: "Make your tweets and profile bio stand out with stylish Unicode fonts. Perfect for the 280-character limit." },
+  { title: "LinkedIn Font Generator", href: "/social/linkedin-font-generator", icon: "work", description: "Add a professional touch to your LinkedIn headline, summary, and posts with clean, elegant Unicode fonts." },
+  { title: "Snapchat Font Generator", href: "/social/snapchat-font-generator", icon: "camera", description: "Generate stylish fonts for your Snapchat bio, display name, and snap captions. Unique Unicode styles for Snapchat." },
+  { title: "Telegram Font Generator", href: "/social/telegram-font-generator", icon: "send", description: "Create stylish fonts for Telegram messages, channel names, and bio. Stand out with unique Unicode text styles." },
+  { title: "Threads Font Generator", href: "/social/threads-font-generator", icon: "forum", description: "Generate stylish fonts for your Threads posts, bio, and replies. Create eye-catching Unicode text styles." },
+  { title: "Pinterest Font Generator", href: "/social/pinterest-font-generator", icon: "push_pin", description: "Create stylish fonts for Pinterest pin descriptions, board names, and profile bio. Make your Pinterest presence unique." },
+  { title: "Hindi Font Generator", href: "/social/hindi-font-generator", icon: "translate", description: "Generate stylish fonts for Hindi text using Unicode characters. Decorative Hindi typography for social media." },
+  { title: "Bengali Font Generator", href: "/social/bengali-font-generator", icon: "translate", description: "Generate stylish fonts for Bengali text with Unicode characters. Decorative Bengali typography for messaging." },
+  { title: "Arabic Font Generator", href: "/social/arabic-font-generator", icon: "translate", description: "Generate stylish fonts for Arabic text using Unicode characters. Decorative Arabic typography for creative content." },
+];
+
+const faqs = [
+  { question: "Do social media font generators work on all platforms?", answer: "Our Unicode-based fonts work on most modern social media platforms including Instagram, TikTok, Twitter, WhatsApp, Facebook, and LinkedIn. Support may vary for older devices." },
+  { question: "Are these fonts free to use?", answer: "Yes, all our social media font generators are completely free. You can generate and copy unlimited styled text without any cost or sign-up." },
+  { question: "Will my followers see the styled fonts correctly?", answer: "Unicode fonts are universally supported on modern smartphones and computers, so the vast majority of your followers will see the styled text correctly." },
+  { question: "Can I use these fonts for my social media bio?", answer: "Absolutely! Each platform page includes the correct character limit for bios. Simply generate your text, copy it, and paste it into your bio settings." },
+];
+---
+
+<BaseLayout
+  title="Social Media Font Generators | Ff Font Lab"
+  description="Generate stylish fonts for Instagram, TikTok, Twitter, WhatsApp, Facebook, LinkedIn, Snapchat, Telegram, and more."
+  canonical="/social"
+  jsonLd={pageSchema}
+  activePage="social"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Social Media Font Generators
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Generate unique, eye-catching fonts for every major social media platform. Each tool is optimized for the specific character limits and formatting rules of the platform, so your text always looks its best.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {socialTools.map((tool) => (
+        <BentoCard title={tool.title} description={tool.description} href={tool.href} icon={tool.icon} />
+      ))}
+    </div>
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Why Use Styled Fonts on Social Media?
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Social media platforms offer limited ways to customize your text appearance. Our Unicode font generators let you create bold, cursive, gothic, and decorative text that stands out in crowded feeds. Whether you want to make your Instagram bio pop or add flair to your TikTok captions, our tools make it easy.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Each tool includes a real-time preview and one-click copy, so you can quickly generate and paste styled text into any social media field. No sign-up, no downloads, no restrictions.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+  </div>
+</BaseLayout>

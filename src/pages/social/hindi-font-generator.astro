@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Social Media", href: "/social" },
+  { label: "Hindi", href: "/social/hindi-font-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Hindi Font Generator — Stylish Hindi Unicode Fonts | Ff Font Lab",
+  description: "Generate stylish fonts for Hindi text using Unicode characters. Create decorative Hindi typography for social media, messaging apps, and creative projects.",
+  url: "https://fontchange.co.in/social/hindi-font-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Type your Hindi text", description: "Enter the Hindi text you want to stylize. You can type in Devanagari script or use transliterated Hindi." },
+  { step: 2, title: "Choose a font style", description: "Browse through bold, cursive, italic, double-struck, and other styles to find the perfect look for your text." },
+  { step: 3, title: "Copy and use", description: "Copy the generated styled text and paste it into your social media bio, WhatsApp messages, or any other platform." },
+];
+
+const faqs = [
+  { question: "Can I generate Hindi fonts?", answer: "Yes, our generator supports Hindi text input. You can type in Devanagari script and generate styled versions using Unicode characters. The generator creates decorative variations that work across platforms." },
+  { question: "Do Hindi fonts work on Instagram?", answer: "Yes, styled Hindi text generated with our tool works on Instagram bios, captions, and comments. Instagram supports Unicode characters, so your styled Hindi text will display correctly for most users." },
+  { question: "How to write stylish Hindi text?", answer: "Simply type your Hindi text into the generator, choose a style you like, and copy the output. You can then paste it into any app or platform that supports Unicode text, including WhatsApp, Instagram, and Facebook." },
+  { question: "Are Hindi Unicode fonts free?", answer: "Yes, our Hindi font generator is completely free to use. You can generate unlimited styled Hindi text without any registration or payment." },
+];
+
+const relatedTools = [
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+  { title: "WhatsApp Font Generator", href: "/social/whatsapp-font-generator", category: "social" },
+  { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", category: "social" },
+  { title: "Facebook Font Style", href: "/social/facebook-font-style", category: "social" },
+  { title: "Bengali Font Generator", href: "/social/bengali-font-generator", category: "social" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Hindi Font Generator — Stylish Hindi Unicode Fonts | Ff Font Lab"
+  description="Generate stylish fonts for Hindi text using Unicode characters. Create decorative Hindi typography for social media, messaging apps, and creative projects."
+  canonical="/social/hindi-font-generator"
+  jsonLd={pageSchema}
+  activePage="social"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Hindi Font Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Generate stylish fonts for Hindi text using Unicode characters. Whether you need decorative typography for social media posts, WhatsApp messages, or creative projects, our generator helps you create eye-catching Hindi text that stands out.
+      </p>
+    </div>
+
+    <FontGenerator
+      styles={["boldSans", "italic", "cursive", "doubleStruck", "smallCaps", "fullwidth", "sansSerif"]}
+      placeholder="Type your Hindi text here..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Hindi Unicode Fonts — How They Work
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Hindi uses the Devanagari script, which is one of the most widely used writing systems in the world. Our generator works by converting your Hindi text into styled Unicode variations. When you type text in Devanagari, the generator applies Unicode mathematical and stylistic transformations to create bold, italic, cursive, and other decorative versions.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Unicode provides a rich set of character variations for Devanagari, including bold, italic, and other decorative styles. These styled characters are separate Unicode codepoints that render differently from regular text, giving you real typographic variation for Hindi without needing to install special fonts.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

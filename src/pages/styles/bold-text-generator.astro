@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Font Styles", href: "/styles" },
+  { label: "Bold", href: "/styles/bold-text-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Bold Text Generator — Create Bold Text Online | Ff Font Lab",
+  description: "Generate bold text using our free bold font generator. Create bold Unicode text for social media bios, usernames, and more.",
+  url: "https://fontchange.co.in/styles/bold-text-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Enter text", description: "Type the text you want to make bold in the generator input field." },
+  { step: 2, title: "Select bold style", description: "Choose from bold sans-serif, bold italic, double-struck, and other bold variations." },
+  { step: 3, title: "Copy & paste", description: "Copy the bold text with one click and use it anywhere online." },
+];
+
+const faqs = [
+  { question: "What is a bold font?", answer: "A bold font uses heavier letter strokes to create a thicker, more impactful appearance that draws attention. Our Unicode bold fonts work in places where standard bold formatting isn't available." },
+  { question: "Can I use bold text on Instagram?", answer: "Yes, our bold Unicode fonts work perfectly in Instagram bios, captions, and comments. Simply copy the bold text and paste it into any Instagram text field." },
+  { question: "How is this different from just bold formatting?", answer: "Unlike standard bold formatting (Ctrl+B), our Unicode bold fonts work in places where bold formatting isn't supported, like social media bios, plain text messages, and gaming profiles." },
+  { question: "What is double-struck text?", answer: "Double-struck (also called blackboard bold) is a bold style where each letter appears to be drawn with a double outline. It's commonly used in mathematics but looks great as decorative text." },
+  { question: "Do bold Unicode fonts work everywhere?", answer: "Bold Unicode fonts work on most modern platforms including social media, messaging apps, and email. Some platforms may not render certain bold Unicode characters correctly." },
+];
+
+const relatedTools = [
+  { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
+  { title: "Gothic Font Generator", href: "/styles/gothic-font-generator", category: "style" },
+  { title: "Aesthetic Text Generator", href: "/styles/aesthetic-text-generator", category: "style" },
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+  { title: "Calligraphy Font Generator", href: "/styles/calligraphy-font-generator", category: "style" },
+  { title: "Twitter / X Font Generator", href: "/social/twitter-font-generator", category: "social" },
+];
+---
+
+<BaseLayout
+  title="Bold Text Generator — Create Bold Text Online | Ff Font Lab"
+  description="Generate bold text using our free bold font generator. Create bold Unicode text for social media bios, usernames, and more."
+  canonical="/styles/bold-text-generator"
+  jsonLd={pageSchema}
+  activePage="styles"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Bold Text Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Create bold, impactful text using our Unicode bold font generator. Choose from bold sans-serif, bold italic, double-struck, and other thick styles. Perfect for social media bios, headlines, emphasis text, and anywhere you need your words to stand out.
+      </p>
+    </div>
+
+    <FontGenerator
+      styles={["boldSans", "boldItalic", "doubleStruck", "sansSerif"]}
+      placeholder="Type text to make bold..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        When to Use Bold Text
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Bold text is one of the most versatile font styles. It commands attention and conveys emphasis, making it ideal for headlines, important announcements, names, and calls to action. On social media, bold bios and captions are more likely to catch a scroller's eye.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Our generator offers several bold variations: Bold Sans for clean, modern weight; Bold Italic for added emphasis with slant; Double-Struck for a mathematical, outlined look; and Sans-Serif for a clean, neutral bold appearance.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

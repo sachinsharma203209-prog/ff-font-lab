@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Social Media", href: "/social" },
+  { label: "Snapchat", href: "/social/snapchat-font-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Snapchat Font Generator — Stylish Snap Fonts | Ff Font Lab",
+  description: "Generate stylish fonts for your Snapchat bio, display name, and snap captions. Create unique text styles that stand out on Snapchat.",
+  url: "https://fontchange.co.in/social/snapchat-font-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Type your Snapchat text", description: "Enter the text you want to style for your display name, bio, or snap captions." },
+  { step: 2, title: "Pick a style", description: "Choose from bold, italic, cursive, small caps, monospace, fullwidth, and more unique options." },
+  { step: 3, title: "Paste into Snapchat", description: "Copy the styled text and paste it into your Snapchat display name, bio, or send it as a snap caption." },
+];
+
+const faqs = [
+  { question: "How do I change my Snapchat font?", answer: "Generate your desired font style using our tool, then paste it into your Snapchat display name, bio, or caption field. Snapchat supports Unicode characters, so styled fonts appear exactly as you see them in the generator." },
+  { question: "Do these fonts work on Snapchat?", answer: "Yes, our Unicode fonts are compatible with Snapchat. You can use them in your display name, bio, and text captions on snaps. Most modern devices will display the styled fonts correctly." },
+  { question: "Can I use styled text in Snapchat stories?", answer: "You can use styled text in snap captions and text overlays on snaps. For story text, Snapchat has its own built-in font options, but you can paste Unicode text into caption fields." },
+  { question: "What is the Snapchat name limit?", answer: "Snapchat display names can be up to 80 characters long. Our generator includes a character counter so you can stay within this limit while creating your unique styled name." },
+];
+
+const relatedTools = [
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+  { title: "Facebook Font Style", href: "/social/facebook-font-style", category: "social" },
+  { title: "WhatsApp Font Generator", href: "/social/whatsapp-font-generator", category: "social" },
+  { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", category: "social" },
+  { title: "Twitter / X Font Generator", href: "/social/twitter-font-generator", category: "social" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Snapchat Font Generator — Stylish Snap Fonts | Ff Font Lab"
+  description="Generate stylish fonts for your Snapchat bio, display name, and snap captions. Create unique text styles that stand out on Snapchat."
+  canonical="/social/snapchat-font-generator"
+  jsonLd={pageSchema}
+  activePage="social"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Snapchat Font Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Give your Snapchat profile a unique personality with our stylish font generator. Create eye-catching display names, bios, and snap captions using Unicode text styles that make your snaps and profile stand out from the crowd.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={80}
+      charLimitLabel="Display name limit"
+      styles={["boldSans", "italic", "cursive", "smallCaps", "monospace", "fullwidth"]}
+      placeholder="Type your Snapchat text..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        How to Change Your Snapchat Display Name Font
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Snapchat doesn't provide built-in font customization for your display name or bio, but you can use Unicode-based styled fonts to achieve the same effect. Simply generate the font you like, copy it, and paste it directly into your Snapchat profile settings.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Bold sans fonts work well for making your display name pop, while cursive styles add a touch of elegance to your bio. Small caps are great for a clean, modern look that catches the eye without being too flashy. Experiment with different styles to find the one that best represents your Snapchat personality.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

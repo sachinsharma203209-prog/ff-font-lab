@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Social Media", href: "/social" },
+  { label: "Bengali", href: "/social/bengali-font-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Bengali Font Generator — Stylish Bengali Unicode Text | Ff Font Lab",
+  description: "Generate stylish fonts for Bengali text with Unicode characters. Create decorative Bengali typography for social media profiles and messaging.",
+  url: "https://fontchange.co.in/social/bengali-font-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Type your Bengali text", description: "Enter the Bengali text you want to stylize. You can type directly in Bengali script or transliterate." },
+  { step: 2, title: "Pick a style", description: "Choose from bold, italic, cursive, double-struck, small caps, and other Unicode font styles." },
+  { step: 3, title: "Use it anywhere", description: "Copy the styled Bengali text and paste it into your social media profiles, chat messages, or creative projects." },
+];
+
+const faqs = [
+  { question: "Can I generate Bengali fonts?", answer: "Yes, our generator supports Bengali text. Type in Bengali script and our tool will generate styled variations using Unicode characters. The styled text can be used across social media platforms and messaging apps." },
+  { question: "Do Bengali fonts work on social media?", answer: "Yes, styled Bengali text works on Instagram, Facebook, WhatsApp, TikTok, and other social media platforms. These platforms support Unicode characters, so your styled Bengali text will display correctly for most users." },
+  { question: "How to create stylish Bengali text?", answer: "Type your Bengali text into the generator, select a style you like from the available options, and copy the generated result. You can then paste it into any app or platform that supports Unicode text input." },
+  { question: "Are Bengali fonts compatible with all devices?", answer: "Most modern devices running Android, iOS, Windows, and macOS support Bengali Unicode characters. Recipients with newer devices will see the styled text correctly. Older devices may show fallback characters for some styles." },
+];
+
+const relatedTools = [
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+  { title: "WhatsApp Font Generator", href: "/social/whatsapp-font-generator", category: "social" },
+  { title: "Hindi Font Generator", href: "/social/hindi-font-generator", category: "social" },
+  { title: "Arabic Font Generator", href: "/social/arabic-font-generator", category: "social" },
+  { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", category: "social" },
+  { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Bengali Font Generator — Stylish Bengali Unicode Text | Ff Font Lab"
+  description="Generate stylish fonts for Bengali text with Unicode characters. Create decorative Bengali typography for social media profiles and messaging."
+  canonical="/social/bengali-font-generator"
+  jsonLd={pageSchema}
+  activePage="social"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Bengali Font Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Generate stylish fonts for Bengali text using Unicode characters. Create decorative Bengali typography for social media profiles, messaging apps, and creative projects. Make your Bengali text stand out with bold, italic, and cursive styles.
+      </p>
+    </div>
+
+    <FontGenerator
+      styles={["boldSans", "italic", "cursive", "doubleStruck", "smallCaps", "sansSerif"]}
+      placeholder="Type your Bengali text here..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Bengali Unicode Typography
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Bengali (Bangla) is a major language of South Asia, spoken by over 250 million people worldwide. The Bengali script, derived from the Brahmic family, has its own rich typographic tradition. Our generator uses Unicode character variations to create styled Bengali text that works across digital platforms.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Unicode provides mathematical and stylistic variations for Bengali characters, including bold, italic, and other decorative forms. These are not traditional Bengali typefaces, but rather Unicode-compliant styled text that renders on most modern devices and platforms without requiring any special font installation.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

@@ -1,0 +1,40 @@
+---
+interface Props {
+  tools: Array<{ title: string; href: string; category: string }>;
+}
+
+const { tools } = Astro.props;
+
+const categoryLabels: Record<string, string> = {
+  social: "Social",
+  style: "Style",
+  gaming: "Gaming",
+  home: "Tool",
+};
+---
+
+<section class="flex flex-col gap-4">
+  <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+    Related Tools
+  </h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+    {tools.map((tool) => (
+      <a
+        href={tool.href}
+        class="surface-card rounded-lg p-4 flex items-center gap-3 group block"
+      >
+        <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+          <span class="material-symbols-outlined text-[18px] text-primary">build</span>
+        </div>
+        <div class="flex flex-col gap-0.5 min-w-0">
+          <span class="text-[14px] font-medium text-on-surface group-hover:text-primary transition-colors truncate" style="font-family: Inter;">
+            {tool.title}
+          </span>
+          <span class="text-[11px] font-medium bg-surface-container-high text-on-surface-variant px-1.5 py-0.5 rounded w-fit" style="font-family: JetBrains Mono;">
+            {categoryLabels[tool.category] || tool.category}
+          </span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

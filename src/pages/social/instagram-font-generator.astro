@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Social Media", href: "/social" },
+  { label: "Instagram", href: "/social/instagram-font-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Instagram Font Generator — Stylish Bio & Caption Fonts | Ff Font Lab",
+  description: "Generate stylish fonts for your Instagram bio, captions, and comments. Stand out with unique Unicode font styles on Instagram.",
+  url: "https://fontchange.co.in/social/instagram-font-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Enter your bio text", description: "Type your Instagram bio text into the generator. Keep it under 150 characters — Instagram's bio limit." },
+  { step: 2, title: "Choose a font style", description: "Browse through bold, cursive, double-struck, and other styles to find the perfect look for your profile." },
+  { step: 3, title: "Paste into Instagram", description: "Open Instagram, go to Edit Profile, and paste the generated font into your bio field." },
+];
+
+const faqs = [
+  { question: "How do I change my Instagram bio font?", answer: "Use our generator to create your desired font style, then paste it into your Instagram bio field in the Edit Profile section. Instagram bios support Unicode characters, so styled fonts work seamlessly." },
+  { question: "What is the Instagram bio character limit?", answer: "Instagram allows a maximum of 150 characters for your bio. Our generator includes a character counter to help you stay within this limit while using styled fonts." },
+  { question: "Do these fonts work in Instagram comments?", answer: "Yes, our Unicode fonts work in Instagram comments, captions, and bio sections. Simply copy the styled text and paste it wherever you want." },
+  { question: "Will my followers see the font correctly?", answer: "Most modern devices and the Instagram app support Unicode fonts, so your followers should see them correctly. Older devices may show fallback characters." },
+  { question: "Can I use these fonts in Instagram Reels captions?", answer: "You can use styled text in your Reels descriptions and comments. For on-screen text within Reels, you would need to use Instagram's built-in text tools." },
+];
+
+const relatedTools = [
+  { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", category: "social" },
+  { title: "Twitter / X Font Generator", href: "/social/twitter-font-generator", category: "social" },
+  { title: "Facebook Font Style", href: "/social/facebook-font-style", category: "social" },
+  { title: "WhatsApp Font Generator", href: "/social/whatsapp-font-generator", category: "social" },
+  { title: "LinkedIn Font Generator", href: "/social/linkedin-font-generator", category: "social" },
+  { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Instagram Font Generator — Stylish Bio & Caption Fonts | Ff Font Lab"
+  description="Generate stylish fonts for your Instagram bio, captions, and comments. Stand out with unique Unicode font styles on Instagram."
+  canonical="/social/instagram-font-generator"
+  jsonLd={pageSchema}
+  activePage="social"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Instagram Font Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Create eye-catching fonts for your Instagram bio, posts, reels, and stories. Our Unicode fonts work seamlessly on Instagram, letting you express your unique style with bold, cursive, and decorative typography. Stand out from millions of profiles.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={150}
+      charLimitLabel="Bio character limit"
+      styles={["boldSans", "cursive", "doubleStruck", "smallCaps", "italic", "sansSerif", "boldScript", "monospace"]}
+      placeholder="Type your Instagram bio text..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Why Use Styled Fonts on Instagram?
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Instagram doesn't offer built-in font customization for bios, captions, or comments. Our Unicode font generator bypasses this limitation by using special Unicode characters that look like different font styles. When you paste the generated text into Instagram, it displays the styled font.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Popular choices for Instagram include bold sans for strong statements, cursive for elegant bios, and double-struck for a unique mathematical aesthetic. Experiment with different styles to find the one that matches your brand.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

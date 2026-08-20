@@ -1,0 +1,24 @@
+---
+import FontGeneratorIsland from './FontGeneratorIsland';
+
+interface Props {
+  charLimit?: number;
+  charLimitLabel?: string;
+  styles?: string[];
+  placeholder?: string;
+  defaultText?: string;
+}
+
+const { charLimit, charLimitLabel, styles, placeholder, defaultText } = Astro.props;
+---
+
+<section class="w-full bg-[#111827] rounded-xl p-4 md:p-8 border border-[#3d494c] floating-layer">
+  <FontGeneratorIsland
+    client:load
+    charLimit={charLimit}
+    charLimitLabel={charLimitLabel}
+    styles={styles}
+    placeholder={placeholder}
+    defaultText={defaultText}
+  />
+</section>

@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Social Media", href: "/social" },
+  { label: "TikTok", href: "/social/tiktok-font-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "TikTok Font Generator — Stylish Bio & Username Fonts | Ff Font Lab",
+  description: "Generate unique fonts for your TikTok bio, username, and video captions. Stand out with custom Unicode typography on TikTok.",
+  url: "https://fontchange.co.in/social/tiktok-font-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Type your bio text", description: "Keep it under 80 characters for TikTok bios. Enter your text in the generator above." },
+  { step: 2, title: "Choose a font", description: "Select a bold, cursive, or decorative style that stands out and matches your TikTok vibe." },
+  { step: 3, title: "Update your profile", description: "Open TikTok, go to Edit Profile, and paste the styled font into your bio section." },
+];
+
+const faqs = [
+  { question: "How do I change my TikTok bio font?", answer: "Generate your desired font style using our tool, then open TikTok, navigate to Edit Profile, and paste the generated text into your bio field." },
+  { question: "What is the TikTok bio character limit?", answer: "TikTok bios have a maximum of 80 characters. Our generator includes a counter to help you stay within this limit while using styled fonts." },
+  { question: "Do these fonts work in TikTok comments?", answer: "Yes, our Unicode fonts work in TikTok bios, comments, and video descriptions. Simply copy and paste the styled text." },
+  { question: "Can I use these fonts in my TikTok username?", answer: "TikTok has strict restrictions on usernames and only accepts standard alphanumeric characters. Styled fonts work best in bios and comments." },
+  { question: "Will styled fonts affect my TikTok discoverability?", answer: "Styled fonts in your bio do not affect TikTok's search algorithm. Your content's discoverability depends on engagement, hashtags, and video quality." },
+];
+
+const relatedTools = [
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+  { title: "Twitter / X Font Generator", href: "/social/twitter-font-generator", category: "social" },
+  { title: "Facebook Font Style", href: "/social/facebook-font-style", category: "social" },
+  { title: "WhatsApp Font Generator", href: "/social/whatsapp-font-generator", category: "social" },
+  { title: "LinkedIn Font Generator", href: "/social/linkedin-font-generator", category: "social" },
+  { title: "Aesthetic Text Generator", href: "/styles/aesthetic-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="TikTok Font Generator — Stylish Bio & Username Fonts | Ff Font Lab"
+  description="Generate unique fonts for your TikTok bio, username, and video captions. Stand out with custom Unicode typography on TikTok."
+  canonical="/social/tiktok-font-generator"
+  jsonLd={pageSchema}
+  activePage="social"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        TikTok Font Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Create eye-catching fonts for your TikTok profile bio, username, and video descriptions using our Unicode font generator. With millions of creators on TikTok, a unique bio font helps you make a strong first impression and attract more followers.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={80}
+      charLimitLabel="Bio character limit"
+      styles={["boldSans", "cursive", "doubleStruck", "fraktur", "smallCaps", "boldScript", "fullwidth", "italic"]}
+      placeholder="Type your TikTok bio text..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Stand Out on TikTok with Styled Text
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          TikTok's 80-character bio limit means every character counts. A styled font helps your bio grab attention immediately when someone visits your profile. Whether you're a content creator, business, or casual user, a unique bio font sets the tone for your content.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Popular choices include bold fonts for strong statements, cursive for artistic vibes, and fraktur for an edgy, gothic look that matches TikTok's creative culture.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

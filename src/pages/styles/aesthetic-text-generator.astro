@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Font Styles", href: "/styles" },
+  { label: "Aesthetic", href: "/styles/aesthetic-text-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Aesthetic Text Generator — Vaporwave & Artsy Fonts | Ff Font Lab",
+  description: "Generate aesthetic, vaporwave, and artsy fonts online. Create unique typography for social media, profiles, and creative content.",
+  url: "https://fontchange.co.in/styles/aesthetic-text-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Type your text", description: "Enter the text you want to stylize with an aesthetic look." },
+  { step: 2, title: "Pick an aesthetic style", description: "Choose from fullwidth, double-struck, squared, and other artsy options for unique vibes." },
+  { step: 3, title: "Use it creatively", description: "Paste the aesthetic text into your social media profiles, music playlists, or design projects." },
+];
+
+const faqs = [
+  { question: "What makes a font aesthetic?", answer: "Aesthetic fonts have a unique, visually pleasing quality that creates a specific mood or vibe. They are often associated with vaporwave, lo-fi, retro, or artsy content and help express creativity through typography." },
+  { question: "Which aesthetic font is most popular?", answer: "Fullwidth and double-struck styles are among the most popular aesthetic fonts, commonly seen in vaporwave and retro-themed content. Squared text is also trending for its blocky, digital look." },
+  { question: "Can I use aesthetic fonts on TikTok?", answer: "Yes, aesthetic fonts work great in TikTok bios, captions, and comments to give your profile a unique look. They pair well with the platform's creative, visual culture." },
+  { question: "What is fullwidth text?", answer: "Fullwidth text uses wider, spaced-out characters that create a distinctive, stretched appearance. It's commonly associated with vaporwave aesthetics and Japanese design influences." },
+  { question: "Are aesthetic fonts good for Discord?", answer: "Yes, aesthetic fonts look fantastic in Discord usernames, server names, and channel descriptions. They help your server or profile stand out in the Discord community." },
+];
+
+const relatedTools = [
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+  { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
+  { title: "Gothic Font Generator", href: "/styles/gothic-font-generator", category: "style" },
+  { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", category: "social" },
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+  { title: "Calligraphy Font Generator", href: "/styles/calligraphy-font-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Aesthetic Text Generator — Vaporwave & Artsy Fonts | Ff Font Lab"
+  description="Generate aesthetic, vaporwave, and artsy fonts online. Create unique typography for social media, profiles, and creative content."
+  canonical="/styles/aesthetic-text-generator"
+  jsonLd={pageSchema}
+  activePage="styles"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Aesthetic Text Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Create aesthetic and artsy text styles using Unicode characters. Our generator offers fullwidth, double-struck, squared, and small caps styles for vaporwave designs, social media profiles, music playlists, and creative content. Express your unique aesthetic through typography.
+      </p>
+    </div>
+
+    <FontGenerator
+      styles={["fullwidth", "doubleStruck", "smallCaps", "squared"]}
+      placeholder="Type text for aesthetic style..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        The World of Aesthetic Typography
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Aesthetic typography is more than just a font choice — it's a form of self-expression. Originating from internet subcultures like vaporwave, lo-fi, and cottagecore, aesthetic text styles have become mainstream across social media platforms.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Whether you're curating a music playlist on Spotify, styling your Discord profile, or creating Instagram captions, aesthetic fonts add a distinctive visual element that sets your content apart from the standard.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

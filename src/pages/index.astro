@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FontGenerator from '../components/FontGenerator.astro';
+import BentoCard from '../components/BentoCard.astro';
+import FAQ from '../components/FAQ.astro';
+import TipSection from '../components/TipSection.astro';
+import { generateWebsiteSchema, generateOrganizationSchema } from '../lib/schema';
+
+const websiteSchema = generateWebsiteSchema();
+const orgSchema = generateOrganizationSchema();
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [websiteSchema, orgSchema],
+};
+
+const socialTools = [
+  { title: "Instagram Fonts", href: "/social/instagram-font-generator", icon: "photo_camera", description: "Generate stylish fonts for your Instagram bio, captions, and comments." },
+  { title: "TikTok Fonts", href: "/social/tiktok-font-generator", icon: "music_note", description: "Create eye-catching fonts for your TikTok bio and video captions." },
+  { title: "Twitter / X Fonts", href: "/social/twitter-font-generator", icon: "tag", description: "Stand out with unique fonts in your tweets and profile bio." },
+  { title: "WhatsApp Fonts", href: "/social/whatsapp-font-generator", icon: "chat", description: "Style your WhatsApp messages, status, and profile with cool fonts." },
+  { title: "Facebook Fonts", href: "/social/facebook-font-style", icon: "thumb_up", description: "Generate unique stylish fonts for your Facebook profile, posts, and comments." },
+  { title: "LinkedIn Fonts", href: "/social/linkedin-font-generator", icon: "work", description: "Create professional-looking fonts for your LinkedIn profile and posts." },
+  { title: "Snapchat Fonts", href: "/social/snapchat-font-generator", icon: "ghost", description: "Generate stylish fonts for your Snapchat bio, display name, and snaps." },
+  { title: "Telegram Fonts", href: "/social/telegram-font-generator", icon: "send", description: "Create stylish fonts for Telegram messages, channel names, and bio." },
+  { title: "Threads Fonts", href: "/social/threads-font-generator", icon: "forum", description: "Generate stylish fonts for your Threads posts, bio, and replies." },
+  { title: "Pinterest Fonts", href: "/social/pinterest-font-generator", icon: "push_pin", description: "Create stylish fonts for Pinterest pins, board names, and profile bio." },
+  { title: "Hindi Fonts", href: "/social/hindi-font-generator", icon: "translate", description: "Generate stylish fonts for Hindi text using Unicode characters." },
+  { title: "Bengali Fonts", href: "/social/bengali-font-generator", icon: "translate", description: "Generate stylish fonts for Bengali text with Unicode characters." },
+  { title: "Arabic Fonts", href: "/social/arabic-font-generator", icon: "translate", description: "Generate stylish fonts for Arabic text using Unicode characters." },
+];
+
+const gamingTools = [
+  { title: "Gaming Nicknames", href: "/gaming/gaming-nickname-generator", icon: "sports_esports", description: "Create unique, cool gaming nicknames for any game." },
+  { title: "Free Fire Names", href: "/gaming/free-fire-nickname", icon: "local_fire_department", description: "Generate stylish Free Fire player names with special characters." },
+  { title: "PUBG Names", href: "/gaming/pubg-nickname", icon: "military_tech", description: "Stand out in the battlefield with a fierce PUBG name." },
+  { title: "Roblox Names", href: "/gaming/roblox-username", icon: "block", description: "Create a unique Roblox display name with stylish fonts." },
+  { title: "Valorant Names", href: "/gaming/valorant-nickname", icon: "precision_manufacturing", description: "Create unique Valorant nicknames with stylish Unicode fonts." },
+  { title: "Fortnite Names", href: "/gaming/fortnite-username", icon: "shield", description: "Generate cool Fortnite usernames and display names with Unicode fonts." },
+  { title: "Minecraft Names", href: "/gaming/minecraft-username", icon: "home", description: "Generate unique Minecraft usernames and server names with Unicode fonts." },
+];
+
+const styleTools = [
+  { title: "Cursive Text", href: "/styles/cursive-text-generator", icon: "draw", description: "Elegant handwritten-style cursive and script fonts." },
+  { title: "Bold Text", href: "/styles/bold-text-generator", icon: "format_bold", description: "Thick, impactful bold text for maximum attention." },
+  { title: "Gothic Fonts", href: "/styles/gothic-font-generator", icon: "castle", description: "Medieval blackletter and fraktur style fonts." },
+  { title: "Aesthetic Text", href: "/styles/aesthetic-text-generator", icon: "palette", description: "Vaporwave, artsy, and decorative typography." },
+  { title: "Calligraphy", href: "/styles/calligraphy-font-generator", icon: "edit", description: "Elegant handwritten calligraphy-style fonts." },
+  { title: "Monospace Text", href: "/styles/monospace-text-generator", icon: "code", description: "Code-style, typewriter-like monospace fonts." },
+  { title: "Script Text", href: "/styles/script-text-generator", icon: "brush", description: "Bold script and calligraphy-style text." },
+];
+
+const tips = [
+  { step: 1, title: "Type your text", description: "Enter the text you want to convert in the input box above." },
+  { step: 2, title: "Pick a style", description: "Browse through dozens of available font styles below the input." },
+  { step: 3, title: "Copy & paste", description: "Click the copy button and paste it anywhere you want." },
+];
+
+const faqs = [
+  { question: "What is a font changer?", answer: "A font changer is a tool that converts normal text into different Unicode font styles that can be copied and pasted into social media, messaging apps, games, and other platforms." },
+  { question: "Is this font generator free?", answer: "Yes, Ff Font Lab is completely free to use. You can generate unlimited font styles without any cost or sign-up required." },
+  { question: "Will the fonts work on all platforms?", answer: "The fonts use Unicode characters, so they work on most modern platforms including Instagram, TikTok, Twitter, Discord, and more. Some platforms may have limited support for certain characters." },
+  { question: "How many font styles are available?", answer: "Our generator includes over 15 font styles ranging from bold and italic to cursive, gothic, monospace, and decorative options." },
+];
+---
+
+<BaseLayout
+  title="Font Changer — Fancy & Stylish Font Generator | Ff Font Lab"
+  description="Instantly convert standard text into sophisticated, pro-level typography styles for social media, gaming, and creative projects."
+  canonical="/"
+  jsonLd={jsonLd}
+  activePage="home"
+>
+  <section class="flex flex-col gap-6">
+    <div class="flex flex-col gap-3 text-center mt-4">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Font Changer — Fancy & Stylish Font Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[640px] mx-auto" style="font-family: Inter;">
+        Instantly convert standard text into sophisticated, pro-level typography styles for social media, gaming, and creative projects. Free, no sign-up required.
+      </p>
+    </div>
+
+    <FontGenerator
+      styles={["boldSans", "cursive", "doubleStruck", "monospace", "italic", "boldScript", "fraktur", "smallCaps", "sansSerif", "fullwidth"]}
+      placeholder="Type or paste your text here..."
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Social Media Font Generators
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {socialTools.map((tool) => (
+          <BentoCard title={tool.title} description={tool.description} href={tool.href} icon={tool.icon} />
+        ))}
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Gaming Name Generators
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {gamingTools.map((tool) => (
+          <BentoCard title={tool.title} description={tool.description} href={tool.href} icon={tool.icon} />
+        ))}
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Font Styles & Typography
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {styleTools.map((tool) => (
+          <BentoCard title={tool.title} description={tool.description} href={tool.href} icon={tool.icon} />
+        ))}
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Explore All Categories
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <a href="/social" class="surface-card rounded-lg p-5 flex flex-col gap-3 group block">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+              <span class="material-symbols-outlined text-[22px] text-primary">share</span>
+            </div>
+            <h3 class="text-[16px] font-semibold text-on-surface group-hover:text-primary transition-colors" style="font-family: Sora;">
+              Social Lab
+            </h3>
+          </div>
+          <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+            Fonts for Instagram, TikTok, Twitter, WhatsApp, and more social platforms.
+          </p>
+        </a>
+        <a href="/styles" class="surface-card rounded-lg p-5 flex flex-col gap-3 group block">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+              <span class="material-symbols-outlined text-[22px] text-primary">text_fields</span>
+            </div>
+            <h3 class="text-[16px] font-semibold text-on-surface group-hover:text-primary transition-colors" style="font-family: Sora;">
+              Style Labs
+            </h3>
+          </div>
+          <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+            Cursive, bold, gothic, calligraphy, and aesthetic font styles to explore.
+          </p>
+        </a>
+        <a href="/gaming" class="surface-card rounded-lg p-5 flex flex-col gap-3 group block">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+              <span class="material-symbols-outlined text-[22px] text-primary">sports_esports</span>
+            </div>
+            <h3 class="text-[16px] font-semibold text-on-surface group-hover:text-primary transition-colors" style="font-family: Sora;">
+              Gaming Lab
+            </h3>
+          </div>
+          <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+            Cool nicknames and styled names for Free Fire, PUBG, Roblox, and more.
+          </p>
+        </a>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+  </section>
+</BaseLayout>

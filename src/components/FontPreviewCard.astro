@@ -1,0 +1,66 @@
+---
+interface Props {
+  styleName: string;
+  convertedText: string;
+  isCopyable?: boolean;
+}
+
+const { styleName, convertedText, isCopyable = true } = Astro.props;
+---
+
+<div class="surface-card rounded-lg p-4 flex flex-col gap-2 transition-colors cursor-pointer group">
+  <div class="flex justify-between items-center">
+    <span class="text-[12px] font-medium bg-primary/10 text-primary px-2 py-1 rounded" style="font-family: JetBrains Mono;">
+      {styleName}
+    </span>
+    {isCopyable && (
+      <button
+        class="copy-btn text-on-surface-variant group-hover:text-primary transition-colors"
+        data-text={convertedText}
+        aria-label={`Copy ${styleName} text`}
+      >
+        <span class="material-symbols-outlined text-[20px]">content_copy</span>
+      </button>
+    )}
+  </div>
+  <p class="text-[18px] text-on-surface truncate break-words" style="font-family: Inter;">
+    {convertedText}
+  </p>
+</div>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach((btn) => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const text = btn.getAttribute('data-text');
+      if (text) {
+        try {
+          await navigator.clipboard.writeText(text);
+          const icon = btn.querySelector('.material-symbols-outlined');
+          if (icon) {
+            icon.textContent = 'check';
+            setTimeout(() => {
+              icon.textContent = 'content_copy';
+            }, 1500);
+          }
+        } catch {
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          const icon = btn.querySelector('.material-symbols-outlined');
+          if (icon) {
+            icon.textContent = 'check';
+            setTimeout(() => {
+              icon.textContent = 'content_copy';
+            }, 1500);
+          }
+        }
+      }
+    });
+  });
+</script>

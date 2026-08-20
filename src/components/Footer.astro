@@ -1,0 +1,138 @@
+---
+import { SITE_CONFIG } from '../lib/site-config';
+
+const currentYear = new Date().getFullYear();
+
+const socialLabLinks = [
+  { label: "Instagram Fonts", href: "/social/instagram-font-generator" },
+  { label: "Facebook Fonts", href: "/social/facebook-font-style" },
+  { label: "WhatsApp Fonts", href: "/social/whatsapp-font-generator" },
+  { label: "TikTok Fonts", href: "/social/tiktok-font-generator" },
+  { label: "Twitter / X Fonts", href: "/social/twitter-font-generator" },
+  { label: "LinkedIn Fonts", href: "/social/linkedin-font-generator" },
+  { label: "Snapchat Fonts", href: "/social/snapchat-font-generator" },
+  { label: "Telegram Fonts", href: "/social/telegram-font-generator" },
+  { label: "Threads Fonts", href: "/social/threads-font-generator" },
+  { label: "Pinterest Fonts", href: "/social/pinterest-font-generator" },
+  { label: "Hindi Fonts", href: "/social/hindi-font-generator" },
+  { label: "Bengali Fonts", href: "/social/bengali-font-generator" },
+  { label: "Arabic Fonts", href: "/social/arabic-font-generator" },
+];
+
+const gamingLabLinks = [
+  { label: "Gaming Nickname", href: "/gaming/gaming-nickname-generator" },
+  { label: "Free Fire Names", href: "/gaming/free-fire-nickname" },
+  { label: "PUBG Names", href: "/gaming/pubg-nickname" },
+  { label: "Roblox Names", href: "/gaming/roblox-username" },
+  { label: "Valorant Names", href: "/gaming/valorant-nickname" },
+  { label: "Fortnite Names", href: "/gaming/fortnite-username" },
+  { label: "Minecraft Names", href: "/gaming/minecraft-username" },
+];
+
+const styleLabLinks = [
+  { label: "Cursive Text", href: "/styles/cursive-text-generator" },
+  { label: "Bold Text", href: "/styles/bold-text-generator" },
+  { label: "Gothic / Fraktur", href: "/styles/gothic-font-generator" },
+  { label: "Calligraphy", href: "/styles/calligraphy-font-generator" },
+  { label: "Aesthetic Text", href: "/styles/aesthetic-text-generator" },
+  { label: "Monospace Text", href: "/styles/monospace-text-generator" },
+  { label: "Script Text", href: "/styles/script-text-generator" },
+];
+
+const moreLinks = [
+  { label: "All Font Styles", href: "/styles" },
+  { label: "Social Media Tools", href: "/social" },
+  { label: "Gaming Tools", href: "/gaming" },
+];
+---
+
+<footer class="bg-surface border-t border-outline-variant mt-auto">
+  <div class="max-w-[1280px] mx-auto px-4 md:px-12 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-6">
+      <div class="col-span-2 md:col-span-1">
+        <a href="/" class="inline-block mb-3">
+          <span class="text-[20px] font-bold text-primary" style="font-family: Sora;">Ff</span>
+        </a>
+        <p class="text-[13px] text-on-surface-variant leading-relaxed mb-4" style="font-family: Inter;">
+          Generate stylish, fancy, and cool font styles using Unicode characters. Copy and paste anywhere — free, no sign-up needed.
+        </p>
+        <div class="flex gap-3">
+          <a href="https://twitter.com/ffontlab" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant hover:text-primary transition-colors" aria-label="Twitter">
+            <span class="material-symbols-outlined text-[20px]">tag</span>
+          </a>
+          <a href="https://instagram.com/ffontlab" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant hover:text-primary transition-colors" aria-label="Instagram">
+            <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+          </a>
+          <a href="https://youtube.com/@ffontlab" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant hover:text-primary transition-colors" aria-label="YouTube">
+            <span class="material-symbols-outlined text-[20px]">play_circle</span>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-[12px] font-bold text-primary uppercase tracking-wider mb-3" style="font-family: JetBrains Mono;">Social Lab</h4>
+        <ul class="flex flex-col gap-2">
+          {socialLabLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-[13px] text-on-surface-variant hover:text-primary transition-colors" style="font-family: Inter;">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-[12px] font-bold text-primary uppercase tracking-wider mb-3" style="font-family: JetBrains Mono;">Gaming Lab</h4>
+        <ul class="flex flex-col gap-2">
+          {gamingLabLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-[13px] text-on-surface-variant hover:text-primary transition-colors" style="font-family: Inter;">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-[12px] font-bold text-primary uppercase tracking-wider mb-3" style="font-family: JetBrains Mono;">Style Labs</h4>
+        <ul class="flex flex-col gap-2">
+          {styleLabLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-[13px] text-on-surface-variant hover:text-primary transition-colors" style="font-family: Inter;">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-[12px] font-bold text-primary uppercase tracking-wider mb-3" style="font-family: JetBrains Mono;">More</h4>
+        <ul class="flex flex-col gap-2">
+          {moreLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-[13px] text-on-surface-variant hover:text-primary transition-colors" style="font-family: Inter;">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-outline-variant">
+    <div class="max-w-[1280px] mx-auto px-4 md:px-12 py-5 flex flex-col sm:flex-row justify-between items-center gap-3">
+      <p class="text-[12px] text-on-surface-variant" style="font-family: Inter;">
+        &copy; {currentYear} {SITE_CONFIG.name}. All rights reserved.
+      </p>
+      <div class="flex gap-4">
+        <a href="/privacy" class="text-[12px] text-on-surface-variant hover:text-primary transition-colors" style="font-family: Inter;">Privacy Policy</a>
+        <a href="/terms" class="text-[12px] text-on-surface-variant hover:text-primary transition-colors" style="font-family: Inter;">Terms of Service</a>
+        <a href="/contact" class="text-[12px] text-on-surface-variant hover:text-primary transition-colors" style="font-family: Inter;">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>

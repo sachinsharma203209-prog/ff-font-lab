@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { generateWebPageSchema } from '../lib/schema';
+
+const pageSchema = generateWebPageSchema({
+  title: "Page Not Found | Ff Font Lab",
+  description: "The page you're looking for doesn't exist. Head back to Ff Font Lab to use our font generator tools.",
+  url: "https://fontchange.co.in/404",
+});
+---
+
+<BaseLayout
+  title="Page Not Found | Ff Font Lab"
+  description="The page you're looking for doesn't exist. Head back to Ff Font Lab to use our font generator tools."
+  canonical="/"
+  jsonLd={pageSchema}
+  noindex={true}
+  activePage="home"
+>
+  <div class="flex flex-col items-center justify-center min-h-[60vh] gap-6 text-center">
+    <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
+      <span class="material-symbols-outlined text-[40px] text-primary">search_off</span>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[32px] md:text-[40px] font-bold text-on-surface" style="font-family: Sora;">
+        Page Not Found
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[480px]" style="font-family: Inter;">
+        The page you're looking for doesn't exist or has been moved. Check the URL or head back to our font generator to create some stylish text.
+      </p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-3">
+      <a href="/" class="btn-primary text-[14px] px-6 py-3 flex items-center gap-2 justify-center">
+        <span class="material-symbols-outlined text-[18px]">home</span>
+        Back to Home
+      </a>
+      <a href="/social" class="surface-card text-[14px] px-6 py-3 flex items-center gap-2 justify-center rounded-lg text-on-surface hover:text-primary transition-colors">
+        <span class="material-symbols-outlined text-[18px]">share</span>
+        Social Media Tools
+      </a>
+      <a href="/styles" class="surface-card text-[14px] px-6 py-3 flex items-center gap-2 justify-center rounded-lg text-on-surface hover:text-primary transition-colors">
+        <span class="material-symbols-outlined text-[18px]">text_fields</span>
+        Font Styles
+      </a>
+      <a href="/gaming" class="surface-card text-[14px] px-6 py-3 flex items-center gap-2 justify-center rounded-lg text-on-surface hover:text-primary transition-colors">
+        <span class="material-symbols-outlined text-[18px]">sports_esports</span>
+        Gaming Tools
+      </a>
+    </div>
+  </div>
+</BaseLayout>

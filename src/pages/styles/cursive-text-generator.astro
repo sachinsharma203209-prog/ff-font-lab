@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Font Styles", href: "/styles" },
+  { label: "Cursive", href: "/styles/cursive-text-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Cursive Text Generator — Elegant Script Fonts | Ff Font Lab",
+  description: "Generate beautiful cursive and script fonts online. Create elegant handwritten-style text for social media, invitations, and creative projects.",
+  url: "https://fontchange.co.in/styles/cursive-text-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Type your text", description: "Enter the text you want in cursive style — names, titles, or short phrases work best." },
+  { step: 2, title: "Choose cursive style", description: "Pick between standard cursive, bold script, or italic variations for different handwriting looks." },
+  { step: 3, title: "Copy and use", description: "Click copy and paste the cursive text wherever you need it — social media, invitations, or documents." },
+];
+
+const faqs = [
+  { question: "What is a cursive font?", answer: "A cursive font mimics handwritten or calligraphic letterforms, creating an elegant, flowing text style. Our Unicode cursive fonts use special characters that resemble connected handwriting." },
+  { question: "Can I use cursive fonts for invitations?", answer: "Yes, cursive fonts are perfect for wedding invitations, greeting cards, and formal event invitations. They add an elegant, personal touch to any printed or digital invitation." },
+  { question: "Are cursive fonts readable?", answer: "While cursive fonts are stylish, very elaborate styles may be harder to read in long paragraphs. We recommend using them for short text like names, titles, and single sentences." },
+  { question: "What is the difference between cursive and bold script?", answer: "Standard cursive has thinner, more delicate strokes, while bold script has thicker, heavier strokes that are more impactful. Both mimic handwriting but have different visual weights." },
+  { question: "Do cursive fonts work on all platforms?", answer: "Our Unicode cursive fonts work on most modern platforms including social media, messaging apps, and email. Some older systems may have limited support for certain Unicode characters." },
+];
+
+const relatedTools = [
+  { title: "Calligraphy Font Generator", href: "/styles/calligraphy-font-generator", category: "style" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+  { title: "Aesthetic Text Generator", href: "/styles/aesthetic-text-generator", category: "style" },
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+  { title: "Gothic Font Generator", href: "/styles/gothic-font-generator", category: "style" },
+  { title: "Twitter / X Font Generator", href: "/social/twitter-font-generator", category: "social" },
+];
+---
+
+<BaseLayout
+  title="Cursive Text Generator — Elegant Script Fonts | Ff Font Lab"
+  description="Generate beautiful cursive and script fonts online. Create elegant handwritten-style text for social media, invitations, and creative projects."
+  canonical="/styles/cursive-text-generator"
+  jsonLd={pageSchema}
+  activePage="styles"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Cursive Text Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Create elegant cursive and handwritten-style fonts using Unicode characters. Our generator offers multiple cursive variations — from delicate, flowing scripts to bold, statement-making calligraphy. Perfect for invitations, social media bios, signatures, and creative projects.
+      </p>
+    </div>
+
+    <FontGenerator
+      styles={["cursive", "boldScript", "italic"]}
+      placeholder="Type text to convert to cursive..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        About Cursive & Script Fonts
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Cursive fonts have been a staple of elegant typography for centuries. They mimic the flowing, connected letterforms of handwritten text, adding a personal and sophisticated touch to any content. Our Unicode cursive fonts bring this classic style to the digital world.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Cursive styles are most effective for short text elements like names, headings, and signatures. For longer passages, consider pairing cursive accents with a more readable body font.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

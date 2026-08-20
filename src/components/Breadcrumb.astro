@@ -1,0 +1,46 @@
+---
+import { generateBreadcrumbSchema } from '../lib/schema';
+
+interface Props {
+  items: Array<{ label: string; href: string }>;
+}
+
+const { items } = Astro.props;
+
+const siteUrl = "https://fontchange.co.in";
+
+const schemaItems = items.map((item) => ({
+  name: item.label,
+  url: `${siteUrl}${item.href}`,
+}));
+
+const breadcrumbSchema = generateBreadcrumbSchema(schemaItems);
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<nav aria-label="Breadcrumb" class="flex items-center gap-1.5 flex-wrap">
+  {items.map((item, index) => {
+    const isLast = index === items.length - 1;
+    return (
+      <span class="flex items-center gap-1.5">
+        {index > 0 && (
+          <span class="material-symbols-outlined text-[14px] text-on-surface-variant">chevron_right</span>
+        )}
+        {isLast ? (
+          <span class="text-[13px] text-on-surface-variant font-medium" style="font-family: JetBrains Mono;">
+            {item.label}
+          </span>
+        ) : (
+          <a
+            href={item.href}
+            class="text-[13px] text-primary hover:text-primary-dark transition-colors font-medium"
+            style="font-family: JetBrains Mono;"
+          >
+            {item.label}
+          </a>
+        )}
+      </span>
+    );
+  })}
+</nav>

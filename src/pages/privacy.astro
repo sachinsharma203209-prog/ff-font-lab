@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy | Ff Font Lab"
+  description="Privacy Policy for Ff Font Lab. Learn how we handle your data and protect your privacy."
+  canonical="/privacy"
+  noindex={true}
+  activePage="home"
+>
+  <div class="flex flex-col gap-6 max-w-[800px]">
+    <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface" style="font-family: Sora;">
+      Privacy Policy
+    </h1>
+    <p class="text-[15px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+      Last updated: August 2026
+    </p>
+    <div class="flex flex-col gap-4 text-[15px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+      <h2 class="text-[20px] font-bold text-on-surface" style="font-family: Sora;">Information We Collect</h2>
+      <p>Ff Font Lab does not collect any personal information. We do not use cookies, track users, or store any data entered into our font generator tools. All text processing happens entirely in your browser and is never sent to our servers.</p>
+
+      <h2 class="text-[20px] font-bold text-on-surface" style="font-family: Sora;">Third-Party Services</h2>
+      <p>We use Google Fonts for typography and Google Analytics for basic traffic statistics. These services may collect anonymous usage data as described in their respective privacy policies.</p>
+
+      <h2 class="text-[20px] font-bold text-on-surface" style="font-family: Sora;">Contact</h2>
+      <p>If you have questions about this privacy policy, please contact us through our social media channels linked in the footer.</p>
+    </div>
+  </div>
+</BaseLayout>

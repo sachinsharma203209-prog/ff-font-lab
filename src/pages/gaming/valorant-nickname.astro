@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Gaming", href: "/gaming" },
+  { label: "Valorant", href: "/gaming/valorant-nickname" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Valorant Name Generator — Stylish Valorant Nicknames | Ff Font Lab",
+  description: "Create unique Valorant nicknames with stylish Unicode fonts and symbols. Stand out in competitive matches with a pro-level gamertag.",
+  url: "https://fontchange.co.in/gaming/valorant-nickname",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Keep it under 16 characters", description: "Valorant limits display names to 16 characters. Use the counter to stay within the limit while creating a stylish name." },
+  { step: 2, title: "Choose a competitive style", description: "Browse through bold, italic, fraktur, double-struck, and monospace styles for a pro-level Valorant look." },
+  { step: 3, title: "Change your name in Valorant", description: "Open Valorant, go to Settings > Name, and paste your styled name. You get a limited number of free name changes." },
+];
+
+const faqs = [
+  { question: "What is the Valorant name character limit?", answer: "Valorant display names can be up to 16 characters long. This includes letters, numbers, spaces, and any Unicode characters you use from our generator. Keep this limit in mind when creating your styled name." },
+  { question: "Do Unicode fonts work in Valorant?", answer: "Yes, Valorant supports many Unicode characters in display names. Bold Sans, Fraktur, and Double-Struck styles generally work well. However, some very complex Unicode characters may be restricted by Valorant's name filter." },
+  { question: "How to change Valorant display name?", answer: "Go to Valorant Settings > About tab > click on your current name. You can also change your name through your Riot account settings at riot.com. Note that you get a limited number of free name changes." },
+  { question: "Can I use symbols in Valorant names?", answer: "Valorant allows some Unicode symbols and special characters, but not all are supported. Simple symbols and styled text characters generally work. Test your name before committing to make sure all characters display correctly." },
+];
+
+const relatedTools = [
+  { title: "Gaming Nickname Generator", href: "/gaming/gaming-nickname-generator", category: "gaming" },
+  { title: "Free Fire Nickname", href: "/gaming/free-fire-nickname", category: "gaming" },
+  { title: "PUBG Nickname", href: "/gaming/pubg-nickname", category: "gaming" },
+  { title: "Roblox Username", href: "/gaming/roblox-username", category: "gaming" },
+  { title: "Fortnite Username", href: "/gaming/fortnite-username", category: "gaming" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Valorant Name Generator — Stylish Valorant Nicknames | Ff Font Lab"
+  description="Create unique Valorant nicknames with stylish Unicode fonts and symbols. Stand out in competitive matches with a pro-level gamertag."
+  canonical="/gaming/valorant-nickname"
+  jsonLd={pageSchema}
+  activePage="gaming"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Valorant Name Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Create unique Valorant nicknames with stylish Unicode fonts and symbols. Stand out in competitive matches with a pro-level gamertag. Valorant limits display names to 16 characters, so our generator helps you craft the most impactful name within that limit.
+      </p>
+    </div>
+
+    <div class="surface-card rounded-lg p-4 flex items-center gap-3 border border-yellow-500/20 bg-yellow-500/5">
+      <span class="material-symbols-outlined text-[20px] text-yellow-500">info</span>
+      <p class="text-[13px] text-on-surface-variant" style="font-family: Inter;">
+        <strong class="text-on-surface">Valorant limit:</strong> Display names are restricted to 16 characters. The generator counter helps you stay within this limit.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={16}
+      charLimitLabel="Name limit"
+      styles={["boldSans", "italic", "fraktur", "boldFraktur", "doubleStruck", "monospace"]}
+      placeholder="Type your Valorant name..."
+      defaultText="Agent"
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Valorant Name Style Tips
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Valorant is a highly competitive tactical shooter where your name is your identity. Pro players often keep their names simple but stylish — a clean bold name reads better in kill feeds and scoreboards than overly complex styles. Bold Sans and Fraktur are among the most popular choices in the Valorant community.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Valorant enforces a strict 16-character limit, and certain symbols or complex Unicode characters may be restricted by the game's name filter. Keep your name short and impactful, and test it in-game before committing your name change. With limited free name changes available, it's worth getting it right the first time.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Gaming", href: "/gaming" },
+  { label: "Fortnite", href: "/gaming/fortnite-username" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Fortnite Username Generator — Cool Fortnite Names | Ff Font Lab",
+  description: "Generate cool Fortnite usernames and display names with Unicode fonts and symbols. Create memorable gaming identities for battle royale.",
+  url: "https://fontchange.co.in/gaming/fortnite-username",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Keep it under 16 characters", description: "Fortnite display names are limited to 16 characters. Use the counter to create the best name within the limit." },
+  { step: 2, title: "Pick a battle royale style", description: "Choose from bold, fraktur, double-struck, monospace, circled, and small caps styles for a standout Fortnite name." },
+  { step: 3, title: "Change your Fortnite name", description: "Log into your Epic Games account, go to Account Settings, and update your display name with the styled text." },
+];
+
+const faqs = [
+  { question: "What is the Fortnite display name limit?", answer: "Fortnite display names can be up to 16 characters long. This limit applies to your Epic Games display name, which is what other players see in-game." },
+  { question: "Do Unicode fonts work in Fortnite?", answer: "Yes, Fortnite supports many Unicode characters in display names. Bold Sans, Fraktur, Double-Struck, and Monospace styles generally display correctly in-game." },
+  { question: "How to change Fortnite display name?", answer: "Go to epicgames.com, log into your account, navigate to General Settings, and update your display name. Note that Epic Games imposes a cooldown between name changes — you can only change your display name once every two weeks." },
+  { question: "Can I use special characters in Fortnite?", answer: "Fortnite supports many Unicode special characters and symbols in display names. However, some characters may be restricted. Keep your name under 16 characters and test it to make sure all characters render correctly." },
+];
+
+const relatedTools = [
+  { title: "Gaming Nickname Generator", href: "/gaming/gaming-nickname-generator", category: "gaming" },
+  { title: "Free Fire Nickname", href: "/gaming/free-fire-nickname", category: "gaming" },
+  { title: "PUBG Nickname", href: "/gaming/pubg-nickname", category: "gaming" },
+  { title: "Valorant Nickname", href: "/gaming/valorant-nickname", category: "gaming" },
+  { title: "Roblox Username", href: "/gaming/roblox-username", category: "gaming" },
+  { title: "Gothic Font Generator", href: "/styles/gothic-font-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Fortnite Username Generator — Cool Fortnite Names | Ff Font Lab"
+  description="Generate cool Fortnite usernames and display names with Unicode fonts and symbols. Create memorable gaming identities for battle royale."
+  canonical="/gaming/fortnite-username"
+  jsonLd={pageSchema}
+  activePage="gaming"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Fortnite Username Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Generate cool Fortnite usernames and display names with Unicode fonts and symbols. Create memorable gaming identities for battle royale. With a 16-character limit, our generator helps you craft the most impactful Fortnite name possible.
+      </p>
+    </div>
+
+    <div class="surface-card rounded-lg p-4 flex items-center gap-3 border border-yellow-500/20 bg-yellow-500/5">
+      <span class="material-symbols-outlined text-[20px] text-yellow-500">info</span>
+      <p class="text-[13px] text-on-surface-variant" style="font-family: Inter;">
+        <strong class="text-on-surface">Fortnite limit:</strong> Display names are restricted to 16 characters. Name changes are limited to once every two weeks.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={16}
+      charLimitLabel="Name limit"
+      styles={["boldSans", "italic", "fraktur", "doubleStruck", "monospace", "circled", "smallCaps"]}
+      placeholder="Type your Fortnite name..."
+      defaultText="Storm"
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Fortnite Name Style Guide
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Fortnite has one of the most expressive gaming communities, and your display name is a big part of your identity on the battlefield. Popular styles among Fortnite players include bold sans for a clean competitive look, fraktur for an edgy aesthetic, and circled characters for something more unique. Keep your name short — the best Fortnite names are 6-12 characters and easy to read in kill feeds.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Remember that Epic Games limits name changes to once every two weeks, so make sure you're happy with your choice before applying it. Our generator lets you preview different styles so you can find the perfect one. Fortnite supports most Unicode characters, so you have plenty of creative freedom.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

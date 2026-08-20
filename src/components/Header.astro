@@ -1,0 +1,105 @@
+---
+import { SITE_CONFIG } from '../lib/site-config';
+
+interface Props {
+  activePage?: string;
+}
+
+const { activePage = 'home' } = Astro.props;
+
+const pageMap: Record<string, string> = {
+  home: '/',
+  social: '/social',
+  styles: '/styles',
+  gaming: '/gaming',
+};
+
+function isActive(href: string): boolean {
+  if (activePage === 'home') return href === '/';
+  return href === pageMap[activePage];
+}
+---
+
+<header class="bg-surface/60 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-outline-variant">
+  <div class="flex justify-between items-center px-4 md:px-12 h-16 max-w-[1280px] mx-auto">
+    <a href="/" class="flex items-center gap-2">
+      <span class="text-[24px] font-bold text-primary" style="font-family: Sora;">Ff</span>
+    </a>
+
+    <nav class="hidden md:flex gap-6 items-center">
+      {SITE_CONFIG.navLinks.map((link) => {
+        const active = isActive(link.href);
+        return (
+          <a
+            href={link.href}
+            class:list={[
+              "text-[14px] font-medium transition-colors pb-1",
+              active
+                ? "text-primary font-bold border-b-2 border-primary"
+                : "text-on-surface-variant hover:text-primary",
+            ]}
+            style="font-family: Inter;"
+          >
+            {link.label}
+          </a>
+        );
+      })}
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden text-on-surface-variant hover:text-primary transition-colors"
+        aria-label="Open menu"
+      >
+        <span class="material-symbols-outlined text-[24px]">menu</span>
+      </button>
+      <a href="/" class="btn-primary text-[13px] px-4 py-2 hidden md:inline-flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-[16px]">diamond</span>
+        Get Pro
+      </a>
+    </div>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden bg-surface border-t border-outline-variant"
+  >
+    <nav class="flex flex-col px-4 py-4 gap-1">
+      {SITE_CONFIG.navLinks.map((link) => {
+        const active = isActive(link.href);
+        return (
+          <a
+            href={link.href}
+            class:list={[
+              "text-[14px] font-medium px-3 py-2.5 rounded-lg transition-colors",
+              active
+                ? "text-primary bg-primary/10 font-bold"
+                : "text-on-surface-variant hover:text-primary hover:bg-surface-container",
+            ]}
+            style="font-family: Inter;"
+          >
+            {link.label}
+          </a>
+        );
+      })}
+      <a
+        href="/"
+        class="btn-primary text-[13px] px-4 py-2.5 mt-2 text-center flex items-center justify-center gap-1.5"
+      >
+        <span class="material-symbols-outlined text-[16px]">diamond</span>
+        Get Pro
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  }
+</script>

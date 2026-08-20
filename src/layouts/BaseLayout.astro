@@ -1,0 +1,62 @@
+---
+import '../styles/global.css';
+import SEO from '../components/SEO.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogImage?: string;
+  noindex?: boolean;
+  jsonLd?: object;
+  activePage?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage,
+  noindex,
+  jsonLd,
+  activePage = 'home',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="generator" content={Astro.generator} />
+  <SEO
+    title={title}
+    description={description}
+    canonical={canonical}
+    ogImage={ogImage}
+    noindex={noindex}
+    jsonLd={jsonLd}
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Sora:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body class="text-on-background min-h-screen flex flex-col font-body antialiased" style="background-color: #020617; color: #dae2fd;">
+  <Header activePage={activePage} />
+  <main class="flex-grow pt-[80px] pb-12 px-4 md:px-12 max-w-[1280px] mx-auto w-full flex flex-col gap-8">
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

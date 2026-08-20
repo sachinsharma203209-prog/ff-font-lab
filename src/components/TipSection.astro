@@ -1,0 +1,41 @@
+---
+import { generateHowToSchema } from '../lib/schema';
+
+interface Props {
+  title?: string;
+  tips: Array<{ step: number; title: string; description: string }>;
+}
+
+const { title = "How to Use", tips } = Astro.props;
+
+const howToSchema = generateHowToSchema({
+  name: title,
+  description: tips.map((tip) => `${tip.title}: ${tip.description}`).join(' '),
+  steps: tips.map((tip) => ({ name: tip.title, text: tip.description })),
+});
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+
+<section class="flex flex-col gap-4">
+  <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+    How to Use
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    {tips.map((tip) => (
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+          <span class="text-[14px] font-bold text-primary" style="font-family: JetBrains Mono;">
+            {tip.step}
+          </span>
+        </div>
+        <h3 class="text-[16px] font-semibold text-on-surface" style="font-family: Sora;">
+          {tip.title}
+        </h3>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          {tip.description}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Social Media", href: "/social" },
+  { label: "Twitter / X", href: "/social/twitter-font-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Twitter / X Font Generator — Stylish Tweet & Bio Fonts | Ff Font Lab",
+  description: "Generate stylish fonts for your Twitter / X profile, tweets, and replies. Stand out with unique Unicode typography on Twitter.",
+  url: "https://fontchange.co.in/social/twitter-font-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Type your text", description: "Enter text for your tweet or bio. Keep it under 160 characters for your Twitter bio." },
+  { step: 2, title: "Select a font", description: "Choose from bold, sans-serif, monospace, and small caps for a clean, readable look." },
+  { step: 3, title: "Post it", description: "Paste the styled text into your tweet, reply, or profile bio on Twitter / X." },
+];
+
+const faqs = [
+  { question: "Can I use these fonts in my Twitter bio?", answer: "Yes, generate your desired font and paste it into your Twitter / X bio in the Edit Profile section. Twitter supports most Unicode characters in bio text." },
+  { question: "Do these fonts work in tweets?", answer: "Yes, you can paste styled Unicode text into tweets, replies, and profile sections on Twitter / X. Each character renders as its Unicode equivalent." },
+  { question: "Will the fonts affect my character count?", answer: "Some Unicode characters count as more than one character in Twitter's character counter. Keep this in mind within Twitter's 280-character limit for tweets." },
+  { question: "What is the Twitter bio character limit?", answer: "Twitter / X allows up to 160 characters for your bio. Our generator includes a character counter to help you stay within this limit." },
+  { question: "Which styles are best for tweets?", answer: "Bold Sans and Sans-Serif are recommended for tweets since they are highly readable and take up fewer Unicode code points, leaving more room for your message." },
+];
+
+const relatedTools = [
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+  { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", category: "social" },
+  { title: "Facebook Font Style", href: "/social/facebook-font-style", category: "social" },
+  { title: "WhatsApp Font Generator", href: "/social/whatsapp-font-generator", category: "social" },
+  { title: "LinkedIn Font Generator", href: "/social/linkedin-font-generator", category: "social" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Twitter / X Font Generator — Stylish Tweet & Bio Fonts | Ff Font Lab"
+  description="Generate stylish fonts for your Twitter / X profile, tweets, and replies. Stand out with unique Unicode typography on Twitter."
+  canonical="/social/twitter-font-generator"
+  jsonLd={pageSchema}
+  activePage="social"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Twitter / X Font Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Make your tweets, bio, and replies stand out with our stylish Unicode font generator for Twitter / X. With 280 characters per tweet, styled text helps your content catch the eye as users scroll through their timeline.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={160}
+      charLimitLabel="Bio character limit"
+      styles={["boldSans", "sansSerif", "monospace", "smallCaps", "italic", "doubleStruck", "cursive"]}
+      placeholder="Type your tweet or bio text..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Making an Impact on Twitter / X
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Twitter's fast-paced feed means your content needs to grab attention instantly. Styled fonts in your bio and tweets help you stand out from the crowd. A unique bio font can increase profile visits and follower engagement.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Keep in mind that Unicode characters may count as multiple characters on Twitter. If you're composing a tweet, use our character counter to make sure your message fits within the 280-character limit.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

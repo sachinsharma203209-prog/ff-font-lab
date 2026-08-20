@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Gaming", href: "/gaming" },
+  { label: "Gaming Nickname", href: "/gaming/gaming-nickname-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Gaming Nickname Generator — Cool Gamer Tags | Ff Font Lab",
+  description: "Generate cool gaming nicknames with stylish Unicode fonts. Create unique gamer tags for any game or platform.",
+  url: "https://fontchange.co.in/gaming/gaming-nickname-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Think of a name", description: "Come up with a cool base name or word you want to stylize. Keep it short and memorable." },
+  { step: 2, title: "Generate styles", description: "Browse through bold, gothic, double-struck, and other gaming-friendly styles to find your look." },
+  { step: 3, title: "Use in your game", description: "Copy the styled name and paste it into your game's name or profile settings." },
+];
+
+const faqs = [
+  { question: "How do I create a cool gaming nickname?", answer: "Type your desired name into the generator, browse through the font styles, and pick one that looks cool. Then copy and paste it into your game. Try different styles to see which one looks best." },
+  { question: "Do these fonts work in all games?", answer: "Most modern games support Unicode characters, but some games may have restrictions on which characters are allowed in usernames. Always test your styled name before committing." },
+  { question: "Can I use special characters in my gaming name?", answer: "Many games allow Unicode characters in display names or clan tags, but not all support them in official usernames. Our generators produce styled text that works in most modern games." },
+  { question: "What font styles look best for gaming?", answer: "Bold Sans, Gothic/Fraktur, Double-Struck, and Squared styles are popular choices for gaming. They are highly readable and create a strong visual impact in game interfaces." },
+  { question: "How do I change my gaming name?", answer: "Each game has its own process for changing names. Most require you to go to your profile or account settings. Some games require a name change card or item." },
+];
+
+const relatedTools = [
+  { title: "Free Fire Nickname", href: "/gaming/free-fire-nickname", category: "gaming" },
+  { title: "PUBG Nickname", href: "/gaming/pubg-nickname", category: "gaming" },
+  { title: "Roblox Username", href: "/gaming/roblox-username", category: "gaming" },
+  { title: "Gothic Font Generator", href: "/styles/gothic-font-generator", category: "style" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+  { title: "Aesthetic Text Generator", href: "/styles/aesthetic-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Gaming Nickname Generator — Cool Gamer Tags | Ff Font Lab"
+  description="Generate cool gaming nicknames with stylish Unicode fonts. Create unique gamer tags for any game or platform."
+  canonical="/gaming/gaming-nickname-generator"
+  jsonLd={pageSchema}
+  activePage="gaming"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Gaming Nickname Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Create unique, stylish gaming nicknames using our Unicode font generator. Stand out in any game with a cool-looking username. Whether you play Free Fire, PUBG, Roblox, Fortnite, or any other game, our generator has the perfect style for your gamer tag.
+      </p>
+    </div>
+
+    <div class="surface-card rounded-lg p-4 flex items-center gap-3 border border-yellow-500/20 bg-yellow-500/5">
+      <span class="material-symbols-outlined text-[20px] text-yellow-500">info</span>
+      <p class="text-[13px] text-on-surface-variant" style="font-family: Inter;">
+        <strong class="text-on-surface">Game-specific note:</strong> Character limits vary by game. Check our game-specific pages for Free Fire (12 chars), PUBG (14 chars), and Roblox (20 chars).
+      </p>
+    </div>
+
+    <FontGenerator
+      styles={["boldSans", "fraktur", "boldFraktur", "doubleStruck", "monospace", "squared", "circled"]}
+      placeholder="Type your gaming name..."
+      defaultText="Shadow"
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Choosing the Right Style for Gaming
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+          <h3 class="text-[16px] font-semibold text-on-surface" style="font-family: Sora;">Bold Sans</h3>
+          <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+            Clean, modern, and highly readable. Works on virtually every game and platform. The safest choice for universal compatibility.
+          </p>
+        </div>
+        <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+          <h3 class="text-[16px] font-semibold text-on-surface" style="font-family: Sora;">Gothic / Fraktur</h3>
+          <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+            Dark, medieval, and intimidating. Perfect for competitive games, RPGs, and creating a fearsome gaming persona.
+          </p>
+        </div>
+        <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+          <h3 class="text-[16px] font-semibold text-on-surface" style="font-family: Sora;">Double-Struck</h3>
+          <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+            Mathematical and unique. The outlined letter style creates a distinctive look that stands out in any game lobby.
+          </p>
+        </div>
+        <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+          <h3 class="text-[16px] font-semibold text-on-surface" style="font-family: Sora;">Squared / Circled</h3>
+          <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+            Enclosed characters with boxes or circles around each letter. Creates a blocky, distinctive appearance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

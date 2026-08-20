@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Social Media", href: "/social" },
+  { label: "WhatsApp", href: "/social/whatsapp-font-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "WhatsApp Font Generator — Cool Chat & Status Fonts | Ff Font Lab",
+  description: "Create stylish fonts for your WhatsApp status, bio, and chat messages. Stand out with unique Unicode text styles on WhatsApp.",
+  url: "https://fontchange.co.in/social/whatsapp-font-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Type your message", description: "Enter the text you want to style for WhatsApp chat, status, or profile bio." },
+  { step: 2, title: "Pick a style", description: "Choose from bold, italic, double-struck, small caps, fullwidth, and more options." },
+  { step: 3, title: "Send it", description: "Paste the styled text and send it in your WhatsApp chat or update your status." },
+];
+
+const faqs = [
+  { question: "How do I change my WhatsApp font?", answer: "Generate your desired font style using our tool, then paste it into your WhatsApp status, bio, or message input field. WhatsApp supports most Unicode characters." },
+  { question: "Do these fonts work in WhatsApp messages?", answer: "Yes, you can copy and paste styled text into any WhatsApp message, status, or profile section. The styled text will appear exactly as generated for recipients." },
+  { question: "Will the fonts display correctly on the recipient's phone?", answer: "Unicode fonts are widely supported on modern smartphones including Android and iOS, so most recipients will see the fonts correctly." },
+  { question: "Can I use styled fonts in WhatsApp group names?", answer: "WhatsApp allows Unicode characters in group names and descriptions, so you can use styled fonts to make your group stand out." },
+  { question: "What is the WhatsApp status character limit?", answer: "WhatsApp statuses can be up to 652 characters long. For the About section, the limit is 139 characters. Our generator helps you stay within these limits." },
+];
+
+const relatedTools = [
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+  { title: "Facebook Font Style", href: "/social/facebook-font-style", category: "social" },
+  { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", category: "social" },
+  { title: "Twitter / X Font Generator", href: "/social/twitter-font-generator", category: "social" },
+  { title: "LinkedIn Font Generator", href: "/social/linkedin-font-generator", category: "social" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="WhatsApp Font Generator — Cool Chat & Status Fonts | Ff Font Lab"
+  description="Create stylish fonts for your WhatsApp status, bio, and chat messages. Stand out with unique Unicode text styles on WhatsApp."
+  canonical="/social/whatsapp-font-generator"
+  jsonLd={pageSchema}
+  activePage="social"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        WhatsApp Font Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Make your WhatsApp messages, status updates, and profile bio stand out with our stylish Unicode font generator. Send bold text in chats, create eye-catching statuses, and personalize your About section with unique typography.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={139}
+      charLimitLabel="About section limit"
+      styles={["boldSans", "italic", "doubleStruck", "smallCaps", "fullwidth", "monospace", "cursive", "sansSerif"]}
+      placeholder="Type your WhatsApp text..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Fun Ways to Use Styled Text on WhatsApp
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          WhatsApp is one of the most popular messaging apps worldwide, and styled fonts let you add personality to every message. Use bold text for emphasis in group chats, italic for elegant announcements, and decorative styles for special occasions.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Styled fonts also work great for WhatsApp Business profiles, helping your brand stand out. Use professional-looking fonts for your business About section and catalog descriptions.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

@@ -1,0 +1,38 @@
+---
+import { generateFAQSchema } from '../lib/schema';
+
+interface Props {
+  faqs: Array<{ question: string; answer: string }>;
+}
+
+const { faqs } = Astro.props;
+
+const faqSchema = generateFAQSchema(faqs);
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<section class="flex flex-col gap-4">
+  <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+    Frequently Asked Questions
+  </h2>
+  <div class="flex flex-col gap-2">
+    {faqs.map((faq) => (
+      <details class="surface-card rounded-lg group">
+        <summary class="flex justify-between items-center cursor-pointer list-none p-4 select-none">
+          <span class="text-[15px] font-medium text-on-surface pr-4" style="font-family: Inter;">
+            {faq.question}
+          </span>
+          <span class="material-symbols-outlined text-[20px] text-on-surface-variant transition-transform group-open:rotate-180 flex-shrink-0">
+            expand_more
+          </span>
+        </summary>
+        <div class="px-4 pb-4 border-t border-outline-variant pt-3">
+          <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+            {faq.answer}
+          </p>
+        </div>
+      </details>
+    ))}
+  </div>
+</section>

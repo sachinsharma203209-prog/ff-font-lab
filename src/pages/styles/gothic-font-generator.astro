@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Font Styles", href: "/styles" },
+  { label: "Gothic", href: "/styles/gothic-font-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Gothic Font Generator — Blackletter & Fraktur Fonts | Ff Font Lab",
+  description: "Generate gothic, blackletter, and fraktur style fonts online. Create medieval-inspired text for logos, gaming, and creative projects.",
+  url: "https://fontchange.co.in/styles/gothic-font-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Type your text", description: "Enter the text for your gothic-styled design — short names and words work best." },
+  { step: 2, title: "Choose gothic style", description: "Pick between standard Fraktur for an elegant look or Bold Fraktur for a heavier, more dramatic appearance." },
+  { step: 3, title: "Copy the result", description: "Use the gothic text for gaming names, logos, band names, or any creative project." },
+];
+
+const faqs = [
+  { question: "What are gothic fonts?", answer: "Gothic fonts, also called blackletter or fraktur, are ornate typefaces inspired by medieval calligraphy with sharp, angular letterforms. They originated in 12th-century Europe and remain popular for their dramatic, historical aesthetic." },
+  { question: "Can I use gothic fonts for gaming names?", answer: "Absolutely! Gothic fonts are very popular for gaming usernames, clan tags, and guild names. They create a fierce, intimidating look that stands out in competitive gaming." },
+  { question: "Do gothic fonts work on all platforms?", answer: "Most modern platforms support Unicode gothic characters, but some older systems may have limited support. The fonts work well on social media, Discord, and most modern games." },
+  { question: "What is the difference between Fraktur and Bold Fraktur?", answer: "Standard Fraktur has thinner, more delicate strokes with traditional blackletter proportions. Bold Fraktur has heavier, thicker strokes that create a more powerful and dramatic appearance." },
+  { question: "Are gothic fonts good for logos?", answer: "Yes, gothic fonts are excellent for logos, band names, and brand identities that want to convey a dark, historical, or powerful aesthetic. They work especially well in metal, horror, and medieval-themed designs." },
+];
+
+const relatedTools = [
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+  { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
+  { title: "Aesthetic Text Generator", href: "/styles/aesthetic-text-generator", category: "style" },
+  { title: "Gaming Nickname Generator", href: "/gaming/gaming-nickname-generator", category: "gaming" },
+  { title: "Free Fire Nickname", href: "/gaming/free-fire-nickname", category: "gaming" },
+  { title: "Calligraphy Font Generator", href: "/styles/calligraphy-font-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Gothic Font Generator — Blackletter & Fraktur Fonts | Ff Font Lab"
+  description="Generate gothic, blackletter, and fraktur style fonts online. Create medieval-inspired text for logos, gaming, and creative projects."
+  canonical="/styles/gothic-font-generator"
+  jsonLd={pageSchema}
+  activePage="styles"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Gothic Font Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Create gothic, blackletter, and fraktur style fonts using Unicode characters. Perfect for gaming names, logos, band branding, and medieval-inspired designs. Choose between standard Fraktur and Bold Fraktur for different levels of dramatic impact.
+      </p>
+    </div>
+
+    <FontGenerator
+      styles={["fraktur", "boldFraktur"]}
+      placeholder="Type text to convert to gothic..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        The History of Gothic Typography
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Gothic typography dates back to the 12th century when it emerged as the dominant writing style in medieval Europe. Also known as blackletter, it was used for manuscripts, religious texts, and official documents for centuries.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Today, gothic fonts are widely used in gaming, metal music, branding, and pop culture to evoke a sense of power, mystery, and historical gravitas. Our Unicode fraktur fonts let you bring this centuries-old style to any digital platform.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

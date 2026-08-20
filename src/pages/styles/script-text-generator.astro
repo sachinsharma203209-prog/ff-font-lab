@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Styles", href: "/styles" },
+  { label: "Script Text", href: "/styles/script-text-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Script Text Generator — Bold Script & Calligraphy Fonts | Ff Font Lab",
+  description: "Generate beautiful script and calligraphy-style text using Unicode characters. Create elegant handwritten-looking typography for social media and creative projects.",
+  url: "https://fontchange.co.in/styles/script-text-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Enter your text", description: "Type the text you want to convert into a flowing script style in the input field." },
+  { step: 2, title: "Choose script style", description: "Pick between regular script and bold script styles to match your desired aesthetic." },
+  { step: 3, title: "Copy and share", description: "Click the copy button and paste your elegant script text on social media, messages, or creative projects." },
+];
+
+const faqs = [
+  { question: "What is script text?", answer: "Script text uses Unicode Mathematical Script characters to create flowing, handwritten-looking typography. Each letter appears as if written with a continuous pen stroke, giving text an elegant and personal feel." },
+  { question: "How is script different from calligraphy?", answer: "Script text features flowing, connected letterforms with a casual elegance, while calligraphy emphasizes formal, structured strokes with dramatic thick-thin contrast. Script is more relaxed and conversational, calligraphy is more ornate and ceremonial." },
+  { question: "Do script fonts work on Instagram?", answer: "Yes, script text works perfectly on Instagram. You can use it in your bio, captions, comments, and stories to add an elegant, handwritten touch to your posts." },
+  { question: "Are script Unicode fonts free?", answer: "Yes, our script text generator is completely free to use. Generate unlimited script-styled text without any registration or payment." },
+];
+
+const relatedTools = [
+  { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+  { title: "Gothic Font Generator", href: "/styles/gothic-font-generator", category: "style" },
+  { title: "Calligraphy Font Generator", href: "/styles/calligraphy-font-generator", category: "style" },
+  { title: "Aesthetic Text Generator", href: "/styles/aesthetic-text-generator", category: "style" },
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+];
+---
+
+<BaseLayout
+  title="Script Text Generator — Bold Script & Calligraphy Fonts | Ff Font Lab"
+  description="Generate beautiful script and calligraphy-style text using Unicode characters. Create elegant typography for social media and creative projects."
+  canonical="/styles/script-text-generator"
+  jsonLd={pageSchema}
+  activePage="styles"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Script Text Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Generate beautiful script and calligraphy-style text using Unicode characters. Create elegant handwritten-looking typography for social media bios, captions, wedding invitations, and creative projects.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={0}
+      styles={["cursive", "boldScript"]}
+      placeholder="Type your script text..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Script vs Calligraphy Styles
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Script text features flowing, connected letterforms with a casual elegance — as if written with a continuous pen stroke. Calligraphy, on the other hand, emphasizes formal, structured strokes with dramatic thick-thin contrast, making it ideal for ceremonial and ornamental use. Script is more relaxed and conversational.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Our generator uses Mathematical Script Unicode characters to produce text that works across all modern platforms. Whether you want a light, airy script for Instagram bios or a bold, dramatic script for digital signatures, our tool has you covered with both regular and bold script variations.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

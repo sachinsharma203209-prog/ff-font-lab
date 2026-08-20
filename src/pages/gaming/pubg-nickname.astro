@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Gaming", href: "/gaming" },
+  { label: "PUBG", href: "/gaming/pubg-nickname" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "PUBG Nickname Generator — Stylish BGMI & PUBG Names | Ff Font Lab",
+  description: "Generate stylish PUBG and BGMI names with cool Unicode fonts. Create unique gaming names that stand out in the battlefield.",
+  url: "https://fontchange.co.in/gaming/pubg-nickname",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Keep names short", description: "PUBG has a 14-character limit, so keep your name concise and impactful." },
+  { step: 2, title: "Pick a fierce style", description: "Choose bold, gothic, or squared fonts for a powerful, battlefield-ready look." },
+  { step: 3, title: "Apply in PUBG", description: "Use a rename card and paste your styled name in-game via Profile > Nickname." },
+];
+
+const faqs = [
+  { question: "How do I change my PUBG name?", answer: "Generate your styled name, then go to your PUBG profile, tap on your nickname, and paste the styled text. You'll need a Rename Card, which can be purchased from the in-game shop or obtained through Royal Pass rewards." },
+  { question: "What is the character limit for PUBG names?", answer: "PUBG allows up to 14 characters for player names. Make sure your styled name fits within this limit before applying it in-game." },
+  { question: "Can I use emojis and styled fonts in PUBG?", answer: "PUBG supports some Unicode characters in names. Our styled fonts generally work well in PUBG and BGMI, but test before committing." },
+  { question: "Does this work for BGMI too?", answer: "Yes, our PUBG nickname generator works for both PUBG Mobile and BGMI (Battlegrounds Mobile India) since they share the same naming system and character limits." },
+  { question: "How do I get a Rename Card in PUBG?", answer: "You can purchase Rename Cards from the PUBG shop using UC (Unknown Cash). They are also occasionally available through events and Royal Pass rewards." },
+];
+
+const relatedTools = [
+  { title: "Gaming Nickname Generator", href: "/gaming/gaming-nickname-generator", category: "gaming" },
+  { title: "Free Fire Nickname", href: "/gaming/free-fire-nickname", category: "gaming" },
+  { title: "Roblox Username", href: "/gaming/roblox-username", category: "gaming" },
+  { title: "Gothic Font Generator", href: "/styles/gothic-font-generator", category: "style" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+  { title: "Aesthetic Text Generator", href: "/styles/aesthetic-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="PUBG Nickname Generator — Stylish BGMI & PUBG Names | Ff Font Lab"
+  description="Generate stylish PUBG and BGMI names with cool Unicode fonts. Create unique gaming names that stand out in the battlefield."
+  canonical="/gaming/pubg-nickname"
+  jsonLd={pageSchema}
+  activePage="gaming"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        PUBG Nickname Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Create eye-catching PUBG and BGMI player names using our Unicode font generator. Stand out in every match with a styled name. With a 14-character limit, our generator helps you craft the most impactful name possible.
+      </p>
+    </div>
+
+    <div class="surface-card rounded-lg p-4 flex items-center gap-3 border border-yellow-500/20 bg-yellow-500/5">
+      <span class="material-symbols-outlined text-[20px] text-yellow-500">info</span>
+      <p class="text-[13px] text-on-surface-variant" style="font-family: Inter;">
+        <strong class="text-on-surface">PUBG / BGMI limit:</strong> Player names are restricted to 14 characters. Works for both PUBG Mobile and BGMI.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={14}
+      charLimitLabel="Name character limit"
+      styles={["boldSans", "fraktur", "boldFraktur", "doubleStruck", "squared", "circled", "monospace"]}
+      placeholder="Type your PUBG name..."
+      defaultText="Sniper"
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Dominate the Battlefield with a Unique Name
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          In PUBG and BGMI, your name is your identity. A unique, styled name makes you instantly recognizable to teammates and opponents alike. Whether you're leading a squad or going solo, a fierce name sets the tone before the first shot is fired.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Gothic and bold fonts are particularly popular in the PUBG community for their aggressive, powerful appearance. Squared text adds a tactical, military-style look that fits the game's battle royale theme.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Social Media", href: "/social" },
+  { label: "Arabic", href: "/social/arabic-font-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Arabic Font Generator — Stylish Arabic Unicode Text | Ff Font Lab",
+  description: "Generate stylish fonts for Arabic text using Unicode characters. Create decorative Arabic typography for social media, messaging, and creative content.",
+  url: "https://fontchange.co.in/social/arabic-font-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Type your Arabic text", description: "Enter the Arabic text you want to stylize. You can type in Arabic script directly — the generator handles right-to-left text." },
+  { step: 2, title: "Choose a style", description: "Browse through bold, italic, cursive, double-struck, and small caps styles to find the perfect look for your Arabic text." },
+  { step: 3, title: "Copy and paste", description: "Copy the styled Arabic text and paste it into your social media bio, WhatsApp messages, or any other platform." },
+];
+
+const faqs = [
+  { question: "Can I generate Arabic fonts?", answer: "Yes, our generator supports Arabic text input. You can type in Arabic script and generate styled variations using Unicode characters. The generator creates decorative text that works across social media and messaging platforms." },
+  { question: "Do Arabic fonts work on Instagram?", answer: "Yes, styled Arabic text works on Instagram bios, captions, and comments. Instagram supports Unicode characters and handles right-to-left text, so your styled Arabic text will display correctly for most users." },
+  { question: "How to write stylish Arabic text?", answer: "Type your Arabic text into the generator, select a font style you like, and copy the generated output. You can then paste it into WhatsApp, Instagram, Facebook, or any other platform that supports Unicode text." },
+  { question: "Are Arabic Unicode fonts free?", answer: "Yes, our Arabic font generator is completely free. You can generate unlimited styled Arabic text without any registration or payment required." },
+];
+
+const relatedTools = [
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+  { title: "WhatsApp Font Generator", href: "/social/whatsapp-font-generator", category: "social" },
+  { title: "Hindi Font Generator", href: "/social/hindi-font-generator", category: "social" },
+  { title: "Bengali Font Generator", href: "/social/bengali-font-generator", category: "social" },
+  { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", category: "social" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Arabic Font Generator — Stylish Arabic Unicode Text | Ff Font Lab"
+  description="Generate stylish fonts for Arabic text using Unicode characters. Create decorative Arabic typography for social media, messaging, and creative content."
+  canonical="/social/arabic-font-generator"
+  jsonLd={pageSchema}
+  activePage="social"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Arabic Font Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Generate stylish fonts for Arabic text using Unicode characters. Create decorative Arabic typography for social media profiles, messaging apps, and creative content. Stand out with bold, cursive, and italic Arabic styles.
+      </p>
+    </div>
+
+    <FontGenerator
+      styles={["boldSans", "italic", "cursive", "doubleStruck", "smallCaps", "sansSerif"]}
+      placeholder="Type your Arabic text here..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Arabic Unicode Typography
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Arabic is one of the most widely used scripts in the world, serving as the writing system for over 400 million people. Arabic text is written from right to left (RTL), and our generator handles this correctly when producing styled variations. The Unicode standard includes numerous character variations for Arabic script.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          When generating styled Arabic text, it's important to note that Arabic has complex joining rules — characters change shape depending on their position in a word. Our generator preserves these rules while applying Unicode stylistic variations, so your Arabic text remains readable and properly connected.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

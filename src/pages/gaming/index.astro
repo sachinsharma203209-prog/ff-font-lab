@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import BentoCard from '../../components/BentoCard.astro';
+import FAQ from '../../components/FAQ.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Gaming", href: "/gaming" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Gaming Nickname Generator | Ff Font Lab",
+  description: "Generate cool gaming nicknames with stylish Unicode fonts. Create unique gamer tags for Free Fire, PUBG, Roblox, and more.",
+  url: "https://fontchange.co.in/gaming",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const gamingTools = [
+  { title: "Gaming Nickname Generator", href: "/gaming/gaming-nickname-generator", icon: "sports_esports", description: "Create unique, stylish gaming nicknames for any game. Choose from bold, gothic, and other gaming-friendly styles." },
+  { title: "Free Fire Nickname", href: "/gaming/free-fire-nickname", icon: "local_fire_department", description: "Generate Free Fire names with special characters and cool Unicode styles. 12-character limit supported." },
+  { title: "PUBG Nickname", href: "/gaming/pubg-nickname", icon: "military_tech", description: "Stand out in the battlefield with a fierce PUBG name. Bold, gothic, and squared font styles for BGMI and PUBG." },
+  { title: "Roblox Username", href: "/gaming/roblox-username", icon: "block", description: "Create a unique Roblox display name with stylish Unicode fonts. Stand out in the Roblox community." },
+  { title: "Valorant Name", href: "/gaming/valorant-nickname", icon: "whatshot", description: "Create unique Valorant nicknames with stylish Unicode fonts. Stand out in competitive matches with a pro-level gamertag." },
+  { title: "Fortnite Username", href: "/gaming/fortnite-username", icon: "construction", description: "Generate cool Fortnite usernames with Unicode fonts and symbols. Create memorable gaming identities." },
+  { title: "Minecraft Username", href: "/gaming/minecraft-username", icon: "grid_on", description: "Generate unique Minecraft usernames with Unicode fonts. Create memorable gaming identities for the Minecraft community." },
+];
+
+const faqs = [
+  { question: "How do I create a cool gaming nickname?", answer: "Type your desired name into the generator, browse through the font styles, and pick one that looks cool. Then copy and paste it into your game's name settings." },
+  { question: "Do these fonts work in all games?", answer: "Most modern games support Unicode characters, but some games may have restrictions on which characters are allowed in usernames. Each gaming page includes specific information about character limits." },
+  { question: "Can I use special characters in my gaming name?", answer: "Many games allow Unicode characters in display names or clan tags. Our generators produce styled text that works in most games, but official username fields may have restrictions." },
+  { question: "What styles look best for gaming names?", answer: "Bold Sans, Gothic/Fraktur, Double-Struck, and Squared styles are popular choices for gaming. They are highly readable and create a strong visual impact." },
+];
+---
+
+<BaseLayout
+  title="Gaming Nickname Generator | Ff Font Lab"
+  description="Generate cool gaming nicknames with stylish Unicode fonts. Create unique gamer tags for Free Fire, PUBG, Roblox, and more."
+  canonical="/gaming"
+  jsonLd={pageSchema}
+  activePage="gaming"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Gaming Nickname Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Stand out in every game with a unique, stylish nickname. Our Unicode font generator creates eye-catching gaming names for Free Fire, PUBG, Roblox, and any other game that supports Unicode characters.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {gamingTools.map((tool) => (
+        <BentoCard title={tool.title} description={tool.description} href={tool.href} icon={tool.icon} />
+      ))}
+    </div>
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Tips for Choosing a Gaming Name
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+          <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <span class="text-[14px] font-bold text-primary" style="font-family: JetBrains Mono;">1</span>
+          </div>
+          <h3 class="text-[16px] font-semibold text-on-surface" style="font-family: Sora;">Keep it short</h3>
+          <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+            Most games have character limits for names. Shorter names are also easier to remember and more impactful.
+          </p>
+        </div>
+        <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+          <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <span class="text-[14px] font-bold text-primary" style="font-family: JetBrains Mono;">2</span>
+          </div>
+          <h3 class="text-[16px] font-semibold text-on-surface" style="font-family: Sora;">Test in-game first</h3>
+          <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+            Some games may not support certain Unicode characters. Always test your styled name before committing to it.
+          </p>
+        </div>
+        <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+          <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <span class="text-[14px] font-bold text-primary" style="font-family: JetBrains Mono;">3</span>
+          </div>
+          <h3 class="text-[16px] font-semibold text-on-surface" style="font-family: Sora;">Match your style</h3>
+          <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+            Gothic fonts look fierce for competitive games. Bold fonts work universally. Choose a style that fits your gaming personality.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+  </div>
+</BaseLayout>

@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Gaming", href: "/gaming" },
+  { label: "Minecraft", href: "/gaming/minecraft-username" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Minecraft Username Generator — Cool Minecraft Names | Ff Font Lab",
+  description: "Generate unique Minecraft usernames and server names with Unicode fonts. Create memorable gaming identities for the Minecraft community.",
+  url: "https://fontchange.co.in/gaming/minecraft-username",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Keep it under 16 characters", description: "Minecraft Java Edition usernames are limited to 16 characters. Use the counter to stay within the limit." },
+  { step: 2, title: "Pick a Minecraft style", description: "Choose from bold, fraktur, double-struck, monospace, small caps, and fullwidth styles for a unique Minecraft look." },
+  { step: 3, title: "Use in Minecraft", description: "For display names and server MOTDs, paste your styled name. Note that official Java usernames can only use letters, numbers, and underscores." },
+];
+
+const faqs = [
+  { question: "What is the Minecraft username limit?", answer: "Minecraft Java Edition usernames can be up to 16 characters long and can only contain letters, numbers, and underscores. However, display names and server MOTDs support a wider range of Unicode characters." },
+  { question: "Do Unicode fonts work in Minecraft?", answer: "For Java Edition, official usernames are restricted to basic characters. However, display names (via servers), server MOTDs, and signs support many Unicode characters. Bedrock Edition has broader Unicode support for display names." },
+  { question: "Can I use fancy text in Minecraft server names?", answer: "Yes! Minecraft server MOTDs (Message of the Day) and server names support color codes and many Unicode characters. You can use our generator to create styled text for your server description." },
+  { question: "How to change Minecraft display name?", answer: "In Java Edition, your username is set at account creation and cannot be changed. However, display names on servers can be changed using the /nick command on servers that support it. In Bedrock Edition, you can change your gamertag through your Microsoft account." },
+];
+
+const relatedTools = [
+  { title: "Gaming Nickname Generator", href: "/gaming/gaming-nickname-generator", category: "gaming" },
+  { title: "Roblox Username", href: "/gaming/roblox-username", category: "gaming" },
+  { title: "Fortnite Username", href: "/gaming/fortnite-username", category: "gaming" },
+  { title: "Valorant Nickname", href: "/gaming/valorant-nickname", category: "gaming" },
+  { title: "Free Fire Nickname", href: "/gaming/free-fire-nickname", category: "gaming" },
+  { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Minecraft Username Generator — Cool Minecraft Names | Ff Font Lab"
+  description="Generate unique Minecraft usernames and server names with Unicode fonts. Create memorable gaming identities for the Minecraft community."
+  canonical="/gaming/minecraft-username"
+  jsonLd={pageSchema}
+  activePage="gaming"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Minecraft Username Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Generate unique Minecraft usernames and server names with Unicode fonts. Create memorable gaming identities for the Minecraft community. Whether you need a stylish display name or a fancy server MOTD, our generator has you covered.
+      </p>
+    </div>
+
+    <div class="surface-card rounded-lg p-4 flex items-center gap-3 border border-yellow-500/20 bg-yellow-500/5">
+      <span class="material-symbols-outlined text-[20px] text-yellow-500">info</span>
+      <p class="text-[13px] text-on-surface-variant" style="font-family: Inter;">
+        <strong class="text-on-surface">Minecraft note:</strong> Java Edition usernames are limited to 16 characters and only allow letters, numbers, and underscores. Unicode styled text works for display names, server MOTDs, and Bedrock Edition gamertags.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={16}
+      charLimitLabel="Name limit"
+      styles={["boldSans", "italic", "fraktur", "doubleStruck", "monospace", "smallCaps", "fullwidth"]}
+      placeholder="Type your Minecraft name..."
+      defaultText="Creeper"
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Minecraft Name Style Tips
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Minecraft's Java Edition has strict username rules — only letters, numbers, and underscores are allowed for account usernames, and you cannot change your name once set. However, display names on multiplayer servers, server MOTDs (Message of the Day), signs, and books all support Unicode characters, giving you plenty of room for creative styled text.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          For server owners, using styled text in your MOTD can make your server stand out in the multiplayer server list. Bold Sans and Fraktur work particularly well for server names. Bedrock Edition players have even more flexibility — Unicode characters are supported in gamertags, making our generator perfect for Bedrock players too.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

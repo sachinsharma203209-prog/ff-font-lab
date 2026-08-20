@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Gaming", href: "/gaming" },
+  { label: "Free Fire", href: "/gaming/free-fire-nickname" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Free Fire Nickname Generator — Stylish FF Names | Ff Font Lab",
+  description: "Generate stylish Free Fire names with cool Unicode fonts. Create unique gaming names for your Free Fire profile.",
+  url: "https://fontchange.co.in/gaming/free-fire-nickname",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Keep it short", description: "Free Fire limits names to 12 characters. Keep your name brief and impactful." },
+  { step: 2, title: "Generate styled names", description: "Browse through bold, gothic, double-struck, and circled styles that look great in-game." },
+  { step: 3, title: "Change your name", description: "Use a name change card in Free Fire and paste your styled name. Go to Profile > Tap Name > Paste." },
+];
+
+const faqs = [
+  { question: "How do I change my Free Fire name?", answer: "Generate your desired styled name, then go to your Free Fire profile, tap on your current name, and paste the styled text. You'll need a Name Change Card, which can be purchased from the in-game store or earned through events." },
+  { question: "What is the character limit for Free Fire names?", answer: "Free Fire has a maximum of 12 characters for player names. Keep this in mind when generating styled names — Unicode characters count as single characters." },
+  { question: "Do styled names work in Free Fire?", answer: "Yes, Free Fire supports many Unicode characters, so styled names typically display correctly in-game. However, some very complex Unicode characters may not render properly." },
+  { question: "How do I get a Name Change Card in Free Fire?", answer: "You can purchase a Name Change Card from the Free Fire store using diamonds. Some events also give away free Name Change Cards as rewards." },
+  { question: "Can I use emojis in my Free Fire name?", answer: "Free Fire supports some emojis in player names. Our generators focus on Unicode font styles that are guaranteed to work in-game." },
+];
+
+const relatedTools = [
+  { title: "Gaming Nickname Generator", href: "/gaming/gaming-nickname-generator", category: "gaming" },
+  { title: "PUBG Nickname", href: "/gaming/pubg-nickname", category: "gaming" },
+  { title: "Roblox Username", href: "/gaming/roblox-username", category: "gaming" },
+  { title: "Gothic Font Generator", href: "/styles/gothic-font-generator", category: "style" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+];
+---
+
+<BaseLayout
+  title="Free Fire Nickname Generator — Stylish FF Names | Ff Font Lab"
+  description="Generate stylish Free Fire names with cool Unicode fonts. Create unique gaming names for your Free Fire profile."
+  canonical="/gaming/free-fire-nickname"
+  jsonLd={pageSchema}
+  activePage="gaming"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Free Fire Nickname Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Create stunning Free Fire player names using our Unicode font generator. Stand out in Battle Royale with a unique styled name. Free Fire allows up to 12 characters, so our generator helps you create the most impactful name within the limit.
+      </p>
+    </div>
+
+    <div class="surface-card rounded-lg p-4 flex items-center gap-3 border border-yellow-500/20 bg-yellow-500/5">
+      <span class="material-symbols-outlined text-[20px] text-yellow-500">info</span>
+      <p class="text-[13px] text-on-surface-variant" style="font-family: Inter;">
+        <strong class="text-on-surface">Free Fire limit:</strong> Player names are restricted to 12 characters. The generator counter helps you stay within this limit.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={12}
+      charLimitLabel="Name character limit"
+      styles={["boldSans", "fraktur", "doubleStruck", "circled", "squared", "boldFraktur", "monospace"]}
+      placeholder="Type your Free Fire name..."
+      defaultText="Shadow"
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Best Styles for Free Fire
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Free Fire's fast-paced gameplay means your name needs to be both short and impactful. Bold Sans is the most compatible choice and works reliably in all game contexts. For a more aggressive look, try Gothic/Fraktur styles. Circled and Squared characters add a unique decorative element.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Remember that with only 12 characters, every letter counts. Choose a name that is short, memorable, and uses a font style that remains readable at small sizes.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

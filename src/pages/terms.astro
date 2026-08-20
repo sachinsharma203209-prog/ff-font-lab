@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Terms of Service | Ff Font Lab"
+  description="Terms of Service for Ff Font Lab. Read the rules and guidelines for using our font generator tools."
+  canonical="/terms"
+  noindex={true}
+  activePage="home"
+>
+  <div class="flex flex-col gap-6 max-w-[800px]">
+    <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface" style="font-family: Sora;">
+      Terms of Service
+    </h1>
+    <p class="text-[15px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+      Last updated: August 2026
+    </p>
+    <div class="flex flex-col gap-4 text-[15px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+      <h2 class="text-[20px] font-bold text-on-surface" style="font-family: Sora;">Use of Service</h2>
+      <p>Ff Font Lab is a free tool provided as-is. You may use the generated text for any personal or commercial purpose. We do not guarantee that all Unicode characters will display correctly on every platform.</p>
+
+      <h2 class="text-[20px] font-bold text-on-surface" style="font-family: Sora;">Intellectual Property</h2>
+      <p>The generated text uses Unicode characters and is not owned by anyone. The Ff Font Lab website, design, and code are our intellectual property.</p>
+
+      <h2 class="text-[20px] font-bold text-on-surface" style="font-family: Sora;">Limitation of Liability</h2>
+      <p>We are not responsible for any issues arising from the use of generated text on third-party platforms. Use at your own discretion.</p>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Font Styles", href: "/styles" },
+  { label: "Calligraphy", href: "/styles/calligraphy-font-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Calligraphy Font Generator — Elegant Handwritten Fonts | Ff Font Lab",
+  description: "Generate elegant calligraphy-style fonts online. Create beautiful handwritten typography for invitations, logos, and creative projects.",
+  url: "https://fontchange.co.in/styles/calligraphy-font-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Enter your text", description: "Type the text you want in calligraphy style — short phrases and names work best." },
+  { step: 2, title: "Select calligraphy font", description: "Choose from cursive, bold script, or italic styles to match the formality of your project." },
+  { step: 3, title: "Copy and use", description: "Copy the calligraphy text for invitations, social media, signatures, or design projects." },
+];
+
+const faqs = [
+  { question: "What is calligraphy font style?", answer: "Calligraphy fonts mimic the art of decorative handwriting, featuring elegant, flowing strokes and artistic letterforms. They are inspired by the traditional art of penmanship and bring a refined, artistic quality to text." },
+  { question: "Can I use calligraphy fonts for wedding invitations?", answer: "Yes, calligraphy fonts are one of the most popular choices for wedding invitations and formal stationery. They add an elegant, romantic touch that perfectly complements wedding themes." },
+  { question: "Are these calligraphy fonts free to use?", answer: "Yes, our calligraphy font generator is completely free. Generate unlimited text styles without any cost, sign-up, or usage restrictions." },
+  { question: "What is the difference between calligraphy and cursive?", answer: "Calligraphy fonts tend to be more formal and ornate, with dramatic thick-thin stroke contrast. Cursive fonts are more casual and mimic everyday handwriting. Both create flowing, connected text." },
+  { question: "Can calligraphy fonts be used in logos?", answer: "Absolutely! Calligraphy fonts work beautifully in logos, especially for brands that want to convey elegance, artistry, and sophistication. They are popular for wedding businesses, boutique brands, and artistic ventures." },
+];
+
+const relatedTools = [
+  { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+  { title: "Aesthetic Text Generator", href: "/styles/aesthetic-text-generator", category: "style" },
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+  { title: "Gothic Font Generator", href: "/styles/gothic-font-generator", category: "style" },
+  { title: "Facebook Font Style", href: "/social/facebook-font-style", category: "social" },
+];
+---
+
+<BaseLayout
+  title="Calligraphy Font Generator — Elegant Handwritten Fonts | Ff Font Lab"
+  description="Generate elegant calligraphy-style fonts online. Create beautiful handwritten typography for invitations, logos, and creative projects."
+  canonical="/styles/calligraphy-font-generator"
+  jsonLd={pageSchema}
+  activePage="styles"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Calligraphy Font Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Create beautiful calligraphy-style text using Unicode characters. Our generator offers cursive, bold script, and italic calligraphy variations for elegant projects, invitations, signatures, and artistic designs. Perfect for weddings, formal events, and creative branding.
+      </p>
+    </div>
+
+    <FontGenerator
+      styles={["cursive", "boldScript", "italic"]}
+      placeholder="Type text for calligraphy style..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        The Art of Calligraphy Typography
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Calligraphy has been practiced for thousands of cultures across the world, from Chinese brush calligraphy to Western pointed-pen scripts. Our Unicode calligraphy fonts capture the essence of these traditions in a digital format.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Calligraphy fonts are most impactful when used sparingly — for titles, names, headers, and special accents. They bring a sense of craftsmanship and intentionality to your text that standard fonts cannot replicate.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

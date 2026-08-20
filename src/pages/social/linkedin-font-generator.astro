@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Social Media", href: "/social" },
+  { label: "LinkedIn", href: "/social/linkedin-font-generator" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "LinkedIn Font Generator — Professional Profile Fonts | Ff Font Lab",
+  description: "Generate professional-looking fonts for your LinkedIn profile, headline, and posts. Stand out with unique typography on LinkedIn.",
+  url: "https://fontchange.co.in/social/linkedin-font-generator",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Write your headline", description: "Type your professional headline or summary text into the generator." },
+  { step: 2, title: "Pick a professional style", description: "Choose subtle, professional styles like Bold Sans, Sans-Serif, or Small Caps that are appropriate for LinkedIn." },
+  { step: 3, title: "Update your profile", description: "Paste the styled text into your LinkedIn profile headline, about section, or experience descriptions." },
+];
+
+const faqs = [
+  { question: "Are these fonts appropriate for LinkedIn?", answer: "Yes, we recommend clean and professional styles like Bold Sans, Sans-Serif, and Small Caps for LinkedIn profiles. These styles look polished and are easy to read." },
+  { question: "Can I use styled text in my LinkedIn headline?", answer: "Yes, you can paste styled Unicode text into your LinkedIn headline and about section. LinkedIn supports most Unicode characters in profile text fields." },
+  { question: "Will LinkedIn accept the special characters?", answer: "LinkedIn supports most Unicode characters in profile text fields. Some special characters may not be accepted in certain fields. If a character is rejected, try a different font style." },
+  { question: "Should I use decorative fonts on LinkedIn?", answer: "For LinkedIn, we recommend sticking to professional, readable styles. Bold, Sans-Serif, and Small Caps are ideal. Avoid overly decorative styles that may look unprofessional." },
+  { question: "Can styled fonts improve my LinkedIn visibility?", answer: "While styled fonts don't directly affect LinkedIn search ranking, a distinctive headline can increase profile clicks and engagement, which indirectly improves your visibility." },
+];
+
+const relatedTools = [
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+  { title: "Twitter / X Font Generator", href: "/social/twitter-font-generator", category: "social" },
+  { title: "Facebook Font Style", href: "/social/facebook-font-style", category: "social" },
+  { title: "WhatsApp Font Generator", href: "/social/whatsapp-font-generator", category: "social" },
+  { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", category: "social" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="LinkedIn Font Generator — Professional Profile Fonts | Ff Font Lab"
+  description="Generate professional-looking fonts for your LinkedIn profile, headline, and posts. Stand out with unique typography on LinkedIn."
+  canonical="/social/linkedin-font-generator"
+  jsonLd={pageSchema}
+  activePage="social"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        LinkedIn Font Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Add a professional touch to your LinkedIn profile with our Unicode font generator. Perfect for headlines, summaries, and posts — create clean, eye-catching text that helps recruiters and connections remember you.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={2200}
+      charLimitLabel="About section limit"
+      styles={["boldSans", "sansSerif", "doubleStruck", "smallCaps", "monospace", "italic"]}
+      placeholder="Type your LinkedIn headline or summary..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Using Styled Fonts Professionally on LinkedIn
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          LinkedIn is a professional network, so font choices should reflect that. Clean, bold text in your headline helps it stand out in search results and connection requests. A well-styled headline can increase your profile views and recruiter engagement.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Use Bold Sans for strong, professional statements. Small Caps works elegantly for certifications and titles. Sans-Serif provides a clean, modern look that complements LinkedIn's design aesthetic.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

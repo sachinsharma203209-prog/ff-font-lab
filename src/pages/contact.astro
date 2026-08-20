@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact Us | Ff Font Lab"
+  description="Get in touch with the Ff Font Lab team. Reach out for support, feedback, or business inquiries."
+  canonical="/contact"
+  noindex={true}
+  activePage="home"
+>
+  <div class="flex flex-col gap-6 max-w-[800px]">
+    <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface" style="font-family: Sora;">
+      Contact Us
+    </h1>
+    <p class="text-[15px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+      We'd love to hear from you. Here's how to reach us:
+    </p>
+    <div class="flex flex-col gap-4">
+      <div class="surface-card rounded-lg p-5 flex items-center gap-4">
+        <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-[22px] text-primary">tag</span>
+        </div>
+        <div>
+          <p class="text-[14px] font-semibold text-on-surface" style="font-family: Sora;">Twitter / X</p>
+          <a href="https://twitter.com/ffontlab" target="_blank" rel="noopener noreferrer" class="text-[14px] text-primary hover:underline" style="font-family: Inter;">@ffontlab</a>
+        </div>
+      </div>
+      <div class="surface-card rounded-lg p-5 flex items-center gap-4">
+        <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-[22px] text-primary">photo_camera</span>
+        </div>
+        <div>
+          <p class="text-[14px] font-semibold text-on-surface" style="font-family: Sora;">Instagram</p>
+          <a href="https://instagram.com/ffontlab" target="_blank" rel="noopener noreferrer" class="text-[14px] text-primary hover:underline" style="font-family: Inter;">@ffontlab</a>
+        </div>
+      </div>
+      <div class="surface-card rounded-lg p-5 flex items-center gap-4">
+        <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-[22px] text-primary">play_circle</span>
+        </div>
+        <div>
+          <p class="text-[14px] font-semibold text-on-surface" style="font-family: Sora;">YouTube</p>
+          <a href="https://youtube.com/@ffontlab" target="_blank" rel="noopener noreferrer" class="text-[14px] text-primary hover:underline" style="font-family: Inter;">@ffontlab</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

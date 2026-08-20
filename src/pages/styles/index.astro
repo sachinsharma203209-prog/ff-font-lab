@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import BentoCard from '../../components/BentoCard.astro';
+import FAQ from '../../components/FAQ.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Font Styles", href: "/styles" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Font Styles & Typography | Ff Font Lab",
+  description: "Explore all font styles available at Ff Font Lab. Cursive, bold, gothic, calligraphy, aesthetic, and monospace font generators.",
+  url: "https://fontchange.co.in/styles",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const styleTools = [
+  { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", icon: "draw", description: "Create elegant, handwritten-style cursive fonts. Perfect for invitations, signatures, and creative social media posts." },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", icon: "format_bold", description: "Generate thick, impactful bold text that demands attention. Ideal for headlines, bios, and emphasis text." },
+  { title: "Gothic Font Generator", href: "/styles/gothic-font-generator", icon: "castle", description: "Medieval blackletter and fraktur style fonts. Great for gaming names, logos, and dramatic designs." },
+  { title: "Calligraphy Font Generator", href: "/styles/calligraphy-font-generator", icon: "brush", description: "Elegant, artistic calligraphy-style fonts. Perfect for wedding invitations, formal stationery, and creative projects." },
+  { title: "Aesthetic Text Generator", href: "/styles/aesthetic-text-generator", icon: "palette", description: "Vaporwave, artsy, and decorative typography styles. Create unique text for social media profiles and creative content." },
+  { title: "Monospace Text Generator", href: "/styles/monospace-text-generator", icon: "code", description: "Code-style, typewriter-like monospace text. Perfect for Discord, coding forums, and terminal aesthetics." },
+  { title: "Script Text Generator", href: "/styles/script-text-generator", icon: "gesture", description: "Beautiful script and calligraphy-style text. Elegant handwritten-looking typography for creative projects." },
+];
+
+const faqs = [
+  { question: "What font styles are available?", answer: "We offer cursive, bold, gothic/blackletter, calligraphy, aesthetic, monospace, italic, script, small caps, fullwidth, and many more Unicode font styles." },
+  { question: "Can I use these font styles on social media?", answer: "Yes! All our Unicode font styles work across social media platforms including Instagram, TikTok, Twitter, Facebook, and WhatsApp." },
+  { question: "Are these fonts free to generate?", answer: "Yes, all font style generators on Ff Font Lab are completely free with unlimited usage. No sign-up or payment required." },
+  { question: "What is the difference between cursive and calligraphy fonts?", answer: "Cursive fonts mimic casual handwriting with flowing, connected letters. Calligraphy fonts are more formal and artistic, resembling professional penmanship used in invitations and formal documents." },
+];
+---
+
+<BaseLayout
+  title="Font Styles & Typography | Ff Font Lab"
+  description="Explore all font styles available at Ff Font Lab. Cursive, bold, gothic, calligraphy, aesthetic, and monospace font generators."
+  canonical="/styles"
+  jsonLd={pageSchema}
+  activePage="styles"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Font Styles & Typography
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Browse our complete collection of Unicode font styles. From elegant cursive scripts to bold statement fonts and medieval gothic lettering, find the perfect style for any project.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {styleTools.map((tool) => (
+        <BentoCard title={tool.title} description={tool.description} href={tool.href} icon={tool.icon} />
+      ))}
+    </div>
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Understanding Unicode Font Styles
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Unicode font styles work by mapping standard ASCII characters to their stylistic Unicode equivalents. This means the styled text can be copied and pasted anywhere that supports Unicode — social media bios, messaging apps, gaming profiles, documents, and more.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Unlike traditional fonts that require installation, Unicode styles are embedded directly in the text. This makes them universally portable across devices and platforms.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+  </div>
+</BaseLayout>

@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Social Media", href: "/social" },
+  { label: "Facebook", href: "/social/facebook-font-style" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Facebook Font Style — Stylish Profile & Post Fonts | Ff Font Lab",
+  description: "Generate unique stylish fonts for your Facebook profile, posts, comments, and stories. Stand out on Facebook with custom typography.",
+  url: "https://fontchange.co.in/social/facebook-font-style",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Type your text", description: "Enter the text you want to style for Facebook — posts, comments, or profile sections." },
+  { step: 2, title: "Select a style", description: "Browse and choose from multiple font categories including bold, italic, sans-serif, and monospace." },
+  { step: 3, title: "Copy and paste", description: "Click the copy button and paste the styled text directly into your Facebook post or profile." },
+];
+
+const faqs = [
+  { question: "Can I use these fonts in my Facebook name?", answer: "Some styles may work in your Facebook name, but Facebook may reject certain Unicode characters in name fields. We recommend testing different styles to find one that Facebook accepts." },
+  { question: "Do these fonts work in Facebook comments?", answer: "Yes, our Unicode fonts work in Facebook posts, comments, and most text fields. Simply copy the styled text and paste it anywhere on Facebook." },
+  { question: "Are the fonts visible to everyone on Facebook?", answer: "Yes, Unicode fonts are universal and should be visible to all users viewing your content, regardless of their device or operating system." },
+  { question: "What styles work best for Facebook posts?", answer: "Bold Sans and Sans-Serif are popular choices for Facebook posts since they are highly readable. Monospace works great for sharing code snippets or creating visual blocks." },
+  { question: "Can I use these fonts in Facebook Stories?", answer: "You can paste styled Unicode text into Facebook Story text overlays and captions. The fonts will display correctly for most viewers." },
+];
+
+const relatedTools = [
+  { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
+  { title: "WhatsApp Font Generator", href: "/social/whatsapp-font-generator", category: "social" },
+  { title: "Twitter / X Font Generator", href: "/social/twitter-font-generator", category: "social" },
+  { title: "LinkedIn Font Generator", href: "/social/linkedin-font-generator", category: "social" },
+  { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", category: "social" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Facebook Font Style — Stylish Profile & Post Fonts | Ff Font Lab"
+  description="Generate unique stylish fonts for your Facebook profile, posts, comments, and stories. Stand out on Facebook with custom typography."
+  canonical="/social/facebook-font-style"
+  jsonLd={pageSchema}
+  activePage="social"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Facebook Font Style
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Transform your Facebook text with stylish Unicode fonts. Perfect for profiles, posts, comments, and bios on Facebook. Create bold statements, elegant signatures, or eye-catching text that makes your content stand out in the feed.
+      </p>
+    </div>
+
+    <FontGenerator
+      styles={["boldSans", "italic", "sansSerif", "monospace", "doubleStruck", "smallCaps", "cursive"]}
+      placeholder="Type your Facebook text..."
+      defaultText=""
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Making Your Facebook Content Stand Out
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Facebook's default formatting options are limited to basic bold and italic in some contexts. Our Unicode font generator expands your creative possibilities with dozens of unique styles that work in posts, comments, bios, and page descriptions.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          For business pages and personal profiles alike, styled fonts help your content grab attention in a crowded newsfeed. Use bold text for announcements, cursive for personal touches, and monospace for technical content.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>

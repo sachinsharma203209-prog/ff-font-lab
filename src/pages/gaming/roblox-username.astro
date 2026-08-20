@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Gaming", href: "/gaming" },
+  { label: "Roblox", href: "/gaming/roblox-username" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Roblox Username Generator — Cool Roblox Display Names | Ff Font Lab",
+  description: "Generate cool Roblox usernames and display names with stylish Unicode fonts. Create unique names for your Roblox profile.",
+  url: "https://fontchange.co.in/gaming/roblox-username",
+  breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const tips = [
+  { step: 1, title: "Type your name", description: "Enter the Roblox display name you want to stylize in the generator." },
+  { step: 2, title: "Choose a style", description: "Pick from bold, cursive, double-struck, and small caps styles that work in Roblox." },
+  { step: 3, title: "Update your profile", description: "Go to Roblox settings and change your display name with the styled text." },
+];
+
+const faqs = [
+  { question: "Can I use styled fonts in my Roblox display name?", answer: "Yes, Roblox supports Unicode characters in display names, so you can use our styled fonts. Generate your text, copy it, and paste it into your display name field in Roblox settings." },
+  { question: "What is the Roblox display name limit?", answer: "Roblox display names can be up to 20 characters long. This gives you more room than many other games to create elaborate styled names." },
+  { question: "Do these fonts work in Roblox chat?", answer: "Roblox has a filter for chat, but styled Unicode characters in display names and bios generally work. Chat filtering may affect some Unicode characters." },
+  { question: "What styles work best for Roblox?", answer: "Bold Sans, Cursive, Double-Struck, and Small Caps are popular choices for Roblox. They look great in the game interface and are compatible with Roblox's text rendering." },
+  { question: "How do I change my Roblox display name?", answer: "Go to Roblox Settings > Account Info > Display Name. Enter your styled name and save. Note that display name changes may have a cooldown period." },
+];
+
+const relatedTools = [
+  { title: "Gaming Nickname Generator", href: "/gaming/gaming-nickname-generator", category: "gaming" },
+  { title: "Free Fire Nickname", href: "/gaming/free-fire-nickname", category: "gaming" },
+  { title: "PUBG Nickname", href: "/gaming/pubg-nickname", category: "gaming" },
+  { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
+  { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
+  { title: "Aesthetic Text Generator", href: "/styles/aesthetic-text-generator", category: "style" },
+];
+---
+
+<BaseLayout
+  title="Roblox Username Generator — Cool Roblox Display Names | Ff Font Lab"
+  description="Generate cool Roblox usernames and display names with stylish Unicode fonts. Create unique names for your Roblox profile."
+  canonical="/gaming/roblox-username"
+  jsonLd={pageSchema}
+  activePage="gaming"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Roblox Username Generator
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Create unique, eye-catching Roblox usernames and display names using our Unicode font generator. Stand out in the Roblox community with a distinctive styled name. Roblox allows up to 20 characters for display names, giving you plenty of room for creativity.
+      </p>
+    </div>
+
+    <div class="surface-card rounded-lg p-4 flex items-center gap-3 border border-yellow-500/20 bg-yellow-500/5">
+      <span class="material-symbols-outlined text-[20px] text-yellow-500">info</span>
+      <p class="text-[13px] text-on-surface-variant" style="font-family: Inter;">
+        <strong class="text-on-surface">Roblox limit:</strong> Display names can be up to 20 characters. Some Unicode characters may be filtered in chat.
+      </p>
+    </div>
+
+    <FontGenerator
+      charLimit={20}
+      charLimitLabel="Display name limit"
+      styles={["boldSans", "cursive", "doubleStruck", "smallCaps", "italic", "monospace", "sansSerif"]}
+      placeholder="Type your Roblox name..."
+      defaultText="Player"
+    />
+
+    <TipSection tips={tips} />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Making Your Roblox Profile Unique
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          With millions of players on Roblox, standing out can be challenging. A styled display name is one of the easiest ways to make your profile memorable. Whether you're a game developer, content creator, or casual player, a unique name helps you build your identity.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Roblox has better Unicode support than many games, making it an excellent platform for styled fonts. Cursive and bold styles work particularly well for display names, while small caps add a touch of elegance.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+
+    <RelatedTools tools={relatedTools} />
+  </div>
+</BaseLayout>
