@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-Sitemap: https://fontchange.co.in/sitemap-index.xml
+Sitemap: https://ff-font-lab.pages.dev/sitemap-index.xml
