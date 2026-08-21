@@ -23,8 +23,13 @@ export const SITE_CONFIG = {
   },
   adsense: {
     clientId: import.meta.env.PUBLIC_ADSENSE_CLIENT ?? "",
-    /** Minimum posts before an ad slot renders (AdSense policy friendly) */
-    enabledSlots: true,
+    /**
+     * Master switch for ad slots.
+     * - true  + clientId set -> real AdSense units render
+     * - true  + no clientId  -> neutral reserved placeholders
+     * - false                -> slots render nothing (current setup)
+     */
+    enabledSlots: false,
   },
 } as const;
 

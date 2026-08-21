@@ -16,23 +16,26 @@ const minHeights: Record<string, string> = {
 };
 
 const adsLive = isAdsEnabled() && SITE_CONFIG.adsense.enabledSlots;
+const showPlaceholder = SITE_CONFIG.adsense.enabledSlots && !adsLive;
 ---
 
 {
   adsLive ? (
-    <ins
-      class={`adsbygoogle w-full ${minHeights[format]} block ${className}`}
-      data-ad-client={SITE_CONFIG.adsense.clientId}
-      data-ad-slot={slot}
-      data-ad-format={format === 'vertical' ? 'vertical' : 'auto'}
-      data-full-width-responsive="true"
-    />
-    <script is:inline>
-      try {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      } catch (e) {}
-    </script>
-  ) : (
+    <Fragment>
+      <ins
+        class={`adsbygoogle w-full ${minHeights[format]} block ${className}`}
+        data-ad-client={SITE_CONFIG.adsense.clientId}
+        data-ad-slot={slot}
+        data-ad-format={format === 'vertical' ? 'vertical' : 'auto'}
+        data-full-width-responsive="true"
+      />
+      <script is:inline>
+        try {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {}
+      </script>
+    </Fragment>
+  ) : showPlaceholder ? (
     <div
       class={`ad-slot w-full ${minHeights[format]} flex items-center justify-center rounded-lg border border-dashed border-outline-variant/50 ${className}`}
       data-ad-slot={slot}
@@ -43,7 +46,7 @@ const adsLive = isAdsEnabled() && SITE_CONFIG.adsense.enabledSlots;
         Advertisement
       </span>
     </div>
-  )
+  ) : null
 }
 
 <style>
