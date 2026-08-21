@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
+Disallow: /search
 
 Sitemap: https://fontchange.co.in/sitemap-index.xml

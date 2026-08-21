@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/social/tiktok-font-generator",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Type your bio text", description: "Keep it under 80 characters for TikTok bios. Enter your text in the generator above." },
   { step: 2, title: "Choose a font", description: "Select a bold, cursive, or decorative style that stands out and matches your TikTok vibe." },
@@ -42,13 +41,21 @@ const relatedTools = [
   { title: "LinkedIn Font Generator", href: "/social/linkedin-font-generator", category: "social" },
   { title: "Aesthetic Text Generator", href: "/styles/aesthetic-text-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "TikTok Font Generator — Stylish Bio & Username Fonts",
+  description: "Generate unique fonts for your TikTok bio, username, and video captions. Stand out with custom Unicode typography on TikTok.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="TikTok Font Generator — Stylish Bio & Username Fonts | Ff Font Lab"
   description="Generate unique fonts for your TikTok bio, username, and video captions. Stand out with custom Unicode typography on TikTok."
   canonical="/social/tiktok-font-generator"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="social"
 >
   <div class="flex flex-col gap-6">

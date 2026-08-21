@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/social/hindi-font-generator",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Type your Hindi text", description: "Enter the Hindi text you want to stylize. You can type in Devanagari script or use transliterated Hindi." },
   { step: 2, title: "Choose a font style", description: "Browse through bold, cursive, italic, double-struck, and other styles to find the perfect look for your text." },
@@ -41,13 +40,21 @@ const relatedTools = [
   { title: "Bengali Font Generator", href: "/social/bengali-font-generator", category: "social" },
   { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Hindi Font Generator — Stylish Hindi Unicode Fonts",
+  description: "Generate stylish fonts for Hindi text using Unicode characters. Create decorative Hindi typography for social media, messaging apps, and creative projects.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Hindi Font Generator — Stylish Hindi Unicode Fonts | Ff Font Lab"
   description="Generate stylish fonts for Hindi text using Unicode characters. Create decorative Hindi typography for social media, messaging apps, and creative projects."
   canonical="/social/hindi-font-generator"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="social"
 >
   <div class="flex flex-col gap-6">

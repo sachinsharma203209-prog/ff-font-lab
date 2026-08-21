@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FAQ from '../../components/FAQ.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import ProTeaser from '../../components/ProTeaser.astro';
+import CharGrid from '../../components/CharGrid';
+import { CHARACTER_CATEGORIES, getAllCharacters } from '../../data/characters';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Characters", href: "/characters" },
+];
+
+const allChars = getAllCharacters();
+const gridCategories = CHARACTER_CATEGORIES.map((c) => ({ id: c.id, name: c.name, slug: c.slug }));
+
+const pageSchema = generateWebPageSchema({
+  title: "Unicode Character Library — Copy Special Characters | Ff Font Lab",
+  description:
+    "Browse and copy hundreds of Unicode characters: hearts ♥, stars ★, arrows →, math symbols, currency and more. Search by name, inspect code points, one-tap copy.",
+  url: "https://fontchange.co.in/characters",
+  breadcrumbs: breadcrumbs.map((b) => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const faqs = [
+  {
+    question: "How do I copy a character from this library?",
+    answer:
+      "Click or tap any character tile — it copies instantly with a confirmation. Each tile also shows the official Unicode name and U+ code point so you know exactly what you copied.",
+  },
+  {
+    question: "Why do some characters show as boxes or question marks?",
+    answer:
+      "That means your device's current font lacks a glyph for that code point. The character is still valid Unicode — it just isn't drawn on that particular system. Symbols in the popular categories (hearts, stars, arrows) render almost everywhere.",
+  },
+  {
+    question: "What is a code point?",
+    answer:
+      "A code point is a character's permanent address in the Unicode standard, written like U+2665 for the heart symbol. It identifies the character itself, separate from how any font happens to draw it.",
+  },
+  {
+    question: "Can I use these characters in my Instagram bio or username?",
+    answer:
+      "Yes — they are plain text characters, so they paste into bios, usernames, comments and messages. A few platforms restrict certain symbols in usernames; the platform compatibility guides cover the details.",
+  },
+];
+---
+
+<BaseLayout
+  title="Unicode Character Library — Copy Special Characters | Ff Font Lab"
+  description="Browse and copy hundreds of Unicode characters: hearts ♥, stars ★, arrows →, math symbols, currency and more. Search by name, inspect code points, one-tap copy."
+  canonical="/characters"
+  jsonLd={pageSchema}
+  activePage="characters"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Character Library
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        {allChars.length} hand-picked Unicode characters across {CHARACTER_CATEGORIES.length} categories — every one verified, named and coded. Tap to copy. No digging through giant tables of glyphs you'll never use.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+      {
+        CHARACTER_CATEGORIES.map((cat) => (
+          <a
+            href={`/characters/${cat.slug}`}
+            class="surface-card rounded-lg p-4 flex flex-col gap-2 group"
+          >
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[20px] text-primary" aria-hidden="true">{cat.icon}</span>
+              <span class="text-[15px] font-semibold text-on-surface group-hover:text-primary transition-colors" style="font-family: Sora;">
+                {cat.name}
+              </span>
+            </div>
+            <p class="text-[12px] text-on-surface-variant leading-relaxed line-clamp-2" style="font-family: Inter;">
+              {cat.shortDescription}
+            </p>
+            <span class="text-[11px] text-primary/70 font-medium" style="font-family: JetBrains Mono;">
+              {cat.chars.length} characters →
+            </span>
+          </a>
+        ))
+      }
+    </div>
+
+    <AdSlot slot="characters-hub-mid" format="horizontal" />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Search everything
+      </h2>
+      <p class="text-[14px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Looking for something specific? Type a keyword like “star”, “arrow” or a code point like U+2665. The search covers names and code points across every category at once.
+      </p>
+      <div class="surface-card rounded-lg p-5">
+        <CharGrid client:load chars={allChars} categories={gridCategories} pageSize={96} />
+      </div>
+    </section>
+
+    <ProTeaser
+      title="Characters are only half the fun"
+      message="Drop any of these symbols into the font converter and watch the whole line change style — bold, cursive, gothic and thirteen more."
+      ctaLabel="Open Text Converter"
+      ctaHref="/tools/text-converter"
+    />
+
+    <FAQ faqs={faqs} />
+  </div>
+</BaseLayout>

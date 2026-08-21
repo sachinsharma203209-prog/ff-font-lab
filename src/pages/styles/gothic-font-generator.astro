@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/styles/gothic-font-generator",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Type your text", description: "Enter the text for your gothic-styled design — short names and words work best." },
   { step: 2, title: "Choose gothic style", description: "Pick between standard Fraktur for an elegant look or Bold Fraktur for a heavier, more dramatic appearance." },
@@ -42,13 +41,21 @@ const relatedTools = [
   { title: "Free Fire Nickname", href: "/gaming/free-fire-nickname", category: "gaming" },
   { title: "Calligraphy Font Generator", href: "/styles/calligraphy-font-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Gothic Font Generator — Blackletter & Fraktur Fonts",
+  description: "Generate gothic, blackletter, and fraktur style fonts online. Create medieval-inspired text for logos, gaming, and creative projects.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Gothic Font Generator — Blackletter & Fraktur Fonts | Ff Font Lab"
   description="Generate gothic, blackletter, and fraktur style fonts online. Create medieval-inspired text for logos, gaming, and creative projects."
   canonical="/styles/gothic-font-generator"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="styles"
 >
   <div class="flex flex-col gap-6">

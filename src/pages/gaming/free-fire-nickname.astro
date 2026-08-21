@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/gaming/free-fire-nickname",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Keep it short", description: "Free Fire limits names to 12 characters. Keep your name brief and impactful." },
   { step: 2, title: "Generate styled names", description: "Browse through bold, gothic, double-struck, and circled styles that look great in-game." },
@@ -42,13 +41,21 @@ const relatedTools = [
   { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
   { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Free Fire Nickname Generator — Stylish FF Names",
+  description: "Generate stylish Free Fire names with cool Unicode fonts. Create unique gaming names for your Free Fire profile.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Free Fire Nickname Generator — Stylish FF Names | Ff Font Lab"
   description="Generate stylish Free Fire names with cool Unicode fonts. Create unique gaming names for your Free Fire profile."
   canonical="/gaming/free-fire-nickname"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="gaming"
 >
   <div class="flex flex-col gap-6">

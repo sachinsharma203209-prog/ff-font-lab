@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/social/threads-font-generator",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Type your Threads content", description: "Enter the text you want to style for your Threads post, bio, or reply." },
   { step: 2, title: "Choose a font style", description: "Select from bold, italic, cursive, double-struck, small caps, sans serif, and other available styles." },
@@ -41,13 +40,21 @@ const relatedTools = [
   { title: "LinkedIn Font Generator", href: "/social/linkedin-font-generator", category: "social" },
   { title: "Aesthetic Text Generator", href: "/styles/aesthetic-text-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Threads Font Generator — Stylish Text for Threads",
+  description: "Generate stylish fonts for your Threads posts, bio, and replies. Create eye-catching Unicode text styles for the Threads app.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Threads Font Generator — Stylish Text for Threads | Ff Font Lab"
   description="Generate stylish fonts for your Threads posts, bio, and replies. Create eye-catching Unicode text styles for the Threads app."
   canonical="/social/threads-font-generator"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="social"
 >
   <div class="flex flex-col gap-6">

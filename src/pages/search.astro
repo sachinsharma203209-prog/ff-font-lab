@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SearchPageIsland from '../components/SearchDialog';
+---
+
+<BaseLayout
+  title="Search | Ff Font Lab"
+  description="Search fonts, tools, symbols, platform guides and languages across Ff Font Lab."
+  canonical="/search"
+  noindex={true}
+  activePage="home"
+>
+  <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-2">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Search
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        One box for the whole site — generators, tools, character categories, symbol guides, platform compatibility and language support.
+      </p>
+    </div>
+    <SearchPageIsland client:load />
+  </div>
+</BaseLayout>

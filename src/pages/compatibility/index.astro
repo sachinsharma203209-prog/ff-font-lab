@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FAQ from '../../components/FAQ.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import { PLATFORM_COMPATIBILITY } from '../../data/platforms';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Compatibility", href: "/compatibility" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Font Compatibility Guides — Where Fancy Text Works | Ff Font Lab",
+  description:
+    "Field-by-field compatibility for Instagram, Discord, TikTok, Facebook and WhatsApp: which Unicode styles work, where they fail and how to fix broken characters.",
+  url: "https://fontchange.co.in/compatibility",
+  breadcrumbs: breadcrumbs.map((b) => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const supportIcons: Record<string, { icon: string; color: string; label: string }> = {
+  yes: { icon: "check_circle", color: "text-green-400", label: "Works" },
+  partial: { icon: "error", color: "text-yellow-400", label: "Partial" },
+  no: { icon: "cancel", color: "text-red-400", label: "No" },
+};
+
+const faqs = [
+  {
+    question: "Why does fancy text work in some apps but not others?",
+    answer:
+      "Styled text is plain Unicode, so it works wherever an app accepts arbitrary characters. Fields that restrict input to A–Z and 0–9 (like @handles) reject it by design — that is a platform rule, not a bug in the characters.",
+  },
+  {
+    question: "What does 'partial' support mean?",
+    answer:
+      "The field accepts the characters but with caveats: some glyphs may render as boxes on older devices, spacing can look different, or the platform transforms the text (for example channel names converting spaces to dashes).",
+  },
+  {
+    question: "Someone sees boxes where my styled text should be. Whose fault is it?",
+    answer:
+      "Neither. Their device's system font simply lacks a glyph for that code point. Switching to widely-shipped styles like Bold Sans, Monospace or Double-Struck fixes it.",
+  },
+];
+---
+
+<BaseLayout
+  title="Font Compatibility Guides — Where Fancy Text Works | Ff Font Lab"
+  description="Field-by-field compatibility for Instagram, Discord, TikTok, Facebook and WhatsApp: which Unicode styles work, where they fail and how to fix broken characters."
+  canonical="/compatibility"
+  jsonLd={pageSchema}
+  activePage="home"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Platform Compatibility
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Fancy fonts are just characters, so the real question is where each app accepts them. These five guides map every field — bio, handle, comments, nicknames — to a straight yes, partial or no, then explain the failures people actually run into.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {
+        PLATFORM_COMPATIBILITY.map((p) => {
+          const yesCount = p.whereToPaste.filter((w) => w.support === "yes").length;
+          const totalCount = p.whereToPaste.length;
+          return (
+            <a href={`/compatibility/${p.slug}`} class="surface-card rounded-lg p-5 flex flex-col gap-2 group">
+              <span class="text-[17px] font-semibold text-on-surface group-hover:text-primary transition-colors" style="font-family: Sora;">
+                {p.name}
+              </span>
+              <p class="text-[13px] text-on-surface-variant leading-relaxed line-clamp-2" style="font-family: Inter;">
+                {p.intro}
+              </p>
+              <span class="text-[11px] font-medium mt-1 w-fit" style="font-family: JetBrains Mono;" aria-label={`${yesCount} of ${totalCount} fields fully support styled text`}>
+                <span class="text-green-400">{yesCount}/{totalCount}</span>
+                <span class="text-on-surface-variant"> fields support styled text →</span>
+              </span>
+            </a>
+          );
+        })
+      }
+    </div>
+
+    <AdSlot slot="compatibility-hub-mid" format="horizontal" />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Reading the guides
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {
+          Object.entries(supportIcons).map(([key, val]) => (
+            <div class="surface-card rounded-lg p-5 flex items-start gap-3">
+              <span class={`material-symbols-outlined text-[22px] ${val.color}`} aria-hidden="true">{val.icon}</span>
+              <div class="flex flex-col gap-1">
+                <h3 class="text-[15px] font-semibold text-on-surface" style="font-family: Sora;">{val.label}</h3>
+                <p class="text-[13px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+                  {key === "yes" && "Paste and go. The field accepts any Unicode character and renders it for all viewers."}
+                  {key === "partial" && "Accepted with caveats — check the notes for device quirks or automatic transformations."}
+                  {key === "no" && "The field enforces plain ASCII. Styled characters will be rejected or stripped."}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+  </div>
+</BaseLayout>

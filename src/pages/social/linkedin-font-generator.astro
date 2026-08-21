@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/social/linkedin-font-generator",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Write your headline", description: "Type your professional headline or summary text into the generator." },
   { step: 2, title: "Pick a professional style", description: "Choose subtle, professional styles like Bold Sans, Sans-Serif, or Small Caps that are appropriate for LinkedIn." },
@@ -42,13 +41,21 @@ const relatedTools = [
   { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", category: "social" },
   { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "LinkedIn Font Generator — Professional Profile Fonts",
+  description: "Generate professional-looking fonts for your LinkedIn profile, headline, and posts. Stand out with unique typography on LinkedIn.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="LinkedIn Font Generator — Professional Profile Fonts | Ff Font Lab"
   description="Generate professional-looking fonts for your LinkedIn profile, headline, and posts. Stand out with unique typography on LinkedIn."
   canonical="/social/linkedin-font-generator"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="social"
 >
   <div class="flex flex-col gap-6">

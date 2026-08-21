@@ -1,9 +1,9 @@
----
+﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import BentoCard from '../../components/BentoCard.astro';
 import FAQ from '../../components/FAQ.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -39,13 +39,15 @@ const faqs = [
   { question: "Will my followers see the styled fonts correctly?", answer: "Unicode fonts are universally supported on modern smartphones and computers, so the vast majority of your followers will see the styled text correctly." },
   { question: "Can I use these fonts for my social media bio?", answer: "Absolutely! Each platform page includes the correct character limit for bios. Simply generate your text, copy it, and paste it into your bio settings." },
 ];
+
+const faqSchema = generateFAQSchema(faqs);
 ---
 
 <BaseLayout
   title="Social Media Font Generators | Ff Font Lab"
   description="Generate stylish fonts for Instagram, TikTok, Twitter, WhatsApp, Facebook, LinkedIn, Snapchat, Telegram, and more."
   canonical="/social"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, faqSchema]}
   activePage="social"
 >
   <div class="flex flex-col gap-6">

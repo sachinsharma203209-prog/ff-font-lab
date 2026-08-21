@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/social/twitter-font-generator",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Type your text", description: "Enter text for your tweet or bio. Keep it under 160 characters for your Twitter bio." },
   { step: 2, title: "Select a font", description: "Choose from bold, sans-serif, monospace, and small caps for a clean, readable look." },
@@ -42,13 +41,21 @@ const relatedTools = [
   { title: "LinkedIn Font Generator", href: "/social/linkedin-font-generator", category: "social" },
   { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Twitter / X Font Generator — Stylish Tweet & Bio Fonts",
+  description: "Generate stylish fonts for your Twitter / X profile, tweets, and replies. Stand out with unique Unicode typography on Twitter.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Twitter / X Font Generator — Stylish Tweet & Bio Fonts | Ff Font Lab"
   description="Generate stylish fonts for your Twitter / X profile, tweets, and replies. Stand out with unique Unicode typography on Twitter."
   canonical="/social/twitter-font-generator"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="social"
 >
   <div class="flex flex-col gap-6">

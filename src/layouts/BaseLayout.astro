@@ -3,6 +3,7 @@ import '../styles/global.css';
 import SEO from '../components/SEO.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { SITE_CONFIG, isAnalyticsEnabled } from '../lib/site-config';
 
 interface Props {
   title: string;
@@ -23,6 +24,9 @@ const {
   jsonLd,
   activePage = 'home',
 } = Astro.props;
+
+const ga4Id = SITE_CONFIG.analytics.ga4Id;
+const analyticsLive = isAnalyticsEnabled();
 ---
 
 <!DOCTYPE html>
@@ -51,6 +55,17 @@ const {
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
     rel="stylesheet"
   />
+  {analyticsLive && (
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`} />
+    <script is:inline define:vars={{ ga4Id }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', ga4Id, { anonymize_ip: true });
+    </script>
+  )}
 </head>
 <body class="text-on-background min-h-screen flex flex-col font-body antialiased" style="background-color: #020617; color: #dae2fd;">
   <Header activePage={activePage} />

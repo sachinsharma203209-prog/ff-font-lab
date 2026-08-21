@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/social/whatsapp-font-generator",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Type your message", description: "Enter the text you want to style for WhatsApp chat, status, or profile bio." },
   { step: 2, title: "Pick a style", description: "Choose from bold, italic, double-struck, small caps, fullwidth, and more options." },
@@ -42,13 +41,21 @@ const relatedTools = [
   { title: "LinkedIn Font Generator", href: "/social/linkedin-font-generator", category: "social" },
   { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "WhatsApp Font Generator — Cool Chat & Status Fonts",
+  description: "Create stylish fonts for your WhatsApp status, bio, and chat messages. Stand out with unique Unicode text styles on WhatsApp.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="WhatsApp Font Generator — Cool Chat & Status Fonts | Ff Font Lab"
   description="Create stylish fonts for your WhatsApp status, bio, and chat messages. Stand out with unique Unicode text styles on WhatsApp."
   canonical="/social/whatsapp-font-generator"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="social"
 >
   <div class="flex flex-col gap-6">

@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/gaming/fortnite-username",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Keep it under 16 characters", description: "Fortnite display names are limited to 16 characters. Use the counter to create the best name within the limit." },
   { step: 2, title: "Pick a battle royale style", description: "Choose from bold, fraktur, double-struck, monospace, circled, and small caps styles for a standout Fortnite name." },
@@ -41,13 +40,21 @@ const relatedTools = [
   { title: "Roblox Username", href: "/gaming/roblox-username", category: "gaming" },
   { title: "Gothic Font Generator", href: "/styles/gothic-font-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Fortnite Username Generator — Cool Fortnite Names",
+  description: "Generate cool Fortnite usernames and display names with Unicode fonts and symbols. Create memorable gaming identities for battle royale.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Fortnite Username Generator — Cool Fortnite Names | Ff Font Lab"
   description="Generate cool Fortnite usernames and display names with Unicode fonts and symbols. Create memorable gaming identities for battle royale."
   canonical="/gaming/fortnite-username"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="gaming"
 >
   <div class="flex flex-col gap-6">

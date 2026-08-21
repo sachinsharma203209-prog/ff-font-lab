@@ -10,7 +10,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "seo:check": "npx tsx scripts/check-seo.ts"
+    "seo:check": "npx tsx scripts/check-seo.ts",
+    "audit:orphans": "npx tsx scripts/audit-orphans.ts",
+    "audit:thin": "npx tsx scripts/audit-thin.ts"
   },
   "devDependencies": {
     "tsx": "^4.19.0"

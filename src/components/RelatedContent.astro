@@ -1,0 +1,56 @@
+---
+import type { RelatedItem } from "../lib/related";
+import { typeLabel } from "../lib/related";
+
+interface Props {
+  items: RelatedItem[];
+  title?: string;
+}
+
+const { items, title = "Related Pages" } = Astro.props;
+
+const typeIcons: Record<string, string> = {
+  tool: "build",
+  styleVariant: "text_fields",
+  stylePage: "brush",
+  socialPage: "share",
+  gamingPage: "sports_esports",
+  useCase: "lightbulb",
+  symbol: "star",
+  characterCategory: "grid_view",
+  language: "translate",
+  hub: "apps",
+};
+---
+
+{
+  items.length > 0 && (
+    <section class="flex flex-col gap-4" aria-label={title}>
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        {title}
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {items.map((item) => (
+          <a href={item.path} class="surface-card rounded-lg p-4 flex items-start gap-3 group">
+            <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+              <span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">
+                {typeIcons[item.type] || "link"}
+              </span>
+            </div>
+            <div class="flex flex-col gap-0.5 min-w-0">
+              <span class="text-[14px] font-medium text-on-surface group-hover:text-primary transition-colors truncate" style="font-family: Inter;">
+                {item.name}
+              </span>
+              <span class="text-[12px] text-on-surface-variant line-clamp-2" style="font-family: Inter;">
+                {item.description}
+              </span>
+              <span class="text-[10px] font-medium uppercase tracking-wider text-primary/80 mt-1 w-fit" style="font-family: JetBrains Mono;">
+                {typeLabel(item.type)}
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}

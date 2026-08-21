@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/gaming/roblox-username",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Type your name", description: "Enter the Roblox display name you want to stylize in the generator." },
   { step: 2, title: "Choose a style", description: "Pick from bold, cursive, double-struck, and small caps styles that work in Roblox." },
@@ -42,13 +41,21 @@ const relatedTools = [
   { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
   { title: "Aesthetic Text Generator", href: "/styles/aesthetic-text-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Roblox Username Generator — Cool Roblox Display Names",
+  description: "Generate cool Roblox usernames and display names with stylish Unicode fonts. Create unique names for your Roblox profile.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Roblox Username Generator — Cool Roblox Display Names | Ff Font Lab"
   description="Generate cool Roblox usernames and display names with stylish Unicode fonts. Create unique names for your Roblox profile."
   canonical="/gaming/roblox-username"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="gaming"
 >
   <div class="flex flex-col gap-6">

@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import BentoCard from '../../components/BentoCard.astro';
+import FAQ from '../../components/FAQ.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import { PHASE3_TOOLS } from '../../data/tools-registry';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Tools", href: "/tools" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Text & Font Tools — Convert, Transform, Copy | Ff Font Lab",
+  description:
+    "Every text tool in one place: convert, flip, mirror, shrink, strike through or hide text with Unicode. Free, instant, no sign-up.",
+  url: "https://fontchange.co.in/tools",
+  breadcrumbs: breadcrumbs.map((b) => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const groups = [
+  {
+    label: "Converters & References",
+    ids: ["text-converter", "letter-generator", "number-generator", "character-generator"],
+    blurb:
+      "Look things up, compare variants, convert between styles. These tools answer questions like 'what does a gothic 5 look like?' (trick question — it doesn't exist) and 'which styles support the letter Q?'.",
+  },
+  {
+    label: "Text Transformations",
+    ids: ["upside-down-text", "mirror-text", "tiny-text", "strikethrough-text", "invisible-text"],
+    blurb:
+      "Single-purpose transformers that do one job properly. Each one uses real Unicode mechanics — combining marks, zero-width characters, rotated look-alikes — not fake fonts or images.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Are these tools free to use?",
+    answer:
+      "Yes. Every tool runs entirely in your browser — nothing is uploaded, nothing is stored, and there is no sign-up. Bookmark the ones you use often.",
+  },
+  {
+    question: "What is the difference between a tool and a font generator?",
+    answer:
+      "Generators show your text in many Unicode styles at once so you can compare. Tools do one specific transformation — flipping, mirroring, shrinking, striking or hiding text — with finer control over the result.",
+  },
+  {
+    question: "Will the output work on Instagram, WhatsApp and Discord?",
+    answer:
+      "In almost all cases yes, because the output is plain Unicode text rather than formatting. A few characters render inconsistently on older devices; each tool page notes its known limitations honestly.",
+  },
+  {
+    question: "Do you store the text I type?",
+    answer:
+      "No. All transformations happen locally in your browser. We never see, log or transmit your input — check the privacy policy for details.",
+  },
+];
+---
+
+<BaseLayout
+  title="Text & Font Tools — Convert, Transform, Copy | Ff Font Lab"
+  description="Every text tool in one place: convert, flip, mirror, shrink, strike through or hide text with Unicode. Free, instant, no sign-up."
+  canonical="/tools"
+  jsonLd={pageSchema}
+  activePage="tools"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Text & Font Tools
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Nine focused utilities for people who work with text: converters that map any sentence into every Unicode style we support, reference browsers for letters, numbers and symbols, and transformers that flip, mirror, shrink, strike or hide what you type. Everything runs in your browser. Nothing gets uploaded.
+      </p>
+    </div>
+
+    {
+      groups.map((group) => (
+        <section class="flex flex-col gap-4">
+          <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+            {group.label}
+          </h2>
+          <p class="text-[14px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+            {group.blurb}
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {group.ids.map((id) => {
+              const tool = PHASE3_TOOLS.find((t) => t.id === id);
+              if (!tool) return null;
+              return (
+                <BentoCard
+                  title={tool.name}
+                  description={tool.intro}
+                  href={`/tools/${tool.slug}`}
+                  icon={tool.icon}
+                />
+              );
+            })}
+          </div>
+        </section>
+      ))
+    }
+
+    <AdSlot slot="tools-hub-mid" format="horizontal" />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Need a full generator instead?
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          The <a href="/" class="text-primary hover:underline">main font generator</a> shows your text in sixteen styles simultaneously — better when you haven't picked a style yet. For platform-specific advice, start at
+          <a href="/compatibility" class="text-primary hover:underline">platform compatibility</a> or browse the
+          <a href="/characters" class="text-primary hover:underline">character library</a> for individual symbols.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+  </div>
+</BaseLayout>

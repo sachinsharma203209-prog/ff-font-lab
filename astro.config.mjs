@@ -14,7 +14,11 @@ export default defineConfig({
 
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/admin') && !page.includes('/api') && !page.includes('/404'),
+      filter: (page) =>
+        !page.includes('/admin') &&
+        !page.includes('/api') &&
+        !page.includes('/404') &&
+        !page.includes('/search'),
     }),
     react()
   ]

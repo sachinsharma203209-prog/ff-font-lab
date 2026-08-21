@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FAQ from '../../components/FAQ.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import ProTeaser from '../../components/ProTeaser.astro';
+import { USE_CASES } from '../../data/use-cases';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Use Cases", href: "/use-cases" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Font Use Cases — Bios, Usernames & Nicknames | Ff Font Lab",
+  description:
+    "Practical guides for styled text: Instagram bio fonts, gaming usernames, Discord names, aesthetic bios and more — with limits, examples and platform notes.",
+  url: "https://fontchange.co.in/use-cases",
+  breadcrumbs: breadcrumbs.map((b) => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const faqs = [
+  {
+    question: "Which use case should I start with?",
+    answer:
+      "Pick the surface you're styling right now — a bio, a game name, a Discord server. Each guide lists the character limits, the styles that actually render well there, and ready-to-copy examples.",
+  },
+  {
+    question: "Are these guides platform-specific?",
+    answer:
+      "They focus on the job (bio, username, nickname) rather than one app. For deep dives per app — where exactly styles work and where they break — see the compatibility section.",
+  },
+  {
+    question: "Do I need an account to use the generators?",
+    answer:
+      "No. Every generator on this site runs in your browser with no sign-up, and nothing you type leaves your device.",
+  },
+];
+---
+
+<BaseLayout
+  title="Font Use Cases — Bios, Usernames & Nicknames | Ff Font Lab"
+  description="Practical guides for styled text: Instagram bio fonts, gaming usernames, Discord names, aesthetic bios and more — with limits, examples and platform notes."
+  canonical="/use-cases"
+  jsonLd={pageSchema}
+  activePage="home"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Styled Text Use Cases
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Same fonts, very different jobs. A bio needs restraint. A game tag needs attitude. A nickname needs to survive a 12-character limit. These six guides break down what works where — with real examples and the limits that actually matter.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {
+        USE_CASES.map((uc) => (
+          <a href={`/use-cases/${uc.slug}`} class="surface-card rounded-lg p-5 flex flex-col gap-2 group">
+            <span class="text-[17px] font-semibold text-on-surface group-hover:text-primary transition-colors" style="font-family: Sora;">
+              {uc.name}
+            </span>
+            <p class="text-[13px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+              {uc.intro}
+            </p>
+            <div class="flex flex-wrap gap-1.5 mt-1">
+              {uc.recommendedStyles.slice(0, 3).map((styleId) => (
+                <span class="text-[10px] font-medium uppercase tracking-wide bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded" style="font-family: JetBrains Mono;">
+                  {styleId.replace(/([A-Z])/g, " $1").trim()}
+                </span>
+              ))}
+            </div>
+          </a>
+        ))
+      }
+    </div>
+
+    <AdSlot slot="use-cases-hub-mid" format="horizontal" />
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        How to use these guides
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Start with your target platform's limit — that constraint shapes everything else. Then pick a style from the guide's shortlist rather than experimenting blind; the lists here are filtered by what actually renders correctly on that surface.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Every guide includes copy-paste examples. Steal the structure, swap in your own words, then generate your version with the linked generator.
+        </p>
+      </div>
+    </section>
+
+    <ProTeaser
+      title="Your use case, your style"
+      message="Every guide pairs with the full style library — sixteen Unicode fonts that paste straight into bios, usernames and chat fields."
+      ctaLabel="Browse Font Styles"
+      ctaHref="/styles"
+    />
+
+    <FAQ faqs={faqs} />
+  </div>
+</BaseLayout>

@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import { LANGUAGES } from '../../data/languages';
+import { getRelatedContent } from '../../lib/related';
+import { generateWebPageSchema } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return LANGUAGES.map((lang) => ({
+    params: { slug: lang.slug },
+    props: { lang },
+  }));
+}
+
+const { lang } = Astro.props;
+const canonical = `/languages/${lang.slug}`;
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Languages", href: "/languages" },
+  { label: lang.name, href: canonical },
+];
+
+const related = getRelatedContent(`language:${lang.id}`, 6);
+
+const supportMeta: Record<string, { icon: string; color: string; bg: string }> = {
+  full: { icon: "check_circle", color: "text-green-400", bg: "bg-green-400/10" },
+  partial: { icon: "error", color: "text-yellow-400", bg: "bg-yellow-400/10" },
+  preserved: { icon: "info", color: "text-primary", bg: "bg-primary/10" },
+};
+
+const meta = supportMeta[lang.supportLevel];
+
+const metaDescription =
+  `${lang.name} font support: ${lang.supportLabel.toLowerCase()} — how Unicode styles handle ` +
+  `${lang.nativeName} text, what converts and what stays unchanged.`;
+
+const pageSchema = generateWebPageSchema({
+  title: `${lang.name} Font Support — Styled Text in ${lang.nativeName} | Ff Font Lab`,
+  description: metaDescription,
+  url: `https://fontchange.co.in${canonical}`,
+  breadcrumbs: breadcrumbs.map((b) => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+---
+
+<BaseLayout
+  title={`${lang.name} Font Support — Styled Text in ${lang.nativeName} | Ff Font Lab`}
+  description={metaDescription}
+  canonical={canonical}
+  jsonLd={pageSchema}
+  activePage="home"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <div class="flex items-center gap-3 flex-wrap">
+        <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+          {lang.name} <span class="text-[20px] md:text-[24px] text-on-surface-variant font-medium">({lang.nativeName})</span>
+        </h1>
+        <span class={`text-[12px] font-medium px-2.5 py-1 rounded-full inline-flex items-center gap-1 ${meta.bg} ${meta.color}`} style="font-family: JetBrains Mono;">
+          <span class="material-symbols-outlined text-[14px]" aria-hidden="true">{meta.icon}</span>
+          {lang.supportLabel}
+        </span>
+      </div>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Script: {lang.script}. Try it below — the generator shows exactly how {lang.name} text behaves in every style, including which characters stay original.
+      </p>
+    </div>
+
+    <FontGenerator
+      placeholder={`Type in ${lang.name}...`}
+      defaultText={lang.sampleText}
+    />
+
+    <AdSlot slot={`languages-${lang.slug}-below`} format="horizontal" />
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        What happens to {lang.name} text
+      </h2>
+      {
+        lang.description.map((para) => (
+          <p class="text-[14px] text-on-surface-variant leading-relaxed max-w-[760px]" style="font-family: Inter;">
+            {para}
+          </p>
+        ))
+      }
+    </section>
+
+    {
+      lang.unsupportedSample.length > 0 && (
+        <section class="flex flex-col gap-4">
+          <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+            Characters that stay original
+          </h2>
+          <p class="text-[14px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+            These {lang.name} characters have no styled Unicode equivalents. Inside converted words they remain exactly as you typed them — correct spelling beats fake styling.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            {lang.unsupportedSample.map((ch) => (
+              <span class="surface-card !py-2 !px-3.5 rounded-lg text-[20px] text-on-surface" style="font-family: Inter;" aria-label={`Character ${ch} is preserved`}>
+                {ch}
+              </span>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Sample conversion
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+          <span class="text-[11px] uppercase tracking-wider text-on-surface-variant sm:w-[100px] flex-shrink-0" style="font-family: JetBrains Mono;">Input</span>
+          <span class="text-[17px] text-on-surface break-words" style="font-family: Inter;">{lang.sampleText}</span>
+        </div>
+        <div class="border-t border-outline-variant"></div>
+        <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+          <span class="text-[11px] uppercase tracking-wider text-primary sm:w-[100px] flex-shrink-0" style="font-family: JetBrains Mono;">Bold Sans</span>
+          <span class="text-[17px] text-primary break-words" style="font-family: Inter;">{lang.sampleText}</span>
+        </div>
+        {
+          lang.unsupportedSample.length > 0 && (
+            <p class="text-[12px] text-on-surface-variant" style="font-family: Inter;">
+              Note: characters like {lang.unsupportedSample.slice(0, 4).join(" ")} remain unstyled inside the converted output.
+            </p>
+          )
+        }
+      </div>
+    </section>
+
+    <FAQ faqs={lang.faqs} />
+
+    <RelatedContent items={related} title="Keep exploring" />
+  </div>
+</BaseLayout>

@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/social/snapchat-font-generator",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Type your Snapchat text", description: "Enter the text you want to style for your display name, bio, or snap captions." },
   { step: 2, title: "Pick a style", description: "Choose from bold, italic, cursive, small caps, monospace, fullwidth, and more unique options." },
@@ -41,13 +40,21 @@ const relatedTools = [
   { title: "Twitter / X Font Generator", href: "/social/twitter-font-generator", category: "social" },
   { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Snapchat Font Generator — Stylish Snap Fonts",
+  description: "Generate stylish fonts for your Snapchat bio, display name, and snap captions. Create unique text styles that stand out on Snapchat.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Snapchat Font Generator — Stylish Snap Fonts | Ff Font Lab"
   description="Generate stylish fonts for your Snapchat bio, display name, and snap captions. Create unique text styles that stand out on Snapchat."
   canonical="/social/snapchat-font-generator"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="social"
 >
   <div class="flex flex-col gap-6">

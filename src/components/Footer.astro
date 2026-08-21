@@ -44,12 +44,33 @@ const moreLinks = [
   { label: "Social Media Tools", href: "/social" },
   { label: "Gaming Tools", href: "/gaming" },
 ];
+
+const toolsLinks = [
+  { label: "All Tools", href: "/tools" },
+  { label: "Text Converter", href: "/tools/text-converter" },
+  { label: "Letter Generator", href: "/tools/letter-generator" },
+  { label: "Number Generator", href: "/tools/number-generator" },
+  { label: "Character Generator", href: "/tools/character-generator" },
+  { label: "Upside Down Text", href: "/tools/upside-down-text" },
+  { label: "Mirror Text", href: "/tools/mirror-text" },
+  { label: "Tiny Text", href: "/tools/tiny-text" },
+  { label: "Strikethrough Text", href: "/tools/strikethrough-text" },
+  { label: "Invisible Text", href: "/tools/invisible-text" },
+];
+
+const exploreLinks = [
+  { label: "Character Library", href: "/characters" },
+  { label: "Symbol Guides", href: "/symbols" },
+  { label: "Use Cases", href: "/use-cases" },
+  { label: "Compatibility Guides", href: "/compatibility" },
+  { label: "Language Support", href: "/languages" },
+];
 ---
 
 <footer class="bg-surface border-t border-outline-variant mt-auto">
   <div class="max-w-[1280px] mx-auto px-4 md:px-12 py-12">
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-6">
-      <div class="col-span-2 md:col-span-1">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-6">
+      <div class="col-span-2 md:col-span-3 lg:col-span-1">
         <a href="/" class="inline-block mb-3">
           <span class="text-[20px] font-bold text-primary" style="font-family: Sora;">Ff</span>
         </a>
@@ -112,6 +133,32 @@ const moreLinks = [
         <h4 class="text-[12px] font-bold text-primary uppercase tracking-wider mb-3" style="font-family: JetBrains Mono;">More</h4>
         <ul class="flex flex-col gap-2">
           {moreLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-[13px] text-on-surface-variant hover:text-primary transition-colors" style="font-family: Inter;">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-[12px] font-bold text-primary uppercase tracking-wider mb-3" style="font-family: JetBrains Mono;">Tools</h4>
+        <ul class="flex flex-col gap-2">
+          {toolsLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-[13px] text-on-surface-variant hover:text-primary transition-colors" style="font-family: Inter;">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-[12px] font-bold text-primary uppercase tracking-wider mb-3" style="font-family: JetBrains Mono;">Explore</h4>
+        <ul class="flex flex-col gap-2">
+          {exploreLinks.map((link) => (
             <li>
               <a href={link.href} class="text-[13px] text-on-surface-variant hover:text-primary transition-colors" style="font-family: Inter;">
                 {link.label}

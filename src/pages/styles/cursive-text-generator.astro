@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/styles/cursive-text-generator",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Type your text", description: "Enter the text you want in cursive style — names, titles, or short phrases work best." },
   { step: 2, title: "Choose cursive style", description: "Pick between standard cursive, bold script, or italic variations for different handwriting looks." },
@@ -42,13 +41,21 @@ const relatedTools = [
   { title: "Gothic Font Generator", href: "/styles/gothic-font-generator", category: "style" },
   { title: "Twitter / X Font Generator", href: "/social/twitter-font-generator", category: "social" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Cursive Text Generator — Elegant Script Fonts",
+  description: "Generate beautiful cursive and script fonts online. Create elegant handwritten-style text for social media, invitations, and creative projects.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Cursive Text Generator — Elegant Script Fonts | Ff Font Lab"
   description="Generate beautiful cursive and script fonts online. Create elegant handwritten-style text for social media, invitations, and creative projects."
   canonical="/styles/cursive-text-generator"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="styles"
 >
   <div class="flex flex-col gap-6">

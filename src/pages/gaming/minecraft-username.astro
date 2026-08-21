@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/gaming/minecraft-username",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Keep it under 16 characters", description: "Minecraft Java Edition usernames are limited to 16 characters. Use the counter to stay within the limit." },
   { step: 2, title: "Pick a Minecraft style", description: "Choose from bold, fraktur, double-struck, monospace, small caps, and fullwidth styles for a unique Minecraft look." },
@@ -41,13 +40,21 @@ const relatedTools = [
   { title: "Free Fire Nickname", href: "/gaming/free-fire-nickname", category: "gaming" },
   { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Minecraft Username Generator — Cool Minecraft Names",
+  description: "Generate unique Minecraft usernames and server names with Unicode fonts. Create memorable gaming identities for the Minecraft community.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Minecraft Username Generator — Cool Minecraft Names | Ff Font Lab"
   description="Generate unique Minecraft usernames and server names with Unicode fonts. Create memorable gaming identities for the Minecraft community."
   canonical="/gaming/minecraft-username"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="gaming"
 >
   <div class="flex flex-col gap-6">

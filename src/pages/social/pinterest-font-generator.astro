@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/social/pinterest-font-generator",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Enter your Pinterest text", description: "Type the pin description, board name, or profile bio text you want to style." },
   { step: 2, title: "Select a font style", description: "Choose from bold, italic, cursive, small caps, double-struck, sans serif, and other decorative styles." },
@@ -41,13 +40,21 @@ const relatedTools = [
   { title: "LinkedIn Font Generator", href: "/social/linkedin-font-generator", category: "social" },
   { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Pinterest Font Generator — Stylish Pin & Profile Fonts",
+  description: "Create stylish fonts for Pinterest pin descriptions, board names, and profile bio. Make your Pinterest presence visually unique.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Pinterest Font Generator — Stylish Pin & Profile Fonts | Ff Font Lab"
   description="Create stylish fonts for Pinterest pin descriptions, board names, and profile bio. Make your Pinterest presence visually unique."
   canonical="/social/pinterest-font-generator"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="social"
 >
   <div class="flex flex-col gap-6">

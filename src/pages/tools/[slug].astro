@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import TextConverterIsland from '../../components/TextConverterIsland';
+import LetterGeneratorIsland from '../../components/LetterGeneratorIsland';
+import NumberGeneratorIsland from '../../components/NumberGeneratorIsland';
+import CharacterGeneratorIsland from '../../components/CharacterGeneratorIsland';
+import InvisibleTextIsland from '../../components/InvisibleTextIsland';
+import { UpsideDownIsland, MirrorTextIsland, TinyTextIsland, StrikeTextIsland } from '../../components/TransformIslands';
+import { PHASE3_TOOLS } from '../../data/tools-registry';
+import { getRelatedContent } from '../../lib/related';
+import { generateWebPageSchema, generateHowToSchema } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return PHASE3_TOOLS.map((tool) => ({
+    params: { slug: tool.slug },
+    props: { tool },
+  }));
+}
+
+const { tool } = Astro.props;
+const canonical = `/tools/${tool.slug}`;
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Tools", href: "/tools" },
+  { label: tool.name, href: canonical },
+];
+
+const related = getRelatedContent(`tool:${tool.id}`, 6);
+
+const pageSchema = generateWebPageSchema({
+  title: `${tool.seoTitle} | Ff Font Lab`,
+  description: tool.seoDescription,
+  url: `https://fontchange.co.in${canonical}`,
+  breadcrumbs: breadcrumbs.map((b) => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const howToSchema = generateHowToSchema({
+  name: `How to use the ${tool.name}`,
+  description: tool.intro,
+  steps: tool.howToUse.map((s) => ({ name: s.title, text: s.description })),
+});
+---
+
+<BaseLayout
+  title={`${tool.seoTitle} | Ff Font Lab`}
+  description={tool.seoDescription}
+  canonical={canonical}
+  jsonLd={[pageSchema, howToSchema]}
+  activePage="tools"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex items-start gap-4">
+      <div class="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+        <span class="material-symbols-outlined text-[24px] text-primary" aria-hidden="true">{tool.icon}</span>
+      </div>
+      <div class="flex flex-col gap-2 min-w-0">
+        <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+          {tool.h1}
+        </h1>
+        <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+          {tool.intro}
+        </p>
+      </div>
+    </div>
+
+    <div class="surface-card rounded-lg p-5 md:p-6">
+      {
+        tool.id === "text-converter" && <TextConverterIsland client:load />
+      }
+      {
+        tool.id === "letter-generator" && <LetterGeneratorIsland client:load />
+      }
+      {
+        tool.id === "number-generator" && <NumberGeneratorIsland client:load />
+      }
+      {
+        tool.id === "character-generator" && <CharacterGeneratorIsland client:load />
+      }
+      {
+        tool.id === "invisible-text" && <InvisibleTextIsland client:load />
+      }
+      {
+        tool.id === "upside-down-text" && <UpsideDownIsland client:load />
+      }
+      {
+        tool.id === "mirror-text" && <MirrorTextIsland client:load />
+      }
+      {
+        tool.id === "tiny-text" && <TinyTextIsland client:load />
+      }
+      {
+        tool.id === "strikethrough-text" && <StrikeTextIsland client:load />
+      }
+    </div>
+
+    <AdSlot slot={`tool-${tool.slug}-below`} format="horizontal" />
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        How it works
+      </h2>
+      {
+        tool.description.map((para) => (
+          <p class="text-[14px] text-on-surface-variant leading-relaxed max-w-[760px]" style="font-family: Inter;">
+            {para}
+          </p>
+        ))
+      }
+    </section>
+
+    <TipSection tips={tool.howToUse} />
+
+    <FAQ faqs={tool.faqs} />
+
+    <RelatedContent items={related} title="More tools & guides" />
+  </div>
+</BaseLayout>

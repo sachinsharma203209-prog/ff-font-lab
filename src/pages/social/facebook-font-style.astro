@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/social/facebook-font-style",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Type your text", description: "Enter the text you want to style for Facebook — posts, comments, or profile sections." },
   { step: 2, title: "Select a style", description: "Browse and choose from multiple font categories including bold, italic, sans-serif, and monospace." },
@@ -42,13 +41,21 @@ const relatedTools = [
   { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", category: "social" },
   { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Facebook Font Style — Stylish Profile & Post Fonts",
+  description: "Generate unique stylish fonts for your Facebook profile, posts, comments, and stories. Stand out on Facebook with custom typography.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Facebook Font Style — Stylish Profile & Post Fonts | Ff Font Lab"
   description="Generate unique stylish fonts for your Facebook profile, posts, comments, and stories. Stand out on Facebook with custom typography."
   canonical="/social/facebook-font-style"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="social"
 >
   <div class="flex flex-col gap-6">

@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import FontGenerator from '../../components/FontGenerator.astro';
+import { USE_CASES } from '../../data/use-cases';
+import { getRelatedContent } from '../../lib/related';
+import { generateWebPageSchema } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return USE_CASES.map((uc) => ({
+    params: { slug: uc.slug },
+    props: { uc },
+  }));
+}
+
+const { uc } = Astro.props;
+const canonical = `/use-cases/${uc.slug}`;
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Use Cases", href: "/use-cases" },
+  { label: uc.name, href: canonical },
+];
+
+const related = getRelatedContent(`useCase:${uc.id}`, 6);
+const relatedUcs = uc.relatedUseCases
+  .map((id) => USE_CASES.find((u) => u.id === id))
+  .filter(Boolean);
+
+const pageSchema = generateWebPageSchema({
+  title: `${uc.seoTitle} | Ff Font Lab`,
+  description: uc.seoDescription,
+  url: `https://fontchange.co.in${canonical}`,
+  breadcrumbs: breadcrumbs.map((b) => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+---
+
+<BaseLayout
+  title={`${uc.seoTitle} | Ff Font Lab`}
+  description={uc.seoDescription}
+  canonical={canonical}
+  jsonLd={pageSchema}
+  activePage="home"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        {uc.name}
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        {uc.intro}
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        The short version
+      </h2>
+      {
+        uc.description.map((para) => (
+          <p class="text-[14px] text-on-surface-variant leading-relaxed max-w-[760px]" style="font-family: Inter;">
+            {para}
+          </p>
+        ))
+      }
+    </section>
+
+    <FontGenerator
+      styles={uc.recommendedStyles}
+      placeholder={`Type your ${uc.name.toLowerCase()} idea...`}
+      defaultText=""
+    />
+
+    <AdSlot slot={`use-case-${uc.slug}-below`} format="horizontal" />
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Where it counts
+      </h2>
+      <div class="surface-card rounded-lg overflow-hidden">
+        {
+          uc.platforms.map((p, i) => (
+            <div class={`flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 p-4 ${i > 0 ? "border-t border-outline-variant" : ""}`}>
+              <span class="text-[13px] font-semibold text-primary sm:w-[180px] flex-shrink-0" style="font-family: JetBrains Mono;">
+                {p.label}
+              </span>
+              <span class="text-[14px] text-on-surface-variant" style="font-family: Inter;">
+                {p.note}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Copy-ready examples
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {
+          uc.examples.map((ex) => (
+            <div class="surface-card rounded-lg p-4">
+              <p class="text-[16px] text-on-surface break-words" style="font-family: Inter;">
+                {ex}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <TipSection tips={uc.tips} />
+
+    <FAQ faqs={uc.faqs} />
+
+    {
+      relatedUcs.length > 0 && (
+        <section class="flex flex-col gap-3">
+          <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+            Related use cases
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {relatedUcs.map((ru) => (
+              <a href={`/use-cases/${ru!.slug}`} class="surface-card rounded-lg p-4 group">
+                <span class="text-[14px] font-medium text-on-surface group-hover:text-primary transition-colors" style="font-family: Inter;">
+                  {ru!.name}
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      uc.relatedGenerators.length > 0 && (
+        <section class="flex flex-col gap-3">
+          <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+            Generators for this job
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {uc.relatedGenerators.map((gen) => (
+              <a href={gen.href} class="surface-card rounded-lg p-4 flex items-center gap-3 group">
+                <span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">arrow_outward</span>
+                <span class="text-[14px] font-medium text-on-surface group-hover:text-primary transition-colors" style="font-family: Inter;">
+                  {gen.title}
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <RelatedContent items={related} title="Keep exploring" />
+  </div>
+</BaseLayout>

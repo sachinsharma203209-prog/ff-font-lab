@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import TipSection from '../../components/TipSection.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import CopyButton from '../../components/CopyButton';
+import { SYMBOL_PAGES } from '../../data/symbols';
+import { getRelatedContent } from '../../lib/related';
+import { generateWebPageSchema, generateHowToSchema } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return SYMBOL_PAGES.map((sym) => ({
+    params: { slug: sym.slug },
+    props: { sym },
+  }));
+}
+
+const { sym } = Astro.props;
+const canonical = `/symbols/${sym.slug}`;
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Symbols", href: "/symbols" },
+  { label: sym.name, href: canonical },
+];
+
+const related = getRelatedContent(`symbol:${sym.id}`, 6);
+const relatedSyms = sym.relatedSymbols
+  .map((id) => SYMBOL_PAGES.find((s) => s.id === id))
+  .filter(Boolean);
+
+const pageSchema = generateWebPageSchema({
+  title: `${sym.seoTitle} | Ff Font Lab`,
+  description: sym.seoDescription,
+  url: `https://fontchange.co.in${canonical}`,
+  breadcrumbs: breadcrumbs.map((b) => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const howToSchema = generateHowToSchema({
+  name: `How to use the ${sym.name}`,
+  description: sym.intro,
+  steps: sym.howToUse.map((s) => ({ name: s.title, text: s.description })),
+});
+---
+
+<BaseLayout
+  title={`${sym.seoTitle} | Ff Font Lab`}
+  description={sym.seoDescription}
+  canonical={canonical}
+  jsonLd={[pageSchema, howToSchema]}
+  activePage="characters"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="surface-card rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6">
+      <div class="flex flex-col items-center gap-3">
+        <span class="text-[72px] md:text-[96px] leading-none text-on-surface" aria-hidden="true">{sym.char}</span>
+        <CopyButton client:load text={sym.char} label={`${sym.name} (${sym.codepoint})`} eventName="symbol_copied" />
+      </div>
+      <div class="flex flex-col gap-3 flex-1 min-w-0">
+        <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+          {sym.name} <span class="text-primary">{sym.char}</span>
+        </h1>
+        <p class="text-[15px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          {sym.intro}
+        </p>
+        <dl class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-1">
+          <div class="bg-surface-container rounded-lg p-3">
+            <dt class="text-[10px] uppercase tracking-wider text-on-surface-variant" style="font-family: JetBrains Mono;">Unicode</dt>
+            <dd class="text-[14px] font-semibold text-primary mt-0.5" style="font-family: JetBrains Mono;">{sym.codepoint}</dd>
+          </div>
+          <div class="bg-surface-container rounded-lg p-3">
+            <dt class="text-[10px] uppercase tracking-wider text-on-surface-variant" style="font-family: JetBrains Mono;">HTML entity</dt>
+            <dd class="text-[14px] font-semibold text-on-surface mt-0.5 break-all" style="font-family: JetBrains Mono;">{sym.htmlEntity}</dd>
+          </div>
+          <div class="bg-surface-container rounded-lg p-3">
+            <dt class="text-[10px] uppercase tracking-wider text-on-surface-variant" style="font-family: JetBrains Mono;">Category</dt>
+            <dd class="text-[14px] font-semibold text-on-surface mt-0.5 capitalize" style="font-family: Inter;">{sym.category}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        About the {sym.name.toLowerCase()}
+      </h2>
+      {
+        sym.description.map((para) => (
+          <p class="text-[14px] text-on-surface-variant leading-relaxed max-w-[760px]" style="font-family: Inter;">
+            {para}
+          </p>
+        ))
+      }
+    </section>
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Where people use it
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {
+          sym.examples.map((ex) => (
+            <div class="surface-card rounded-lg p-4 flex flex-col gap-2">
+              <span class="text-[11px] uppercase tracking-wider text-primary font-medium" style="font-family: JetBrains Mono;">
+                {ex.context}
+              </span>
+              <p class="text-[16px] text-on-surface break-words" style="font-family: Inter;">
+                {ex.sample}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Variations & look-alikes
+      </h2>
+      <p class="text-[14px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Same family, different flavors. Text versions inherit your font color; emoji versions always render as images.
+      </p>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+        {
+          sym.variations.map((v) => (
+            <div class="surface-card !p-3 flex flex-col items-center gap-1.5">
+              <span class="text-[28px] leading-none text-on-surface" aria-hidden="true">{v.char}</span>
+              <span class="text-[10px] text-on-surface-variant text-center leading-tight min-h-[24px]" style="font-family: Inter;">
+                {v.label}
+              </span>
+              <CopyButton client:visible text={v.char} label={v.label} eventName="symbol_copied" compact />
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <TipSection tips={sym.howToUse} />
+
+    <AdSlot slot={`symbols-${sym.slug}-below`} format="horizontal" />
+
+    <FAQ faqs={sym.faqs} />
+
+    {
+      relatedSyms.length > 0 && (
+        <section class="flex flex-col gap-3">
+          <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+            Related symbols
+          </h2>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {relatedSyms.map((rs) => (
+              <a href={`/symbols/${rs!.slug}`} class="surface-card rounded-lg p-4 flex items-center gap-3 group">
+                <span class="text-[26px] leading-none text-on-surface group-hover:text-primary transition-colors" aria-hidden="true">{rs!.char}</span>
+                <span class="text-[13px] font-medium text-on-surface group-hover:text-primary transition-colors" style="font-family: Inter;">
+                  {rs!.name}
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      sym.relatedGenerators.length > 0 && (
+        <section class="flex flex-col gap-3">
+          <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+            Use it in a generator
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {sym.relatedGenerators.map((gen) => (
+              <a href={gen.href} class="surface-card rounded-lg p-4 flex items-center gap-3 group">
+                <span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">arrow_outward</span>
+                <span class="text-[14px] font-medium text-on-surface group-hover:text-primary transition-colors" style="font-family: Inter;">
+                  {gen.title}
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <RelatedContent items={related} title="Keep exploring" />
+  </div>
+</BaseLayout>

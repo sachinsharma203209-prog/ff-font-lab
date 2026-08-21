@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/styles/bold-text-generator",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Enter text", description: "Type the text you want to make bold in the generator input field." },
   { step: 2, title: "Select bold style", description: "Choose from bold sans-serif, bold italic, double-struck, and other bold variations." },
@@ -42,13 +41,21 @@ const relatedTools = [
   { title: "Calligraphy Font Generator", href: "/styles/calligraphy-font-generator", category: "style" },
   { title: "Twitter / X Font Generator", href: "/social/twitter-font-generator", category: "social" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Bold Text Generator — Create Bold Text Online",
+  description: "Generate bold text using our free bold font generator. Create bold Unicode text for social media bios, usernames, and more.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Bold Text Generator — Create Bold Text Online | Ff Font Lab"
   description="Generate bold text using our free bold font generator. Create bold Unicode text for social media bios, usernames, and more."
   canonical="/styles/bold-text-generator"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="styles"
 >
   <div class="flex flex-col gap-6">

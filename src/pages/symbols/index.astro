@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FAQ from '../../components/FAQ.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import { SYMBOL_PAGES } from '../../data/symbols';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Symbols", href: "/symbols" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Symbol Guides — Meaning, Code Points & Copy | Ff Font Lab",
+  description:
+    "Deep dives into popular Unicode symbols: heart ♥, arrow →, star ★, infinity ∞, check ✓, copyright © and trademark ™ — copy them with one tap.",
+  url: "https://fontchange.co.in/symbols",
+  breadcrumbs: breadcrumbs.map((b) => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const faqs = [
+  {
+    question: "What makes these symbols different from emoji?",
+    answer:
+      "Each symbol covered here is a plain text character. It inherits your font's color and size, works inside fields that reject emoji, and combines cleanly with styled text.",
+  },
+  {
+    question: "Will these symbols work in usernames?",
+    answer:
+      "Mostly yes — legacy blocks like card suits (♥) and arrows (→) are accepted by most games and apps. Fields restricted to A–Z and 0–9 reject every symbol; each guide notes the exceptions.",
+  },
+];
+---
+
+<BaseLayout
+  title="Symbol Guides — Meaning, Code Points & Copy | Ff Font Lab"
+  description="Deep dives into popular Unicode symbols: heart ♥, arrow →, star ★, infinity ∞, check ✓, copyright © and trademark ™ — copy them with one tap."
+  canonical="/symbols"
+  jsonLd={pageSchema}
+  activePage="characters"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Symbol Guides
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Seven characters that do most of the decorative work on the internet. Each guide covers the code point, what it means, where it renders reliably, its look-alike family and ready-to-paste examples.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+      {
+        SYMBOL_PAGES.map((sym) => (
+          <a href={`/symbols/${sym.slug}`} class="surface-card rounded-lg p-5 flex flex-col items-center gap-2 group text-center">
+            <span class="text-[44px] leading-none text-on-surface group-hover:text-primary transition-colors" aria-hidden="true">{sym.char}</span>
+            <span class="text-[14px] font-semibold text-on-surface group-hover:text-primary transition-colors" style="font-family: Sora;">
+              {sym.name}
+            </span>
+            <span class="text-[11px] text-on-surface-variant" style="font-family: JetBrains Mono;">{sym.codepoint}</span>
+          </a>
+        ))
+      }
+    </div>
+
+    <AdSlot slot="symbols-hub-mid" format="horizontal" />
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Why a whole guide for single characters?
+      </h2>
+      <div class="flex flex-col gap-3 max-w-[760px]">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Because the questions people ask about one symbol are surprisingly deep. Is ♥ allowed in a Free Fire name? Why does ✓ look different in Discord than on an iPhone? Which version of the arrow — → ⇒ ➔ — survives a copy-paste into Instagram? A one-line answer is not enough when a username or a brand post is on the line.
+        </p>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          Each guide answers those questions with specifics: the exact code point, the platform support record, the look-alike characters that cause mix-ups, and examples you can paste without editing. No fluff, no history lessons nobody asked for.
+        </p>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Need more than seven?
+      </h2>
+      <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
+        <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+          The full <a href="/characters" class="text-primary hover:underline">character library</a> holds hundreds more — searchable by name or code point across thirteen categories, from hearts and stars to math and currency.
+        </p>
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+  </div>
+</BaseLayout>

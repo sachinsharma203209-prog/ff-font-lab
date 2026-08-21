@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/gaming/valorant-nickname",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Keep it under 16 characters", description: "Valorant limits display names to 16 characters. Use the counter to stay within the limit while creating a stylish name." },
   { step: 2, title: "Choose a competitive style", description: "Browse through bold, italic, fraktur, double-struck, and monospace styles for a pro-level Valorant look." },
@@ -41,13 +40,21 @@ const relatedTools = [
   { title: "Fortnite Username", href: "/gaming/fortnite-username", category: "gaming" },
   { title: "Bold Text Generator", href: "/styles/bold-text-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Valorant Name Generator — Stylish Valorant Nicknames",
+  description: "Create unique Valorant nicknames with stylish Unicode fonts and symbols. Stand out in competitive matches with a pro-level gamertag.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Valorant Name Generator — Stylish Valorant Nicknames | Ff Font Lab"
   description="Create unique Valorant nicknames with stylish Unicode fonts and symbols. Stand out in competitive matches with a pro-level gamertag."
   canonical="/gaming/valorant-nickname"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="gaming"
 >
   <div class="flex flex-col gap-6">

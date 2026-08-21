@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FAQ from '../../components/FAQ.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import { LANGUAGES } from '../../data/languages';
+import { generateWebPageSchema } from '../../lib/schema';
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Languages", href: "/languages" },
+];
+
+const pageSchema = generateWebPageSchema({
+  title: "Language Support — How Font Styles Handle Your Script | Ff Font Lab",
+  description:
+    "How Unicode font styles treat English, Spanish, French, German, Portuguese, Italian, Indonesian and Hindi — what converts, what is preserved and why.",
+  url: "https://fontchange.co.in/languages",
+  breadcrumbs: breadcrumbs.map((b) => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+
+const supportMeta: Record<string, { icon: string; color: string; bg: string }> = {
+  full: { icon: "check_circle", color: "text-green-400", bg: "bg-green-400/10" },
+  partial: { icon: "error", color: "text-yellow-400", bg: "bg-yellow-400/10" },
+  preserved: { icon: "info", color: "text-primary", bg: "bg-primary/10" },
+};
+
+const faqs = [
+  {
+    question: "Why doesn't my language convert fully?",
+    answer:
+      "Unicode's styled alphabets (the mathematical blocks) only cover the unaccented English A–Z plus digits. Accented letters, ligatures and non-Latin scripts have no styled equivalents anywhere in the standard — no honest tool can create them.",
+  },
+  {
+    question: "Is mixed output (styled + original characters) safe to paste?",
+    answer:
+      "Completely. Preserved characters are ordinary Unicode. The mix pastes cleanly into any field that accepts your language's normal text.",
+  },
+  {
+    question: "Why not fake the missing characters with look-alikes?",
+    answer:
+      "Look-alike substitution produces text that breaks screen readers, search and copy-paste in subtle ways. We preserve originals instead — readable, correct and searchable.",
+  },
+];
+---
+
+<BaseLayout
+  title="Language Support — How Font Styles Handle Your Script | Ff Font Lab"
+  description="How Unicode font styles treat English, Spanish, French, German, Portuguese, Italian, Indonesian and Hindi — what converts, what is preserved and why."
+  canonical="/languages"
+  jsonLd={pageSchema}
+  activePage="home"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex flex-col gap-3">
+      <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+        Language Support
+      </h1>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+        Unicode ships exactly one set of styled letters — the mathematical alphanumerics — and it covers plain English A–Z only. Everything else depends on how close your language sits to that set. Here is the honest picture for eight languages, including which characters stay untouched and why.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      {
+        LANGUAGES.map((lang) => {
+          const meta = supportMeta[lang.supportLevel];
+          return (
+            <a href={`/languages/${lang.slug}`} class="surface-card rounded-lg p-5 flex flex-col gap-2 group">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[16px] font-semibold text-on-surface group-hover:text-primary transition-colors" style="font-family: Sora;">
+                  {lang.name}
+                </span>
+                <span class={`material-symbols-outlined text-[18px] ${meta.color}`} aria-hidden="true">{meta.icon}</span>
+              </div>
+              <span class="text-[12px] text-on-surface-variant" style="font-family: Inter;">{lang.nativeName} · {lang.script}</span>
+              <span class={`text-[11px] font-medium px-2 py-0.5 rounded w-fit ${meta.bg} ${meta.color}`} style="font-family: JetBrains Mono;">
+                {lang.supportLabel}
+              </span>
+            </a>
+          );
+        })
+      }
+    </div>
+
+    <AdSlot slot="languages-hub-mid" format="horizontal" />
+
+    <section class="flex flex-col gap-3">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        The three support levels
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {
+          Object.entries(supportMeta).map(([key, val]) => (
+            <div class="surface-card rounded-lg p-5 flex items-start gap-3">
+              <span class={`material-symbols-outlined text-[22px] ${val.color}`} aria-hidden="true">{val.icon}</span>
+              <div class="flex flex-col gap-1">
+                <h3 class="text-[15px] font-semibold text-on-surface" style="font-family: Sora;">
+                  {key === "full" && "Full conversion"}
+                  {key === "partial" && "Partial conversion"}
+                  {key === "preserved" && "Preserved as-is"}
+                </h3>
+                <p class="text-[13px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
+                  {key === "full" && "Every letter maps to a styled equivalent in all 16 styles."}
+                  {key === "partial" && "Base letters convert; accents and local characters stay original inside styled words."}
+                  {key === "preserved" && "The script has no styled forms — your text passes through unchanged rather than broken."}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <FAQ faqs={faqs} />
+  </div>
+</BaseLayout>

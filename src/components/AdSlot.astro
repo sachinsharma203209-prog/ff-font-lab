@@ -1,0 +1,53 @@
+---
+import { SITE_CONFIG, isAdsEnabled } from '../lib/site-config';
+
+interface Props {
+  slot: string;
+  format?: "horizontal" | "rectangle" | "vertical";
+  className?: string;
+}
+
+const { slot, format = "horizontal", className = "" } = Astro.props;
+
+const minHeights: Record<string, string> = {
+  horizontal: "min-h-[90px]",
+  rectangle: "min-h-[250px]",
+  vertical: "min-h-[600px]",
+};
+
+const adsLive = isAdsEnabled() && SITE_CONFIG.adsense.enabledSlots;
+---
+
+{
+  adsLive ? (
+    <ins
+      class={`adsbygoogle w-full ${minHeights[format]} block ${className}`}
+      data-ad-client={SITE_CONFIG.adsense.clientId}
+      data-ad-slot={slot}
+      data-ad-format={format === 'vertical' ? 'vertical' : 'auto'}
+      data-full-width-responsive="true"
+    />
+    <script is:inline>
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {}
+    </script>
+  ) : (
+    <div
+      class={`ad-slot w-full ${minHeights[format]} flex items-center justify-center rounded-lg border border-dashed border-outline-variant/50 ${className}`}
+      data-ad-slot={slot}
+      data-ad-format={format}
+      aria-hidden="true"
+    >
+      <span class="text-[11px] uppercase tracking-widest text-on-surface-variant/40 select-none" style="font-family: JetBrains Mono;">
+        Advertisement
+      </span>
+    </div>
+  )
+}
+
+<style>
+  .ad-slot {
+    background: rgba(255, 255, 255, 0.02);
+  }
+</style>

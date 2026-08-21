@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/styles/aesthetic-text-generator",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Type your text", description: "Enter the text you want to stylize with an aesthetic look." },
   { step: 2, title: "Pick an aesthetic style", description: "Choose from fullwidth, double-struck, squared, and other artsy options for unique vibes." },
@@ -42,13 +41,21 @@ const relatedTools = [
   { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
   { title: "Calligraphy Font Generator", href: "/styles/calligraphy-font-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Aesthetic Text Generator — Vaporwave & Artsy Fonts",
+  description: "Generate aesthetic, vaporwave, and artsy fonts online. Create unique typography for social media, profiles, and creative content.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Aesthetic Text Generator — Vaporwave & Artsy Fonts | Ff Font Lab"
   description="Generate aesthetic, vaporwave, and artsy fonts online. Create unique typography for social media, profiles, and creative content."
   canonical="/styles/aesthetic-text-generator"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="styles"
 >
   <div class="flex flex-col gap-6">

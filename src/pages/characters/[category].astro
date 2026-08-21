@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import CharGrid from '../../components/CharGrid';
+import { CHARACTER_CATEGORIES } from '../../data/characters';
+import { getRelatedContent } from '../../lib/related';
+import { generateWebPageSchema } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return CHARACTER_CATEGORIES.map((cat) => ({
+    params: { category: cat.slug },
+    props: { cat },
+  }));
+}
+
+const { cat } = Astro.props;
+const canonical = `/characters/${cat.slug}`;
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Characters", href: "/characters" },
+  { label: cat.name, href: canonical },
+];
+
+const emojiCount = cat.chars.filter((c) => /\p{Extended_Pictographic}/u.test(c.char)).length;
+const textCount = cat.chars.length - emojiCount;
+const codepoints = cat.chars.map((c) => parseInt(c.codepoint.slice(2), 16)).filter((n) => !isNaN(n));
+const minCp = Math.min(...codepoints);
+const maxCp = Math.max(...codepoints);
+const fmtCp = (n: number) => `U+${n.toString(16).toUpperCase().padStart(4, "0")}`;
+const atAGlance = [
+  { label: "Characters listed", value: String(cat.chars.length) },
+  { label: "Plain text glyphs", value: String(textCount) },
+  { label: "Emoji-style", value: String(emojiCount) },
+  { label: "Code point range", value: `${fmtCp(minCp)} – ${fmtCp(maxCp)}` },
+];
+
+const related = getRelatedContent(`characterCategory:${cat.id}`, 6);
+const gridCategories = CHARACTER_CATEGORIES.map((c) => ({ id: c.id, name: c.name, slug: c.slug }));
+
+const pageSchema = generateWebPageSchema({
+  title: `${cat.name} Symbols & Characters — Copy Instantly | Ff Font Lab`,
+  description: cat.shortDescription,
+  url: `https://fontchange.co.in${canonical}`,
+  breadcrumbs: breadcrumbs.map((b) => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
+});
+---
+
+<BaseLayout
+  title={`${cat.name} Symbols & Characters — Copy Instantly | Ff Font Lab`}
+  description={cat.shortDescription}
+  canonical={canonical}
+  jsonLd={pageSchema}
+  activePage="characters"
+>
+  <div class="flex flex-col gap-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    <div class="flex items-start gap-4">
+      <div class="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+        <span class="material-symbols-outlined text-[24px] text-primary" aria-hidden="true">{cat.icon}</span>
+      </div>
+      <div class="flex flex-col gap-2 min-w-0">
+        <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface leading-tight" style="font-family: Sora;">
+          {cat.name}
+        </h1>
+        <p class="text-[15px] text-on-surface-variant leading-relaxed max-w-[720px]" style="font-family: Inter;">
+          {cat.shortDescription}
+        </p>
+      </div>
+    </div>
+
+    <section class="flex flex-col gap-3">
+      {
+        cat.description.map((para) => (
+          <p class="text-[14px] text-on-surface-variant leading-relaxed max-w-[760px]" style="font-family: Inter;">
+            {para}
+          </p>
+        ))
+      }
+    </section>
+
+    <section class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      {
+        atAGlance.map((stat) => (
+          <div class="surface-card rounded-lg p-4 flex flex-col gap-1">
+            <span class="text-[12px] uppercase tracking-wide text-on-surface-variant" style="font-family: Inter;">
+              {stat.label}
+            </span>
+            <span class="text-[16px] font-semibold text-on-surface truncate" style="font-family: Sora;" title={stat.value}>
+              {stat.value}
+            </span>
+          </div>
+        ))
+      }
+    </section>
+
+    <div class="surface-card rounded-lg p-5">
+      <CharGrid client:load chars={cat.chars} categories={gridCategories} activeCategory={cat.slug} pageSize={120} />
+    </div>
+
+    <AdSlot slot={`characters-${cat.slug}-below`} format="horizontal" />
+
+    {
+      cat.relatedCategories.length > 0 && (
+        <section class="flex flex-col gap-3">
+          <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+            Related categories
+          </h2>
+          <div class="flex flex-wrap gap-2">
+            {cat.relatedCategories.map((relId) => {
+              const rel = CHARACTER_CATEGORIES.find((c) => c.id === relId);
+              if (!rel) return null;
+              return (
+                <a
+                  href={`/characters/${rel.slug}`}
+                  class="surface-card !py-2.5 !px-4 rounded-full flex items-center gap-2 text-[13px] font-medium text-on-surface hover:text-primary transition-colors"
+                  style="font-family: Inter;"
+                >
+                  <span class="material-symbols-outlined text-[16px] text-primary" aria-hidden="true">{rel.icon}</span>
+                  {rel.name}
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      cat.relatedTools.length > 0 && (
+        <section class="flex flex-col gap-3">
+          <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+            Put these characters to work
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {cat.relatedTools.map((tool) => (
+              <a href={tool.href} class="surface-card rounded-lg p-4 flex items-center gap-3 group">
+                <span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">build</span>
+                <span class="text-[14px] font-medium text-on-surface group-hover:text-primary transition-colors" style="font-family: Inter;">
+                  {tool.title}
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <FAQ faqs={cat.faqs} />
+
+    <RelatedContent items={related} title="Keep exploring" />
+  </div>
+</BaseLayout>

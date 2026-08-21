@@ -1,9 +1,9 @@
----
+﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import BentoCard from '../../components/BentoCard.astro';
 import FAQ from '../../components/FAQ.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -33,13 +33,15 @@ const faqs = [
   { question: "Are these fonts free to generate?", answer: "Yes, all font style generators on Ff Font Lab are completely free with unlimited usage. No sign-up or payment required." },
   { question: "What is the difference between cursive and calligraphy fonts?", answer: "Cursive fonts mimic casual handwriting with flowing, connected letters. Calligraphy fonts are more formal and artistic, resembling professional penmanship used in invitations and formal documents." },
 ];
+
+const faqSchema = generateFAQSchema(faqs);
 ---
 
 <BaseLayout
   title="Font Styles & Typography | Ff Font Lab"
   description="Explore all font styles available at Ff Font Lab. Cursive, bold, gothic, calligraphy, aesthetic, and monospace font generators."
   canonical="/styles"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, faqSchema]}
   activePage="styles"
 >
   <div class="flex flex-col gap-6">
@@ -66,7 +68,7 @@ const faqs = [
       </h2>
       <div class="surface-card rounded-lg p-5 flex flex-col gap-3">
         <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
-          Unicode font styles work by mapping standard ASCII characters to their stylistic Unicode equivalents. This means the styled text can be copied and pasted anywhere that supports Unicode — social media bios, messaging apps, gaming profiles, documents, and more.
+          Unicode font styles work by mapping standard ASCII characters to their stylistic Unicode equivalents. This means the styled text can be copied and pasted anywhere that supports Unicode â€” social media bios, messaging apps, gaming profiles, documents, and more.
         </p>
         <p class="text-[14px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
           Unlike traditional fonts that require installation, Unicode styles are embedded directly in the text. This makes them universally portable across devices and platforms.

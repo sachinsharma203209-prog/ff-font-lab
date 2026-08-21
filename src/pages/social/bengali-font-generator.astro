@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/social/bengali-font-generator",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Type your Bengali text", description: "Enter the Bengali text you want to stylize. You can type directly in Bengali script or transliterate." },
   { step: 2, title: "Pick a style", description: "Choose from bold, italic, cursive, double-struck, small caps, and other Unicode font styles." },
@@ -41,13 +40,21 @@ const relatedTools = [
   { title: "TikTok Font Generator", href: "/social/tiktok-font-generator", category: "social" },
   { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Bengali Font Generator — Stylish Bengali Unicode Text",
+  description: "Generate stylish fonts for Bengali text with Unicode characters. Create decorative Bengali typography for social media profiles and messaging.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Bengali Font Generator — Stylish Bengali Unicode Text | Ff Font Lab"
   description="Generate stylish fonts for Bengali text with Unicode characters. Create decorative Bengali typography for social media profiles and messaging."
   canonical="/social/bengali-font-generator"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="social"
 >
   <div class="flex flex-col gap-6">

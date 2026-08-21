@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/social/instagram-font-generator",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Enter your bio text", description: "Type your Instagram bio text into the generator. Keep it under 150 characters — Instagram's bio limit." },
   { step: 2, title: "Choose a font style", description: "Browse through bold, cursive, double-struck, and other styles to find the perfect look for your profile." },
@@ -42,13 +41,21 @@ const relatedTools = [
   { title: "LinkedIn Font Generator", href: "/social/linkedin-font-generator", category: "social" },
   { title: "Cursive Text Generator", href: "/styles/cursive-text-generator", category: "style" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Instagram Font Generator — Stylish Bio & Caption Fonts",
+  description: "Generate stylish fonts for your Instagram bio, captions, and comments. Stand out with unique Unicode font styles on Instagram.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Instagram Font Generator — Stylish Bio & Caption Fonts | Ff Font Lab"
   description="Generate stylish fonts for your Instagram bio, captions, and comments. Stand out with unique Unicode font styles on Instagram."
   canonical="/social/instagram-font-generator"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="social"
 >
   <div class="flex flex-col gap-6">

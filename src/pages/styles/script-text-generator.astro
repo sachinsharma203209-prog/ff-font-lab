@@ -5,7 +5,7 @@ import FontGenerator from '../../components/FontGenerator.astro';
 import TipSection from '../../components/TipSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateHowToSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -19,7 +19,6 @@ const pageSchema = generateWebPageSchema({
   url: "https://fontchange.co.in/styles/script-text-generator",
   breadcrumbs: breadcrumbs.map(b => ({ name: b.label, url: `https://fontchange.co.in${b.href}` })),
 });
-
 const tips = [
   { step: 1, title: "Enter your text", description: "Type the text you want to convert into a flowing script style in the input field." },
   { step: 2, title: "Choose script style", description: "Pick between regular script and bold script styles to match your desired aesthetic." },
@@ -41,13 +40,21 @@ const relatedTools = [
   { title: "Aesthetic Text Generator", href: "/styles/aesthetic-text-generator", category: "style" },
   { title: "Instagram Font Generator", href: "/social/instagram-font-generator", category: "social" },
 ];
----
 
+const howToSchema = generateHowToSchema({
+  name: "Script Text Generator — Bold Script & Calligraphy Fonts",
+  description: "Generate beautiful script and calligraphy-style text using Unicode characters. Create elegant handwritten-looking typography for social media and creative projects.",
+  steps: tips.map((t) => ({ name: t.title, text: t.description })),
+});
+
+const faqSchema = generateFAQSchema(faqs);
+
+---
 <BaseLayout
   title="Script Text Generator — Bold Script & Calligraphy Fonts | Ff Font Lab"
   description="Generate beautiful script and calligraphy-style text using Unicode characters. Create elegant typography for social media and creative projects."
   canonical="/styles/script-text-generator"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, howToSchema, faqSchema]}
   activePage="styles"
 >
   <div class="flex flex-col gap-6">

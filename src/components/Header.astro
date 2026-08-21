@@ -1,5 +1,6 @@
 ---
 import { SITE_CONFIG } from '../lib/site-config';
+import SearchDialog from './SearchDialog';
 
 interface Props {
   activePage?: string;
@@ -12,6 +13,8 @@ const pageMap: Record<string, string> = {
   social: '/social',
   styles: '/styles',
   gaming: '/gaming',
+  tools: '/tools',
+  characters: '/characters',
 };
 
 function isActive(href: string): boolean {
@@ -46,7 +49,15 @@ function isActive(href: string): boolean {
       })}
     </nav>
 
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-2 md:gap-3">
+      <button
+        type="button"
+        data-search-trigger
+        class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#4cd7f6]"
+        aria-label="Search (Ctrl+K)"
+      >
+        <span class="material-symbols-outlined text-[22px]">search</span>
+      </button>
       <button
         id="mobile-menu-btn"
         class="md:hidden text-on-surface-variant hover:text-primary transition-colors"
@@ -93,6 +104,8 @@ function isActive(href: string): boolean {
     </nav>
   </div>
 </header>
+
+<SearchDialog client:idle />
 
 <script>
   const btn = document.getElementById('mobile-menu-btn');

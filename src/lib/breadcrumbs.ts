@@ -164,6 +164,30 @@ const BREADCRUMB_MAP: Record<string, BreadcrumbItem[]> = {
     { label: "Home", href: "/" },
     { label: "Contact", href: "/contact" },
   ],
+  "/tools": [
+    { label: "Home", href: "/" },
+    { label: "Tools", href: "/tools" },
+  ],
+  "/characters": [
+    { label: "Home", href: "/" },
+    { label: "Characters", href: "/characters" },
+  ],
+  "/symbols": [
+    { label: "Home", href: "/" },
+    { label: "Symbols", href: "/symbols" },
+  ],
+  "/use-cases": [
+    { label: "Home", href: "/" },
+    { label: "Use Cases", href: "/use-cases" },
+  ],
+  "/compatibility": [
+    { label: "Home", href: "/" },
+    { label: "Compatibility", href: "/compatibility" },
+  ],
+  "/languages": [
+    { label: "Home", href: "/" },
+    { label: "Languages", href: "/languages" },
+  ],
 };
 
 export function getBreadcrumbs(pathname: string): BreadcrumbItem[] {

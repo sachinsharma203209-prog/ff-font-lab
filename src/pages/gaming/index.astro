@@ -1,9 +1,9 @@
----
+﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import BentoCard from '../../components/BentoCard.astro';
 import FAQ from '../../components/FAQ.astro';
-import { generateWebPageSchema } from '../../lib/schema';
+import { generateWebPageSchema, generateFAQSchema } from '../../lib/schema';
 
 const breadcrumbs = [
   { label: "Home", href: "/" },
@@ -33,13 +33,15 @@ const faqs = [
   { question: "Can I use special characters in my gaming name?", answer: "Many games allow Unicode characters in display names or clan tags. Our generators produce styled text that works in most games, but official username fields may have restrictions." },
   { question: "What styles look best for gaming names?", answer: "Bold Sans, Gothic/Fraktur, Double-Struck, and Squared styles are popular choices for gaming. They are highly readable and create a strong visual impact." },
 ];
+
+const faqSchema = generateFAQSchema(faqs);
 ---
 
 <BaseLayout
   title="Gaming Nickname Generator | Ff Font Lab"
   description="Generate cool gaming nicknames with stylish Unicode fonts. Create unique gamer tags for Free Fire, PUBG, Roblox, and more."
   canonical="/gaming"
-  jsonLd={pageSchema}
+  jsonLd={[pageSchema, faqSchema]}
   activePage="gaming"
 >
   <div class="flex flex-col gap-6">

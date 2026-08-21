@@ -50,6 +50,15 @@ const styleTools = [
   { title: "Script Text", href: "/styles/script-text-generator", icon: "brush", description: "Bold script and calligraphy-style text." },
 ];
 
+const exploreHubs = [
+  { title: "Text & Font Tools", href: "/tools", icon: "build", description: "Flip, mirror, shrink, strike or hide text — nine focused utilities that run in your browser." },
+  { title: "Character Library", href: "/characters", icon: "grid_view", description: "Hundreds of named, coded Unicode characters across thirteen categories. Tap to copy." },
+  { title: "Symbol Guides", href: "/symbols", icon: "star", description: "Deep dives into ♥ → ★ ∞ ✓ © ™ — meaning, code points and platform notes." },
+  { title: "Use Cases", href: "/use-cases", icon: "lightbulb", description: "Bio fonts, gaming usernames and nicknames — what works where, with limits." },
+  { title: "Compatibility Guides", href: "/compatibility", icon: "fact_check", description: "Field-by-field support maps for Instagram, Discord, TikTok, Facebook and WhatsApp." },
+  { title: "Language Support", href: "/languages", icon: "translate", description: "How styled text treats English, Spanish, Hindi and more — honest coverage details." },
+];
+
 const tips = [
   { step: 1, title: "Type your text", description: "Enter the text you want to convert in the input box above." },
   { step: 2, title: "Pick a style", description: "Browse through dozens of available font styles below the input." },
@@ -117,6 +126,17 @@ const faqs = [
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {styleTools.map((tool) => (
           <BentoCard title={tool.title} description={tool.description} href={tool.href} icon={tool.icon} />
+        ))}
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-4">
+      <h2 class="text-[22px] font-bold text-on-surface" style="font-family: Sora;">
+        Tools, Symbols & Guides
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {exploreHubs.map((hub) => (
+          <BentoCard title={hub.title} description={hub.description} href={hub.href} icon={hub.icon} />
         ))}
       </div>
     </section>
