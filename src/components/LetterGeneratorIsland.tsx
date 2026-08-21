@@ -90,7 +90,7 @@ export default function LetterGeneratorIsland() {
               } ${!v.exists ? "opacity-60" : ""}`}
               aria-label={v.exists ? `Copy ${v.styleName} version of ${letter}` : `${v.styleName} has no variant of ${letter} — original shown`}
             >
-              <span className="text-[30px] leading-none text-on-surface">{v.char}</span>
+              <span className="font-unicode text-[30px] leading-none text-on-surface">{v.char}</span>
               <span className="text-[10px] font-medium text-primary uppercase tracking-wide" style={{ fontFamily: "JetBrains Mono" }}>
                 {v.styleName}
               </span>

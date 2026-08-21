@@ -84,7 +84,7 @@ export default function NumberGeneratorIsland() {
                 }`}
                 aria-label={`Copy ${set.name} version of ${digit}`}
               >
-                <span className="text-[30px] leading-none text-on-surface">{ch}</span>
+                <span className="font-unicode text-[30px] leading-none text-on-surface">{ch}</span>
                 <span className="text-[10px] font-medium text-primary uppercase tracking-wide text-center" style={{ fontFamily: "JetBrains Mono" }}>
                   {set.name}
                 </span>
@@ -132,7 +132,7 @@ export default function NumberGeneratorIsland() {
                   }`}
                   aria-label={`Copy ${validSequence} in ${set.name} style`}
                 >
-                  <span className="text-[18px] text-on-surface break-all">{converted}</span>
+                  <span className="font-unicode text-[18px] text-on-surface break-all">{converted}</span>
                   <span className="text-[10px] font-medium text-primary uppercase whitespace-nowrap" style={{ fontFamily: "JetBrains Mono" }}>
                     {copiedValue === converted + set.name ? "✓ Copied" : set.name}
                   </span>

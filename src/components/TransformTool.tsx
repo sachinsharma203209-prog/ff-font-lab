@@ -164,10 +164,10 @@ export default function TransformTool({
           </div>
         </div>
         <div
-          className={`w-full min-h-[64px] bg-[#060e20] rounded-lg border border-outline-variant p-4 break-words ${
+          className={`font-unicode w-full min-h-[64px] bg-[#060e20] rounded-lg border border-outline-variant p-4 break-words ${
             output ? "text-[#dae2fd]" : "text-on-surface-variant/50"
           } ${monoOutput ? "text-[16px]" : "text-[20px]"}`}
-          style={{ fontFamily: monoOutput ? "JetBrains Mono" : "Inter", lineHeight: 1.6 }}
+          style={{ lineHeight: 1.6 }}
           aria-live="polite"
         >
           {output || <span className="text-[14px]">Type something to generate styled text.</span>}

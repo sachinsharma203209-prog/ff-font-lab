@@ -119,7 +119,7 @@ export default function CharGrid({
               aria-label={`Copy ${c.name} (${c.codepoint})`}
               title={c.name}
             >
-              <span className="text-[26px] leading-none text-on-surface group-hover:text-primary transition-colors">
+              <span className="font-unicode text-[26px] leading-none text-on-surface group-hover:text-primary transition-colors">
                 {c.char}
               </span>
               <span className="text-[9px] text-on-surface-variant truncate w-full text-center" style={{ fontFamily: "JetBrains Mono" }}>

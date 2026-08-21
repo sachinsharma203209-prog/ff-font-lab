@@ -110,3 +110,12 @@ body {
   border-color: #4cd7f6;
   box-shadow: 0 0 20px rgba(76, 215, 246, 0.1);
 }
+
+/* Unicode styled-text output stack: Inter covers plain text; the rest
+   supply Mathematical Alphanumerics, Fraktur, Script, fullwidth and
+   symbol glyphs that webfonts like Inter/JetBrains Mono lack. */
+.font-unicode {
+  font-family: Inter, "Segoe UI Historic", "Segoe UI Symbol", "Apple Symbols",
+    "STIX Two Math", "STIXGeneral", "Noto Sans Math", "Noto Sans Symbols 2",
+    "DejaVu Sans", "Arial Unicode MS", sans-serif;
+}

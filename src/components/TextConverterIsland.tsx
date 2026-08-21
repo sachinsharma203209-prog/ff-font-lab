@@ -108,8 +108,8 @@ export default function TextConverterIsland({ defaultText = "" }: { defaultText?
           </button>
         </div>
         <div
-          className="w-full min-h-[72px] bg-[#060e20] rounded-lg border border-outline-variant p-4 break-words text-[20px]"
-          style={{ fontFamily: "Inter", lineHeight: 1.6 }}
+          className="font-unicode w-full min-h-[72px] bg-[#060e20] rounded-lg border border-outline-variant p-4 break-words text-[20px]"
+          style={{ lineHeight: 1.6 }}
           aria-live="polite"
         >
           {output || <span className="text-[14px] text-on-surface-variant/50">Type something to generate styled text.</span>}

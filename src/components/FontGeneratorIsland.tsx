@@ -327,8 +327,7 @@ export default function FontGeneratorIsland({
                 </div>
               </div>
               <p
-                className="text-[18px] leading-[28px] text-[#dae2fd] line-clamp-2 break-words min-h-[56px]"
-                style={{ fontFamily: "Inter" }}
+                className="font-unicode text-[18px] leading-[28px] text-[#dae2fd] line-clamp-2 break-words min-h-[56px]"
               >
                 {converted}
               </p>
