@@ -13,8 +13,10 @@ const d = "0123456789";
 
 function zip(keys: string, values: string): Record<string, string> {
   const m: Record<string, string> = {};
-  for (let i = 0; i < keys.length && i < values.length; i++) {
-    m[keys[i]] = values[i];
+  const keyCharacters = Array.from(keys);
+  const valueCharacters = Array.from(values);
+  for (let i = 0; i < keyCharacters.length && i < valueCharacters.length; i++) {
+    m[keyCharacters[i]] = valueCharacters[i];
   }
   return m;
 }
