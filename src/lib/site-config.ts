@@ -15,11 +15,11 @@ export const SITE_CONFIG = {
     { label: "Characters", href: "/characters" },
   ],
   /**
-   * Monetization & analytics. IDs come from env vars so production
-   * secrets never live in the repo; empty string = feature disabled.
+   * Public monetization & analytics IDs. Environment variables can override
+   * the default analytics ID; an empty string disables the feature.
    */
   analytics: {
-    ga4Id: import.meta.env.PUBLIC_GA4_ID ?? "",
+    ga4Id: import.meta.env.PUBLIC_GA4_ID ?? "G-RTMBD38D5N",
   },
   adsense: {
     clientId: import.meta.env.PUBLIC_ADSENSE_CLIENT ?? "",
