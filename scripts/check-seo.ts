@@ -194,7 +194,8 @@ function checkFile(filePath: string, html: string) {
     const targetPath = path.join(DIST_DIR, cleanLink);
     const targetAsDir = path.join(DIST_DIR, cleanLink, 'index.html');
     const targetAsFile = targetPath;
-    if (!fs.existsSync(targetAsDir) && !fs.existsSync(targetAsFile)) {
+    const targetAsHtml = `${targetPath}.html`;
+    if (!fs.existsSync(targetAsDir) && !fs.existsSync(targetAsFile) && !fs.existsSync(targetAsHtml)) {
       addIssue(relPath, 'broken-link', `Broken internal link: ${link}`);
     }
   }
