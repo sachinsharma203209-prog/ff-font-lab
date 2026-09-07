@@ -1,49 +1,23 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_CONFIG } from '../lib/site-config';
+import { generateWebPageSchema } from '../lib/schema';
+const title = 'Contact Us | Ff Font Lab';
+const description = 'Contact Ff Font Lab with questions, feedback, bug reports, partnership inquiries, or privacy requests.';
+const canonical = '/contact';
+const jsonLd = generateWebPageSchema({ title, description, url: `${SITE_CONFIG.url}${canonical}` });
+const channels = [
+  { icon: 'tag', name: 'Twitter / X', value: '@ffontlab', href: 'https://twitter.com/ffontlab' },
+  { icon: 'photo_camera', name: 'Instagram', value: '@ffontlab', href: 'https://instagram.com/ffontlab' },
+  { icon: 'play_circle', name: 'YouTube', value: '@ffontlab', href: 'https://youtube.com/@ffontlab' },
+];
 ---
-
-<BaseLayout
-  title="Contact Us | Ff Font Lab"
-  description="Get in touch with the Ff Font Lab team. Reach out for support, feedback, or business inquiries."
-  canonical="/contact"
-  noindex={true}
-  activePage="home"
->
-  <div class="flex flex-col gap-6 max-w-[800px]">
-    <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface" style="font-family: Sora;">
-      Contact Us
-    </h1>
-    <p class="text-[15px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
-      We'd love to hear from you. Here's how to reach us:
-    </p>
-    <div class="flex flex-col gap-4">
-      <div class="surface-card rounded-lg p-5 flex items-center gap-4">
-        <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-          <span class="material-symbols-outlined text-[22px] text-primary">tag</span>
-        </div>
-        <div>
-          <p class="text-[14px] font-semibold text-on-surface" style="font-family: Sora;">Twitter / X</p>
-          <a href="https://twitter.com/ffontlab" target="_blank" rel="noopener noreferrer" class="text-[14px] text-primary hover:underline" style="font-family: Inter;">@ffontlab</a>
-        </div>
-      </div>
-      <div class="surface-card rounded-lg p-5 flex items-center gap-4">
-        <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-          <span class="material-symbols-outlined text-[22px] text-primary">photo_camera</span>
-        </div>
-        <div>
-          <p class="text-[14px] font-semibold text-on-surface" style="font-family: Sora;">Instagram</p>
-          <a href="https://instagram.com/ffontlab" target="_blank" rel="noopener noreferrer" class="text-[14px] text-primary hover:underline" style="font-family: Inter;">@ffontlab</a>
-        </div>
-      </div>
-      <div class="surface-card rounded-lg p-5 flex items-center gap-4">
-        <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-          <span class="material-symbols-outlined text-[22px] text-primary">play_circle</span>
-        </div>
-        <div>
-          <p class="text-[14px] font-semibold text-on-surface" style="font-family: Sora;">YouTube</p>
-          <a href="https://youtube.com/@ffontlab" target="_blank" rel="noopener noreferrer" class="text-[14px] text-primary hover:underline" style="font-family: Inter;">@ffontlab</a>
-        </div>
-      </div>
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd} activePage="contact">
+  <article class="max-w-[800px] flex flex-col gap-8">
+    <header class="flex flex-col gap-3"><p class="text-[12px] font-mono font-bold uppercase tracking-wider text-primary">Support</p><h1 class="text-[30px] md:text-[40px] font-bold text-on-surface font-display">Contact Us</h1><p class="text-[15px] text-on-surface-variant leading-7 max-w-[680px]">Questions, feedback, bug reports, business inquiries, and privacy requests are welcome. Message us through any official channel below.</p></header>
+    <div class="grid sm:grid-cols-3 gap-4">
+      {channels.map((channel) => <a href={channel.href} target="_blank" rel="noopener noreferrer" class="surface-card group flex flex-col gap-4"><span class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center"><span class="material-symbols-outlined text-[22px] text-primary">{channel.icon}</span></span><span><strong class="block text-[15px] text-on-surface font-display">{channel.name}</strong><span class="text-[14px] text-primary group-hover:underline font-body">{channel.value}</span></span></a>)}
     </div>
-  </div>
+    <section class="surface-card flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">How we can help</h2><p class="text-[15px] text-on-surface-variant leading-7 font-body">For faster help, include the page URL, the device and browser you use, and a short description of the issue. Please do not send passwords, payment details, or other sensitive information. We aim to review genuine messages as promptly as possible.</p></section>
+  </article>
 </BaseLayout>

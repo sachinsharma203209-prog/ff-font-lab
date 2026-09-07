@@ -1,30 +1,29 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_CONFIG } from '../lib/site-config';
+import { generateWebPageSchema } from '../lib/schema';
+
+const title = 'Privacy Policy | Ff Font Lab';
+const description = 'Learn what information Ff Font Lab collects, how browser storage and analytics are used, and the choices available to you.';
+const canonical = '/privacy';
+const jsonLd = generateWebPageSchema({ title, description, url: `${SITE_CONFIG.url}${canonical}` });
 ---
 
-<BaseLayout
-  title="Privacy Policy | Ff Font Lab"
-  description="Privacy Policy for Ff Font Lab. Learn how we handle your data and protect your privacy."
-  canonical="/privacy"
-  noindex={true}
-  activePage="home"
->
-  <div class="flex flex-col gap-6 max-w-[800px]">
-    <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface" style="font-family: Sora;">
-      Privacy Policy
-    </h1>
-    <p class="text-[15px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
-      Last updated: August 2026
-    </p>
-    <div class="flex flex-col gap-4 text-[15px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
-      <h2 class="text-[20px] font-bold text-on-surface" style="font-family: Sora;">Information We Collect</h2>
-      <p>Ff Font Lab does not collect any personal information. We do not use cookies, track users, or store any data entered into our font generator tools. All text processing happens entirely in your browser and is never sent to our servers.</p>
-
-      <h2 class="text-[20px] font-bold text-on-surface" style="font-family: Sora;">Third-Party Services</h2>
-      <p>We use Google Fonts for typography and Google Analytics for basic traffic statistics. These services may collect anonymous usage data as described in their respective privacy policies.</p>
-
-      <h2 class="text-[20px] font-bold text-on-surface" style="font-family: Sora;">Contact</h2>
-      <p>If you have questions about this privacy policy, please contact us through our social media channels linked in the footer.</p>
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd} activePage="privacy">
+  <article class="max-w-[800px] flex flex-col gap-8">
+    <header class="flex flex-col gap-3">
+      <p class="text-[12px] font-mono font-bold uppercase tracking-wider text-primary">Legal</p>
+      <h1 class="text-[30px] md:text-[40px] font-bold text-on-surface font-display">Privacy Policy</h1>
+      <p class="text-[14px] text-on-surface-variant">Last updated: September 7, 2026</p>
+    </header>
+    <div class="flex flex-col gap-7 text-[15px] text-on-surface-variant leading-7 font-body">
+      <p>This Privacy Policy explains how Ff Font Lab handles information when you visit fontchange.co.in or use our font and text tools.</p>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">Information you enter</h2><p>Text entered into our generators is transformed locally in your browser. We do not require an account, and the text you type is not submitted to or stored on our servers.</p></section>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">Browser storage</h2><p>Some features use your browser's local storage to remember favorite and recently used font styles. These records contain style identifiers, not the text you enter. You can remove them by clearing this site's data in your browser.</p></section>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">Analytics, cookies, and advertising</h2><p>We use Google Analytics to understand aggregate site traffic and improve our tools. Analytics may process device, browser, approximate location, referral, and interaction information and may use cookies or similar technologies.</p><p>If advertising is enabled, Google AdSense and its partners may use cookies or similar technologies to serve, measure, and personalize ads. You can manage personalized advertising through <a class="text-primary hover:underline" href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">Google's My Ad Center</a>. Your browser may also let you block or delete cookies.</p></section>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">Third-party services</h2><p>We may use services provided by Google, including Analytics, Fonts, and AdSense. Those providers process data under their own terms and privacy policies. Links to other websites are also governed by the policies of those websites.</p></section>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">Children's privacy</h2><p>Ff Font Lab is a general-audience service and is not directed to children under 13. We do not knowingly collect personal information from children.</p></section>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">Changes and contact</h2><p>We may update this policy as our services or legal requirements change. The date above shows the latest revision. For questions or privacy requests, please use our <a class="text-primary hover:underline" href="/contact">Contact Us page</a>.</p></section>
     </div>
-  </div>
+  </article>
 </BaseLayout>

@@ -1,30 +1,24 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_CONFIG } from '../lib/site-config';
+import { generateWebPageSchema } from '../lib/schema';
+const title = 'Terms & Conditions | Ff Font Lab';
+const description = 'Read the terms and conditions that apply when using Ff Font Lab and its free Unicode font and text tools.';
+const canonical = '/terms';
+const jsonLd = generateWebPageSchema({ title, description, url: `${SITE_CONFIG.url}${canonical}` });
 ---
-
-<BaseLayout
-  title="Terms of Service | Ff Font Lab"
-  description="Terms of Service for Ff Font Lab. Read the rules and guidelines for using our font generator tools."
-  canonical="/terms"
-  noindex={true}
-  activePage="home"
->
-  <div class="flex flex-col gap-6 max-w-[800px]">
-    <h1 class="text-[28px] md:text-[36px] font-bold text-on-surface" style="font-family: Sora;">
-      Terms of Service
-    </h1>
-    <p class="text-[15px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
-      Last updated: August 2026
-    </p>
-    <div class="flex flex-col gap-4 text-[15px] text-on-surface-variant leading-relaxed" style="font-family: Inter;">
-      <h2 class="text-[20px] font-bold text-on-surface" style="font-family: Sora;">Use of Service</h2>
-      <p>Ff Font Lab is a free tool provided as-is. You may use the generated text for any personal or commercial purpose. We do not guarantee that all Unicode characters will display correctly on every platform.</p>
-
-      <h2 class="text-[20px] font-bold text-on-surface" style="font-family: Sora;">Intellectual Property</h2>
-      <p>The generated text uses Unicode characters and is not owned by anyone. The Ff Font Lab website, design, and code are our intellectual property.</p>
-
-      <h2 class="text-[20px] font-bold text-on-surface" style="font-family: Sora;">Limitation of Liability</h2>
-      <p>We are not responsible for any issues arising from the use of generated text on third-party platforms. Use at your own discretion.</p>
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd} activePage="terms">
+  <article class="max-w-[800px] flex flex-col gap-8">
+    <header class="flex flex-col gap-3"><p class="text-[12px] font-mono font-bold uppercase tracking-wider text-primary">Legal</p><h1 class="text-[30px] md:text-[40px] font-bold text-on-surface font-display">Terms &amp; Conditions</h1><p class="text-[14px] text-on-surface-variant">Last updated: September 7, 2026</p></header>
+    <div class="flex flex-col gap-7 text-[15px] text-on-surface-variant leading-7 font-body">
+      <p>By accessing or using Ff Font Lab, you agree to these Terms &amp; Conditions. If you do not agree, please do not use the website.</p>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">Use of the service</h2><p>Ff Font Lab provides free tools that convert ordinary text into Unicode characters and symbols. You may use the output for personal or commercial purposes, subject to the rules of any platform where you publish it and any applicable law.</p></section>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">Acceptable use</h2><p>You may not use the website to break the law, infringe another person's rights, distribute malware, interfere with the service, attempt unauthorized access, or misrepresent an affiliation with Ff Font Lab.</p></section>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">Compatibility and availability</h2><p>Unicode support varies by device, browser, app, and platform. We do not guarantee that every generated character will display or be accepted everywhere. We may change, suspend, or discontinue any part of the service without notice.</p></section>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">Intellectual property</h2><p>The underlying Unicode characters are part of the Unicode standard. The Ff Font Lab name, original site content, visual design, and software remain protected by applicable intellectual-property laws. Third-party names and trademarks belong to their respective owners.</p></section>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">Disclaimer</h2><p>The service is provided “as is” and “as available,” without warranties of any kind to the fullest extent permitted by law. We do not warrant that the website will always be available, error-free, or suitable for a particular purpose.</p></section>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">Limitation of liability</h2><p>To the fullest extent permitted by law, Ff Font Lab will not be liable for indirect, incidental, special, consequential, or other losses arising from your use of, or inability to use, the website or generated text.</p></section>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">Changes and contact</h2><p>We may revise these terms from time to time. Continued use after a revision means you accept the updated terms. If you have questions, please visit our <a class="text-primary hover:underline" href="/contact">Contact Us page</a>.</p></section>
     </div>
-  </div>
+  </article>
 </BaseLayout>

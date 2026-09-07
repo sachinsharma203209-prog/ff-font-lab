@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_CONFIG } from '../lib/site-config';
+import { generateWebPageSchema } from '../lib/schema';
+const title = 'About Us | Ff Font Lab';
+const description = 'Learn about Ff Font Lab, our free browser-based Unicode font tools, how they work, and the principles behind the site.';
+const canonical = '/about';
+const jsonLd = generateWebPageSchema({ title, description, url: `${SITE_CONFIG.url}${canonical}` });
+---
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd} activePage="about">
+  <article class="max-w-[900px] flex flex-col gap-10">
+    <header class="max-w-[760px] flex flex-col gap-4"><p class="text-[12px] font-mono font-bold uppercase tracking-wider text-primary">About Ff Font Lab</p><h1 class="text-[30px] md:text-[40px] font-bold text-on-surface font-display">Useful text tools, without the friction</h1><p class="text-[16px] text-on-surface-variant leading-8 font-body">Ff Font Lab is a free collection of browser-based tools for creating stylish Unicode text, symbols, gaming names, and social-media copy. No account or software download is required.</p></header>
+    <div class="grid md:grid-cols-3 gap-4">
+      <section class="surface-card flex flex-col gap-3"><span class="material-symbols-outlined text-primary">bolt</span><h2 class="text-[18px] font-bold text-on-surface font-display">Fast by design</h2><p class="text-[14px] text-on-surface-variant leading-6 font-body">Text transformations happen directly in your browser so results appear instantly.</p></section>
+      <section class="surface-card flex flex-col gap-3"><span class="material-symbols-outlined text-primary">lock</span><h2 class="text-[18px] font-bold text-on-surface font-display">Privacy-minded</h2><p class="text-[14px] text-on-surface-variant leading-6 font-body">The text you enter is not sent to our servers or attached to an account.</p></section>
+      <section class="surface-card flex flex-col gap-3"><span class="material-symbols-outlined text-primary">devices</span><h2 class="text-[18px] font-bold text-on-surface font-display">Made to copy</h2><p class="text-[14px] text-on-surface-variant leading-6 font-body">Results use Unicode characters that can be copied into many apps, games, and websites.</p></section>
+    </div>
+    <div class="max-w-[800px] flex flex-col gap-7 text-[15px] text-on-surface-variant leading-7 font-body">
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">What we publish</h2><p>Alongside the main font changer, we maintain focused generators for social platforms and games, character and symbol libraries, compatibility guides, and practical explanations that help visitors choose text styles that work for their use case.</p></section>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">How fancy text works</h2><p>These tools do not install a new font. They map ordinary letters and numbers to visually distinct Unicode characters. Because support differs across platforms, we provide multiple styles and compatibility guidance so you can test what works where you plan to post it.</p></section>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">Our approach</h2><p>We aim to keep the tools free, straightforward, and useful on both mobile and desktop. We improve the collection by adding focused tools, correcting compatibility information, and responding to visitor feedback.</p></section>
+      <section class="flex flex-col gap-3"><h2 class="text-[21px] font-bold text-on-surface font-display">Get in touch</h2><p>Found a problem or have an idea for a tool? Visit our <a class="text-primary hover:underline" href="/contact">Contact Us page</a>. You can also review our <a class="text-primary hover:underline" href="/privacy">Privacy Policy</a> and <a class="text-primary hover:underline" href="/terms">Terms &amp; Conditions</a>.</p></section>
+    </div>
+  </article>
+</BaseLayout>
